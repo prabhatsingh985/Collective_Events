@@ -15,7 +15,6 @@ import {
   TrendingUp
 } from 'lucide-react';
 
-
 export const CollectibleDetailModal: React.FC = () => {
   const { 
     selectedCollectible, 
@@ -38,7 +37,6 @@ export const CollectibleDetailModal: React.FC = () => {
   const inWishlist = isInWishlist(item.id);
   const isCard = item.category === 'trading-cards';
 
-  // Related collectibles (same category or similar series, excluding self)
   const relatedItems = collectibles
     .filter((c) => c.id !== item.id && (c.category === item.category || c.brand === item.brand))
     .slice(0, 3);
@@ -52,23 +50,23 @@ export const CollectibleDetailModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#004449]/40 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
       
       {/* Modal Container */}
       <div 
-        className="relative w-full max-w-5xl bg-[#0e121e] rounded-3xl border border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.85)] overflow-hidden my-auto max-h-[92vh] flex flex-col"
+        className="relative w-full max-w-5xl bg-[#fffef0] rounded-[24px] border border-[#004449]/20 shadow-[0px_8px_32px_rgba(0,68,73,0.12)] overflow-hidden my-auto max-h-[92vh] flex flex-col text-[#004449]"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Modal Top Bar */}
-        <div className="sticky top-0 z-30 bg-[#0e121e]/90 backdrop-blur-md px-6 py-4 border-b border-white/10 flex items-center justify-between">
+        <div className="sticky top-0 z-30 bg-[#fffef0] px-6 py-4 border-b border-[#004449]/10 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border ${
+            <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${
               isCard
-                ? 'bg-purple-950/80 text-purple-300 border-purple-500/30'
-                : 'bg-amber-950/80 text-amber-300 border-amber-500/30'
+                ? 'bg-[#483cff] text-[#fffef0]'
+                : 'bg-[#d7ffc2] text-[#004449] border border-[#004449]/20'
             }`}>
-              {isCard ? <Sparkles className="w-3 h-3 text-purple-400" /> : <Car className="w-3 h-3 text-amber-400" />}
+              {isCard ? <Sparkles className="w-3 h-3" /> : <Car className="w-3 h-3" />}
               <span>{isCard ? 'Trading Card Slab' : 'Hot Wheels Die-Cast'}</span>
             </span>
             <RarityBadge rarity={item.rarity} size="sm" />
@@ -77,14 +75,14 @@ export const CollectibleDetailModal: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopyLink}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-full text-[#004449]/60 hover:text-[#004449] hover:bg-[#d7ffc2] transition-colors"
               title="Share Link"
             >
               <Share2 className="w-4 h-4" />
             </button>
             <button
               onClick={() => setSelectedCollectible(null)}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-full text-[#004449]/60 hover:text-[#004449] hover:bg-[#d7ffc2] transition-colors"
               title="Close (ESC)"
             >
               <X className="w-5 h-5" />
@@ -102,24 +100,24 @@ export const CollectibleDetailModal: React.FC = () => {
             <div className="lg:col-span-6 space-y-4">
               
               {/* Main Image View */}
-              <div className={`relative rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl flex items-center justify-center ${
+              <div className={`relative rounded-[24px] overflow-hidden bg-[#f4f2de] border border-[#004449]/15 shadow-sm flex items-center justify-center ${
                 isCard ? 'aspect-[4/5] p-3' : 'aspect-[16/11]'
-              } holo-card group`}>
+              } group`}>
                 <img
                   src={activeImage}
                   alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103"
                 />
 
                 {/* Grade / Slab Overlay */}
                 <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-                  <span className="text-xs font-mono font-bold bg-black/80 backdrop-blur-md px-3 py-1 rounded-xl text-amber-300 border border-amber-500/30">
+                  <span className="text-xs font-mono font-bold bg-[#fffef0]/95 px-3 py-1 rounded-full text-[#004449] border border-[#004449]/20 shadow-sm">
                     {item.condition}
                   </span>
                 </div>
 
                 <div className="absolute bottom-4 right-4 z-10">
-                  <span className="text-[11px] font-mono text-slate-400 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
+                  <span className="text-[11px] font-mono text-[#004449]/70 bg-[#fffef0]/95 px-2.5 py-1 rounded-full border border-[#004449]/15 shadow-sm">
                     {item.scaleOrSize}
                   </span>
                 </div>
@@ -132,10 +130,10 @@ export const CollectibleDetailModal: React.FC = () => {
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      className={`w-20 h-16 rounded-xl overflow-hidden bg-slate-950 border-2 transition-all ${
+                      className={`w-20 h-16 rounded-[12px] overflow-hidden bg-[#f4f2de] border-2 transition-all ${
                         activeImageIndex === idx
-                          ? 'border-amber-400 scale-105 shadow-md'
-                          : 'border-white/10 opacity-70 hover:opacity-100'
+                          ? 'border-[#483cff] scale-105 shadow-sm'
+                          : 'border-[#004449]/15 opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
@@ -144,12 +142,12 @@ export const CollectibleDetailModal: React.FC = () => {
                 </div>
               )}
 
-              {/* Collector Authenticity Assurance */}
-              <div className="p-4 rounded-2xl bg-slate-900/50 border border-white/5 flex items-center gap-3 text-xs text-slate-400">
-                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+              {/* Authenticity Assurance */}
+              <div className="p-4 rounded-[16px] bg-[#d7ffc2] border border-[#004449]/15 flex items-center gap-3 text-xs text-[#004449]">
+                <ShieldCheck className="w-5 h-5 text-[#004449] shrink-0" />
                 <div>
-                  <span className="font-bold text-white block">Verified Collector Item</span>
-                  <span>Cross-checked against original production runs and auction records.</span>
+                  <span className="font-bold block">Verified Collector Item</span>
+                  <span className="opacity-80">Cross-referenced against original production runs and auction records.</span>
                 </div>
               </div>
 
@@ -160,59 +158,59 @@ export const CollectibleDetailModal: React.FC = () => {
               
               {/* Brand & Series */}
               <div>
-                <div className="text-xs uppercase font-mono tracking-widest text-amber-400 font-bold mb-1">
+                <div className="text-xs uppercase font-mono tracking-widest text-[#004449]/60 font-bold mb-1">
                   {item.brand} • {item.year}
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#004449] tracking-tight">
                   {item.name}
                 </h2>
-                <p className="text-sm text-slate-400 mt-1">
-                  Series: <span className="text-slate-200 font-semibold">{item.series}</span>
+                <p className="text-sm text-[#004449]/70 mt-1 font-medium">
+                  Series: <span className="text-[#004449] font-bold">{item.series}</span>
                 </p>
               </div>
 
               {/* Price & Market Stat Card */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-500/20 shadow-lg">
+              <div className="p-6 rounded-[20px] bg-[#f6f5e2]/60 border border-[#004449]/15 shadow-sm">
                 <div className="flex items-baseline justify-between mb-3">
                   <div>
-                    <span className="text-xs uppercase font-mono text-slate-400 block">
+                    <span className="text-xs uppercase font-mono text-[#004449]/60 block font-bold">
                       Estimated Market Valuation
                     </span>
-                    <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono tracking-tight">
+                    <div className="text-3xl sm:text-4xl font-bold text-[#004449] font-mono tracking-tight">
                       ${item.estimatedValue.toLocaleString()}
                     </div>
                   </div>
                   {item.trendingChange && (
-                    <div className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 px-2.5 py-1 rounded-full">
-                      <TrendingUp className="w-3.5 h-3.5" />
+                    <div className="inline-flex items-center gap-1 text-xs font-bold text-[#004449] bg-[#d7ffc2] border border-[#004449]/20 px-3 py-1 rounded-full">
+                      <TrendingUp className="w-3.5 h-3.5 text-[#004449]" />
                       +{item.trendingChange}% (30d)
                     </div>
                   )}
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-xs">
+                <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#004449]/10 text-xs">
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-mono">Original MSRP</span>
-                    <span className="font-mono text-slate-300 font-bold">
+                    <span className="text-[#004449]/60 block text-[10px] uppercase font-mono">Original MSRP</span>
+                    <span className="font-mono text-[#004449] font-bold">
                       {item.originalPrice ? `$${item.originalPrice.toFixed(2)}` : 'N/A'}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-mono">Last Sold</span>
-                    <span className="font-mono text-slate-300 font-bold">
+                    <span className="text-[#004449]/60 block text-[10px] uppercase font-mono">Last Sold</span>
+                    <span className="font-mono text-[#004449] font-bold">
                       ${item.lastSoldPrice.toLocaleString()}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-mono">Owners Tracked</span>
-                    <span className="font-mono text-slate-300 font-bold">
+                    <span className="text-[#004449]/60 block text-[10px] uppercase font-mono">Owners</span>
+                    <span className="font-mono text-[#004449] font-bold">
                       {item.ownersCount} collectors
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons: 900px pills */}
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => {
@@ -222,16 +220,16 @@ export const CollectibleDetailModal: React.FC = () => {
                       addToCollection(item.id);
                     }
                   }}
-                  className={`flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
+                  className={`flex-1 py-3.5 px-6 rounded-full font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                     inCollection
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 hover:bg-rose-500/20 hover:text-rose-300 hover:border-rose-500/50'
-                      : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/25'
+                      ? 'bg-[#d7ffc2] text-[#004449] border border-[#004449]/30 hover:bg-rose-100 hover:text-rose-700 hover:border-rose-300'
+                      : 'bg-[#483cff] hover:opacity-95 text-[#fffef0] shadow-sm'
                   }`}
                 >
                   {inCollection ? (
                     <>
-                      <Check className="w-4 h-4 text-emerald-400" />
-                      <span>In Your Vault (Click to Remove)</span>
+                      <Check className="w-4 h-4 text-[#004449]" />
+                      <span>In Vault (Click to Remove)</span>
                     </>
                   ) : (
                     <>
@@ -243,54 +241,54 @@ export const CollectibleDetailModal: React.FC = () => {
 
                 <button
                   onClick={() => toggleWishlist(item.id)}
-                  className={`py-3.5 px-6 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 border transition-all ${
+                  className={`py-3.5 px-6 rounded-full font-semibold text-sm flex items-center justify-center gap-2 border-[1.5px] transition-all ${
                     inWishlist
-                      ? 'bg-rose-500/20 text-rose-300 border-rose-500/40 hover:bg-rose-500/30'
-                      : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-white/10'
+                      ? 'bg-[#d7ffc2] text-[#004449] border-[#004449]/30'
+                      : 'bg-[#fffef0] text-[#004449] border-[#004449]/30 hover:bg-[#f6f5e2]'
                   }`}
                 >
-                  <Heart className={`w-4 h-4 ${inWishlist ? 'fill-current text-rose-400' : ''}`} />
+                  <Heart className={`w-4 h-4 ${inWishlist ? 'fill-current text-[#483cff]' : ''}`} />
                   <span>{inWishlist ? 'In Wishlist' : 'Add to Wishlist'}</span>
                 </button>
               </div>
 
               {/* Description */}
               <div>
-                <h4 className="text-xs uppercase font-mono tracking-wider font-bold text-slate-400 mb-2">
+                <h4 className="text-xs uppercase font-mono tracking-wider font-bold text-[#004449]/60 mb-2">
                   Collector Overview
                 </h4>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-[#004449]/80 leading-relaxed font-medium">
                   {item.description}
                 </p>
               </div>
 
               {/* Technical Specifications Matrix */}
-              <div className="bg-slate-900/40 rounded-2xl p-4 border border-white/5">
-                <h4 className="text-xs uppercase font-mono tracking-wider font-bold text-slate-400 mb-3">
+              <div className="bg-[#f6f5e2]/60 rounded-[16px] p-5 border border-[#004449]/10">
+                <h4 className="text-xs uppercase font-mono tracking-wider font-bold text-[#004449]/60 mb-3">
                   Technical Specifications
                 </h4>
-                <div className="grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs">
+                <div className="grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs font-medium">
                   <div>
-                    <span className="text-slate-500">Casting / Card No:</span>
-                    <span className="font-mono text-slate-200 ml-1.5 font-bold">
+                    <span className="text-[#004449]/60">Casting / Card No:</span>
+                    <span className="font-mono text-[#004449] ml-1.5 font-bold">
                       {item.itemNumber || 'Standard Release'}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500">Scale / Dimension:</span>
-                    <span className="font-mono text-slate-200 ml-1.5 font-bold">
+                    <span className="text-[#004449]/60">Scale / Dimension:</span>
+                    <span className="font-mono text-[#004449] ml-1.5 font-bold">
                       {item.scaleOrSize}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500">Composition:</span>
-                    <span className="text-slate-200 ml-1.5 font-bold truncate block">
+                    <span className="text-[#004449]/60">Composition:</span>
+                    <span className="text-[#004449] ml-1.5 font-bold truncate block">
                       {item.material}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500">Release Date:</span>
-                    <span className="text-slate-200 ml-1.5 font-bold">
+                    <span className="text-[#004449]/60">Release Date:</span>
+                    <span className="text-[#004449] ml-1.5 font-bold">
                       {item.releaseDate}
                     </span>
                   </div>
@@ -302,7 +300,7 @@ export const CollectibleDetailModal: React.FC = () => {
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-400 border border-white/5"
+                    className="text-[11px] font-mono px-3 py-1 rounded-full bg-[#f6f5e2] text-[#004449]/70 border border-[#004449]/10"
                   >
                     #{tag}
                   </span>
@@ -315,21 +313,21 @@ export const CollectibleDetailModal: React.FC = () => {
 
           {/* Historical Price Trend */}
           <div>
-            <h3 className="text-lg font-bold text-white mb-3">
+            <h3 className="text-lg font-bold text-[#004449] mb-3">
               Valuation Trajectory & Auction History
             </h3>
-            <ValuationChart data={item.priceHistory} height={160} strokeColor="#10b981" />
+            <ValuationChart data={item.priceHistory} height={160} strokeColor="#004449" />
           </div>
 
           {/* Related / Similar Collectibles */}
           {relatedItems.length > 0 && (
-            <div className="pt-6 border-t border-white/5">
+            <div className="pt-6 border-t border-[#004449]/10">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-[#004449]">
                     Similar & Related Collectibles
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-[#004449]/60 font-medium">
                     Other coveted items in this series
                   </p>
                 </div>

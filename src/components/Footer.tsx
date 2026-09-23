@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCollection } from '../context/CollectionContext';
-import { Flame, Sparkles, Car, Shield, Send, Check } from 'lucide-react';
+import { Send, Check, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { setActivePage, addToast } = useCollection();
@@ -11,30 +11,26 @@ export const Footer: React.FC = () => {
     e.preventDefault();
     if (!email) return;
     setSubscribed(true);
-    addToast('Subscribed to Drop Alerts! 📬', 'You will receive notifications for rare Hot Wheels and Card drops.', 'success');
+    addToast('Subscribed to Collector Alerts! 📬', 'You will receive rare drop notifications.', 'success');
     setEmail('');
   };
 
   return (
-    <footer className="w-full bg-[#080a0f] border-t border-white/5 pt-16 pb-24 md:pb-16 text-slate-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="w-full bg-[#004449] text-[#fffef0] pt-20 pb-24 md:pb-20 border-t border-[#000000]/20">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top Newsletter Grid */}
-        <div className="rounded-3xl bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-blue-500/10 p-8 sm:p-10 border border-white/10 mb-16 relative overflow-hidden">
-          <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -left-10 -top-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        {/* Mint Wash Newsletter Band */}
+        <div className="rounded-[24px] bg-[#d7ffc2] text-[#004449] p-8 sm:p-12 mb-20 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.04)]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="max-w-xl">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                Never Miss A Super Treasure Hunt Or Grail Slab
+              <span className="inline-block px-3 py-1 rounded-full bg-[#004449] text-[#d7ffc2] text-xs font-semibold uppercase tracking-wider mb-3">
+                Editorial Drop Alerts
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Get real-time market drop alerts.
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#004449]">
+                Get sun-bleached alerts for rare collectibles.
               </h3>
-              <p className="text-slate-400 text-sm mt-2">
-                Join 38,000+ passionate collectors tracking RLC drops, Pokemon 1st editions, and vintage Hot Wheels.
+              <p className="text-[#004449]/80 text-sm mt-2 leading-relaxed">
+                Join 38,000+ collectors receiving verified auction drops, Super Treasure Hunt alerts, and PSA 10 slabs.
               </p>
             </div>
 
@@ -44,12 +40,12 @@ export const Footer: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your collector email..."
-                className="px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 w-full sm:w-80 text-sm"
+                placeholder="Enter your email..."
+                className="px-5 py-3.5 rounded-[16px] bg-[#fffef0] border border-[#004449]/20 text-[#004449] placeholder-[#004449]/50 focus:outline-none focus:border-[#483cff] w-full sm:w-80 text-sm font-medium"
               />
               <button
                 type="submit"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold text-sm hover:from-amber-400 hover:to-orange-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 shrink-0"
+                className="px-6 py-3.5 rounded-full bg-[#483cff] text-[#fffef0] font-semibold text-sm hover:opacity-95 transition-all flex items-center justify-center gap-2 shrink-0 shadow-sm"
               >
                 {subscribed ? (
                   <>
@@ -58,7 +54,7 @@ export const Footer: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <span>Join Alerts</span>
+                    <span>Join Free</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}
@@ -68,56 +64,50 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Navigation Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
           
           {/* Brand Info */}
           <div className="col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.4)]">
-                <Flame className="w-5 h-5 text-slate-950" />
+              <div className="w-8 h-8 rounded-full bg-[#d7ffc2] flex items-center justify-center text-[#004449] font-bold text-sm">
+                C™
               </div>
-              <span className="font-black text-xl tracking-tight text-white font-['Outfit']">
-                COLLECTR
+              <span className="font-bold text-2xl tracking-tight text-[#fffef0]">
+                COLLECTR™
               </span>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed mb-6 max-w-sm">
-              The premier digital platform engineered for physical collectors. Track market values, catalog rare variants, and showcase your collection to the world.
+            <p className="text-sm text-[#fffef0]/80 leading-relaxed mb-6 max-w-sm">
+              Sun-bleached travel companion for physical collectors. A warm paper catalog for Hot Wheels, graded trading cards, and personal vault curation.
             </p>
-            <div className="flex items-center gap-3 text-xs text-slate-500">
-              <span className="inline-flex items-center gap-1">
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                Verified Slabs & Castings
-              </span>
-              <span>•</span>
-              <span>100% Collector Powered</span>
+            <div className="flex items-center gap-2 text-xs text-[#d7ffc2]">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Verified 2026 Auction Pricing</span>
             </div>
           </div>
 
           {/* Navigation Column 1 */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-white mb-4 font-mono">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#d7ffc2] mb-4">
               Explore
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm text-[#fffef0]/90">
               <li>
-                <button onClick={() => setActivePage('explore')} className="hover:text-amber-300 transition-colors">
+                <button onClick={() => setActivePage('explore')} className="hover:text-[#d7ffc2] transition-colors">
                   All Collectibles
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
-                  <Car className="w-3.5 h-3.5 text-amber-400" />
+                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-[#d7ffc2] transition-colors">
                   Hot Wheels Hub
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('trading-cards')} className="hover:text-purple-300 transition-colors flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                <button onClick={() => setActivePage('trading-cards')} className="hover:text-[#d7ffc2] transition-colors">
                   Trading Cards Hub
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('my-collection')} className="hover:text-emerald-300 transition-colors">
+                <button onClick={() => setActivePage('my-collection')} className="hover:text-[#d7ffc2] transition-colors">
                   My Collection Vault
                 </button>
               </li>
@@ -126,28 +116,23 @@ export const Footer: React.FC = () => {
 
           {/* Navigation Column 2 */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-white mb-4 font-mono">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#d7ffc2] mb-4">
               Hot Wheels
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm text-[#fffef0]/90">
               <li>
-                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-amber-300 transition-colors">
+                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-[#d7ffc2] transition-colors">
                   Super Treasure Hunts
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-amber-300 transition-colors">
+                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-[#d7ffc2] transition-colors">
                   Red Line Club (RLC)
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-amber-300 transition-colors">
-                  Car Culture Series
-                </button>
-              </li>
-              <li>
-                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-amber-300 transition-colors">
-                  Original 1968 Redlines
+                <button onClick={() => setActivePage('hot-wheels')} className="hover:text-[#d7ffc2] transition-colors">
+                  Original 1968 Sweet 16
                 </button>
               </li>
             </ul>
@@ -155,28 +140,23 @@ export const Footer: React.FC = () => {
 
           {/* Navigation Column 3 */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-white mb-4 font-mono">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#d7ffc2] mb-4">
               Trading Cards
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm text-[#fffef0]/90">
               <li>
-                <button onClick={() => setActivePage('trading-cards')} className="hover:text-purple-300 transition-colors">
-                  Pokémon Base 1st Edition
+                <button onClick={() => setActivePage('trading-cards')} className="hover:text-[#d7ffc2] transition-colors">
+                  Pokémon 1st Edition
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('trading-cards')} className="hover:text-purple-300 transition-colors">
-                  Vintage Basketball Rookies
+                <button onClick={() => setActivePage('trading-cards')} className="hover:text-[#d7ffc2] transition-colors">
+                  1986 Fleer Basketball
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('trading-cards')} className="hover:text-purple-300 transition-colors">
-                  Magic: The Gathering Alpha
-                </button>
-              </li>
-              <li>
-                <button onClick={() => setActivePage('trading-cards')} className="hover:text-purple-300 transition-colors">
-                  PSA & BGS 10 Slabs
+                <button onClick={() => setActivePage('trading-cards')} className="hover:text-[#d7ffc2] transition-colors">
+                  PSA 10 Gem Mint Slabs
                 </button>
               </li>
             </ul>
@@ -185,15 +165,14 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#fffef0]/60 gap-4">
           <div>
-            &copy; 2026 COLLECTR Technologies Inc. Frontend UI Prototype Demo.
+            &copy; 2026 COLLECTR™ Technologies Inc. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
-            <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>
-            <span className="hover:text-slate-400 cursor-pointer">Grading Standards</span>
-            <span className="hover:text-slate-400 cursor-pointer">API Prototype</span>
+            <span>Privacy</span>
+            <span>Terms</span>
+            <span>Grading Standards</span>
           </div>
         </div>
 

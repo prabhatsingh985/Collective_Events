@@ -16,7 +16,8 @@ const AppContent: React.FC = () => {
   const { activePage } = useCollection();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b0d13] text-slate-100 selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen flex flex-col bg-[#fffef0] text-[#004449] selection:bg-[#d7ffc2] selection:text-[#004449]">
+
       {/* Header Navigation */}
       <Navbar />
 

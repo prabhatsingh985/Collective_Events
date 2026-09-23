@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { useCollection } from '../context/CollectionContext';
 import type { ActivePage } from '../types/collectible';
 import { 
-  Flame, 
   Search, 
   Heart, 
-  Layers, 
-  Sparkles, 
-  Car, 
   Menu,
-  X
+  X,
+  Compass,
+  Car,
+  Sparkles,
+  Layers
 } from 'lucide-react';
-
 
 export const Navbar: React.FC = () => {
   const { 
@@ -25,13 +24,13 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks: { id: ActivePage; label: string; icon?: React.ReactNode; badge?: number }[] = [
-    { id: 'explore', label: 'Explore' },
-    { id: 'hot-wheels', label: 'Hot Wheels', icon: <Car className="w-3.5 h-3.5 text-amber-400" /> },
-    { id: 'trading-cards', label: 'Trading Cards', icon: <Sparkles className="w-3.5 h-3.5 text-purple-400" /> },
+    { id: 'explore', label: 'EXPLORE', icon: <Compass className="w-3.5 h-3.5 text-[#d7ffc2]" /> },
+    { id: 'hot-wheels', label: 'HOT WHEELS', icon: <Car className="w-3.5 h-3.5 text-[#0bff80]" /> },
+    { id: 'trading-cards', label: 'TRADING CARDS', icon: <Sparkles className="w-3.5 h-3.5 text-[#d7ffc2]" /> },
     { 
       id: 'my-collection', 
-      label: 'My Collection', 
-      icon: <Layers className="w-3.5 h-3.5 text-emerald-400" />,
+      label: 'MY VAULT', 
+      icon: <Layers className="w-3.5 h-3.5 text-[#0bff80]" />,
       badge: collectionStats.totalItems 
     },
   ];
@@ -42,52 +41,43 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#0b0d13]/85 border-b border-white/5 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-40 w-full bg-[#004449] border-b border-[#000000]/20 transition-all text-[#fffef0]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         
-        {/* Brand Logo */}
+        {/* Brand Logo - Going™ Style */}
         <div 
           onClick={() => handleNavClick('landing')}
           className="flex items-center gap-3 cursor-pointer group select-none shrink-0"
         >
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 via-orange-600 to-purple-600 p-[1.5px] shadow-[0_0_20px_rgba(245,158,11,0.3)] group-hover:shadow-[0_0_28px_rgba(245,158,11,0.5)] transition-all">
-            <div className="w-full h-full bg-[#0b0d13] rounded-[10px] flex items-center justify-center">
-              <Flame className="w-5 h-5 text-amber-400 fill-amber-400/80 group-hover:scale-110 transition-transform" />
-            </div>
+          <div className="w-10 h-10 rounded-full bg-[#d7ffc2] flex items-center justify-center text-[#004449] font-bold text-lg shadow-sm">
+            C™
           </div>
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-white flex items-center gap-1 font-['Outfit']">
-              COLLECTR
-              <span className="text-[10px] font-bold tracking-widest text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded border border-amber-400/20 font-mono">
-                PRO
-              </span>
-            </span>
-            <span className="block text-[10px] uppercase tracking-wider text-slate-400 font-mono -mt-0.5">
-              Vault & Discovery
+            <span className="font-bold text-2xl tracking-tight text-[#fffef0] flex items-center gap-1.5 font-['Inter']">
+              COLLECTR™
             </span>
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-slate-900/60 p-1 rounded-2xl border border-white/5">
+        {/* Center: Uppercase Text Links in 475 weight */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           {navLinks.map((link) => {
             const isActive = activePage === link.id;
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                className={`px-3.5 py-2 rounded-full text-[13px] font-medium tracking-[0.06em] transition-all flex items-center gap-1.5 ${
                   isActive
-                    ? 'text-white bg-white/10 shadow-sm border border-white/10'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                    ? 'text-[#004449] bg-[#d7ffc2] font-semibold'
+                    : 'text-[#fffef0] hover:text-[#d7ffc2] hover:bg-white/5'
                 }`}
               >
-                {link.icon}
                 <span>{link.label}</span>
                 {link.badge !== undefined && link.badge > 0 && (
                   <span
-                    className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
-                      isActive ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300'
+                    className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full ${
+                      isActive ? 'bg-[#004449] text-[#d7ffc2]' : 'bg-white/20 text-[#fffef0]'
                     }`}
                   >
                     {link.badge}
@@ -98,68 +88,52 @@ export const Navbar: React.FC = () => {
           })}
         </nav>
 
-        {/* Right Action Icons & Profile */}
+        {/* Right Side: Outlined + Filled Electric Iris Pill */}
         <div className="flex items-center gap-2 sm:gap-3">
           
-          {/* Quick Search Trigger */}
+          {/* Search Trigger */}
           <button
             onClick={() => setQuickSearchOpen(true)}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs text-slate-400 bg-slate-900/80 hover:bg-slate-850 hover:text-slate-200 border border-white/5 transition-all"
-            title="Search collectibles (Hot Wheels, Cards, Sets...)"
+            className="p-2.5 rounded-full text-[#fffef0] hover:text-[#d7ffc2] hover:bg-white/10 transition-all border border-white/20"
+            title="Search catalog"
           >
-            <Search className="w-4 h-4 text-slate-400" />
-            <span className="hidden lg:inline font-medium">Search vault...</span>
-            <kbd className="hidden lg:inline-flex text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400 border border-white/5 font-mono">
-              /
-            </kbd>
+            <Search className="w-4 h-4" />
           </button>
 
-          {/* Wishlist Quick Button */}
+          {/* Wishlist Pill */}
           <button
             onClick={() => handleNavClick('my-collection')}
-            className="relative p-2.5 rounded-xl text-slate-400 hover:text-rose-400 bg-slate-900/80 hover:bg-slate-850 border border-white/5 transition-all"
-            title="View Wishlist"
+            className="relative p-2.5 rounded-full text-[#fffef0] hover:text-[#d7ffc2] hover:bg-white/10 transition-all border border-white/20"
+            title="Saved wishlist"
           >
             <Heart className="w-4 h-4" />
             {wishlistIds.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-md animate-pulse">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#483cff] text-[#fffef0] text-[10px] font-bold rounded-full flex items-center justify-center">
                 {wishlistIds.length}
               </span>
             )}
           </button>
 
-          {/* Live Portfolio Valuation Pill */}
+          {/* Outlined Action Pill */}
           <button
             onClick={() => handleNavClick('my-collection')}
-            className="hidden sm:flex items-center gap-2 pl-3 pr-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950/60 to-slate-900/90 border border-emerald-500/30 hover:border-emerald-500/60 transition-all text-left group"
+            className="hidden sm:inline-flex items-center px-4 py-2 border-[1.5px] border-[#fffef0] text-[#fffef0] rounded-full text-xs font-medium tracking-wide hover:bg-white/10 transition-all"
           >
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <div>
-              <div className="text-[9px] uppercase tracking-wider text-slate-400 font-mono">
-                Vault Value
-              </div>
-              <div className="text-xs font-bold text-emerald-300 font-mono group-hover:text-emerald-200">
-                ${collectionStats.totalValue.toLocaleString()}
-              </div>
-            </div>
+            <span>Vault (${collectionStats.totalValue.toLocaleString()})</span>
           </button>
 
-          {/* Profile Avatar */}
-          <div 
-            onClick={() => handleNavClick('my-collection')}
-            className="flex items-center gap-2 cursor-pointer p-1 rounded-full bg-slate-900 border border-white/10 hover:border-amber-400/50 transition-all"
+          {/* Filled Electric Iris Action Pill (Single filled action in viewport) */}
+          <button
+            onClick={() => handleNavClick('explore')}
+            className="px-5 py-2.5 bg-[#483cff] text-[#fffef0] rounded-full text-xs font-semibold hover:opacity-90 transition-all shadow-sm"
           >
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-              alt="Collector Profile"
-              className="w-8 h-8 rounded-full object-cover ring-2 ring-amber-500/30"
-            />
-          </div>
+            <span>Join for Free</span>
+          </button>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900 border border-white/5"
+            className="md:hidden p-2 rounded-full text-[#fffef0] border border-white/20"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -167,40 +141,30 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0e121c] border-b border-white/10 px-4 pt-2 pb-6 space-y-2 animate-fadeIn">
+        <div className="md:hidden bg-[#00363a] border-b border-[#000000]/20 px-6 py-6 space-y-3">
           {navLinks.map((link) => {
             const isActive = activePage === link.id;
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-full text-sm font-medium tracking-wider transition-all ${
                   isActive
-                    ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
-                    : 'text-slate-300 hover:bg-slate-800'
+                    ? 'bg-[#d7ffc2] text-[#004449] font-bold'
+                    : 'text-[#fffef0] hover:bg-white/5'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  {link.icon}
-                  <span>{link.label}</span>
-                </div>
+                <span>{link.label}</span>
                 {link.badge !== undefined && link.badge > 0 && (
-                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-amber-300">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#004449] text-[#d7ffc2]">
                     {link.badge}
                   </span>
                 )}
               </button>
             );
           })}
-          
-          <div className="pt-3 mt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Portfolio Valuation</span>
-            <span className="text-emerald-400 font-bold text-sm">
-              ${collectionStats.totalValue.toLocaleString()}
-            </span>
-          </div>
         </div>
       )}
     </header>

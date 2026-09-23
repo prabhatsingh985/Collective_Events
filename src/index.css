@@ -1,123 +1,119 @@
 @import "tailwindcss";
 
+@theme {
+  --color-deep-lagoon: #004449;
+  --color-electric-iris: #483cff;
+  --color-parchment: #fffef0;
+  --color-ink-black: #000000;
+  --color-mint-wash: #d7ffc2;
+  --color-lime-pulse: #0bff80;
+
+  --font-sans: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --radius-cards: 24px;
+  --radius-badges: 900px;
+  --radius-inputs: 16px;
+  --radius-buttons: 900px;
+
+  --shadow-sm: rgba(0, 0, 0, 0.04) 0px 2px 8px 0px;
+}
+
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-heading: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  * {
-    border-color: rgba(255, 255, 255, 0.08);
+    --color-deep-lagoon: #004449;
+    --color-electric-iris: #483cff;
+    --color-parchment: #fffef0;
+    --color-ink-black: #000000;
+    --color-mint-wash: #d7ffc2;
+    --color-lime-pulse: #0bff80;
   }
 
   body {
-    background-color: #0b0d13;
-    color: #e2e8f0;
-    font-family: var(--font-sans);
+    background-color: #fffef0;
+    color: #004449;
+    font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-weight: 475;
+    letter-spacing: 0.01em;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    color: #004449;
+    font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Glassmorphism surfaces */
-.glass-panel {
-  background: rgba(18, 22, 34, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Whisper Shadow — Authentic flat, paper-like quality */
+.whisper-shadow {
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 2px 8px 0px;
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.whisper-shadow-hover {
+  transition: all 0.25s ease;
 }
-.glass-panel-hover:hover {
-  background: rgba(24, 30, 48, 0.85);
-  border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px 2px rgba(245, 158, 11, 0.08);
+.whisper-shadow-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 14px 0px;
 }
 
-/* Holographic Card Sheen */
-.holo-card {
-  position: relative;
-  overflow: hidden;
-}
-.holo-card::after {
-  content: "";
-  position: absolute;
-  top: -150%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.03) 30%,
-    rgba(147, 51, 234, 0.12) 40%,
-    rgba(6, 182, 212, 0.15) 50%,
-    rgba(245, 158, 11, 0.12) 60%,
-    rgba(255, 255, 255, 0.03) 70%,
-    transparent 80%
-  );
-  transform: rotate(25deg);
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  opacity: 0;
-}
-.holo-card:hover::after {
-  opacity: 1;
-  animation: holoSheen 2.2s infinite ease-in-out;
+/* Parchment Card */
+.parchment-card {
+  background-color: #fffef0;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 68, 73, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 2px 8px 0px;
 }
 
-@keyframes holoSheen {
-  0% {
-    transform: translateY(0%) rotate(25deg);
-  }
-  100% {
-    transform: translateY(120%) rotate(25deg);
-  }
+/* Mint Section Band */
+.mint-band {
+  background-color: #d7ffc2;
 }
 
-/* Metallic Hot Wheels Glow */
-.hotwheels-glow {
-  box-shadow: 0 0 35px -8px rgba(249, 115, 22, 0.25);
+/* Primary Electric Iris Button */
+.btn-electric {
+  background-color: #483cff;
+  color: #fffef0;
+  border-radius: 900px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-.hotwheels-glow:hover {
-  box-shadow: 0 0 45px -5px rgba(249, 115, 22, 0.45);
-}
-
-/* Trading Card Slab Glow */
-.card-slab-glow {
-  box-shadow: 0 0 35px -8px rgba(139, 92, 246, 0.25);
-}
-.card-slab-glow:hover {
-  box-shadow: 0 0 45px -5px rgba(139, 92, 246, 0.45);
+.btn-electric:hover {
+  opacity: 0.92;
+  transform: scale(1.01);
 }
 
-/* Subtle Grid Background Pattern */
-.bg-grid-pattern {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+/* Outlined Navigation Button */
+.btn-outlined {
+  background-color: transparent;
+  border-radius: 900px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Custom Scrollbar */
+/* Social Proof Pill Badge */
+.social-pill {
+  background-color: #d7ffc2;
+  border-radius: 900px;
+  padding: 8px 16px;
+  color: #004449;
+  font-weight: 500;
+}
+
+/* Custom Scrollbar for Warm Paper Canvas */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0d13;
+  background: #fffef0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e2433;
-  border-radius: 4px;
+  background: #004449;
+  opacity: 0.3;
+  border-radius: 900px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #004449;
 }

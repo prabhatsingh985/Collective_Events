@@ -8,7 +8,7 @@ export const ToastContainer: React.FC = () => {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-50 flex flex-col gap-2 max-w-sm pointer-events-none">
+    <div className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none">
       {toasts.map((toast) => {
         const isSuccess = toast.type === 'success';
         const isRemove = toast.type === 'remove';
@@ -16,28 +16,34 @@ export const ToastContainer: React.FC = () => {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all transform translate-y-0 duration-300 ${
-              isSuccess
-                ? 'bg-slate-900/90 border-emerald-500/40 text-slate-100 shadow-[0_10px_30px_rgba(16,185,129,0.2)]'
-                : isRemove
-                ? 'bg-slate-900/90 border-rose-500/40 text-slate-100 shadow-[0_10px_30px_rgba(244,63,94,0.2)]'
-                : 'bg-slate-900/90 border-amber-500/40 text-slate-100 shadow-[0_10px_30px_rgba(245,158,11,0.2)]'
-            }`}
+            className="pointer-events-auto flex items-start gap-3 p-4 rounded-[20px] bg-[#fffef0] text-[#004449] border border-[#004449]/20 shadow-[0px_4px_16px_0px_rgba(0,0,0,0.08)] transition-all transform translate-y-0 duration-200"
           >
             <div className="shrink-0 mt-0.5">
-              {isSuccess && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
-              {isRemove && <Trash2 className="w-5 h-5 text-rose-400" />}
-              {!isSuccess && !isRemove && <Heart className="w-5 h-5 text-amber-400 fill-amber-400/30" />}
+              {isSuccess && (
+                <div className="w-6 h-6 rounded-full bg-[#d7ffc2] flex items-center justify-center text-[#004449]">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
+              )}
+              {isRemove && (
+                <div className="w-6 h-6 rounded-full bg-[#fee2e2] flex items-center justify-center text-[#b91c1c]">
+                  <Trash2 className="w-4 h-4" />
+                </div>
+              )}
+              {!isSuccess && !isRemove && (
+                <div className="w-6 h-6 rounded-full bg-[#e8e6ff] flex items-center justify-center text-[#483cff]">
+                  <Heart className="w-4 h-4 fill-current" />
+                </div>
+              )}
             </div>
 
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-bold leading-tight text-white">{toast.title}</h4>
-              <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{toast.description}</p>
+              <h4 className="text-sm font-bold leading-tight text-[#004449]">{toast.title}</h4>
+              <p className="text-xs text-[#004449]/70 mt-0.5 leading-relaxed">{toast.description}</p>
             </div>
 
             <button
               onClick={() => removeToast(toast.id)}
-              className="shrink-0 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+              className="shrink-0 text-[#004449]/40 hover:text-[#004449] p-1 rounded-full hover:bg-[#d7ffc2]/50 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

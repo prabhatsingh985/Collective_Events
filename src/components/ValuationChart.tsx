@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { PricePoint } from '../types/collectible';
 import { ArrowUpRight } from 'lucide-react';
 
-
 interface ValuationChartProps {
   data: PricePoint[];
   height?: number;
@@ -15,8 +14,8 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
   data,
   height = 140,
   showLabels = true,
-  strokeColor = '#10b981',
-  fillGradientId = 'valGrad'
+  strokeColor = '#004449',
+  fillGradientId = 'goingValGrad'
 }) => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
@@ -56,20 +55,20 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
   const percentChange = (((data[data.length - 1].value - data[0].value) / data[0].value) * 100).toFixed(1);
 
   return (
-    <div className="w-full bg-slate-900/60 rounded-xl p-4 border border-slate-800/80 backdrop-blur-sm">
-      <div className="flex items-center justify-between mb-2">
+    <div className="w-full bg-[#fffef0] rounded-[24px] p-6 border border-[#004449]/15 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.04)]">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-xs uppercase font-semibold tracking-wider text-slate-400">
-            6-Month Market Trend
+          <span className="text-xs uppercase font-semibold tracking-wider text-[#004449]/70">
+            6-Month Trajectory
           </span>
-          <span className="inline-flex items-center text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+          <span className="inline-flex items-center text-xs font-semibold text-[#004449] bg-[#d7ffc2] px-2.5 py-0.5 rounded-full border border-[#004449]/15">
             <ArrowUpRight className="w-3 h-3 mr-0.5" />
             +{percentChange}%
           </span>
         </div>
         <div className="text-right">
-          <span className="text-xs text-slate-400 mr-2">{activePoint.month}:</span>
-          <span className="text-sm font-bold text-slate-100 font-mono">
+          <span className="text-xs text-[#004449]/60 mr-2">{activePoint.month}:</span>
+          <span className="text-sm font-bold text-[#004449] font-mono">
             ${activePoint.value.toLocaleString()}
           </span>
         </div>
@@ -84,8 +83,8 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
         >
           <defs>
             <linearGradient id={fillGradientId} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={strokeColor} stopOpacity="0.35" />
-              <stop offset="80%" stopColor={strokeColor} stopOpacity="0.0" />
+              <stop offset="0%" stopColor="#d7ffc2" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#fffef0" stopOpacity="0.1" />
             </linearGradient>
           </defs>
 
@@ -95,7 +94,7 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
             y1={paddingY}
             x2={width - paddingX}
             y2={paddingY}
-            stroke="rgba(255,255,255,0.05)"
+            stroke="rgba(0,68,73,0.08)"
             strokeDasharray="4 4"
           />
           <line
@@ -103,7 +102,7 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
             y1={paddingY + chartHeight / 2}
             x2={width - paddingX}
             y2={paddingY + chartHeight / 2}
-            stroke="rgba(255,255,255,0.05)"
+            stroke="rgba(0,68,73,0.08)"
             strokeDasharray="4 4"
           />
           <line
@@ -111,7 +110,7 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
             y1={height - paddingY}
             x2={width - paddingX}
             y2={height - paddingY}
-            stroke="rgba(255,255,255,0.08)"
+            stroke="rgba(0,68,73,0.15)"
           />
 
           {/* Area Fill */}
@@ -135,8 +134,8 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
                 cy={p.y}
                 r={hoverIndex === idx ? 6 : 3.5}
                 className="transition-all duration-150"
-                fill={hoverIndex === idx ? '#fff' : strokeColor}
-                stroke="#0f172a"
+                fill={hoverIndex === idx ? '#483cff' : strokeColor}
+                stroke="#fffef0"
                 strokeWidth="2"
               />
             </g>
@@ -144,11 +143,11 @@ export const ValuationChart: React.FC<ValuationChartProps> = ({
         </svg>
 
         {showLabels && (
-          <div className="flex justify-between text-[11px] text-slate-500 font-mono mt-1 px-1">
+          <div className="flex justify-between text-[11px] text-[#004449]/60 font-mono mt-2 px-1">
             {data.map((d, i) => (
               <span
                 key={i}
-                className={`transition-colors ${hoverIndex === i ? 'text-amber-400 font-bold' : ''}`}
+                className={`transition-colors ${hoverIndex === i ? 'text-[#483cff] font-bold' : ''}`}
               >
                 {d.month}
               </span>
