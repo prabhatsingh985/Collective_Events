@@ -147,3 +147,82 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: #999999;
 }
+
+/* Collector Store Holographic & Foil Effects */
+.card-foil-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-foil-shine::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(255, 215, 0, 0.3) 48%,
+    rgba(168, 85, 247, 0.35) 55%,
+    rgba(56, 189, 248, 0.4) 62%,
+    transparent 80%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.8s ease-in-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.card-foil-shine:hover::after {
+  transform: translateX(100%) rotate(25deg);
+}
+
+/* Hot Wheels Blister Clamshell Gloss */
+.hw-blister-gloss {
+  position: relative;
+}
+
+.hw-blister-gloss::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 70%,
+    transparent 100%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 3D Card Hover Perspective */
+.card-perspective {
+  perspective: 1000px;
+}
+
+.card-tilt {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+}
+
+.card-tilt:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* Pack Opening Teaser Shimmer */
+.pack-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 3s infinite linear;
+}
+

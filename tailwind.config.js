@@ -73,11 +73,33 @@ module.exports = {
           foil: '#d9c58b',
           metallic: '#c7b070',
         },
+        // Hot Wheels Collector Palette
+        hw: {
+          orange: '#ff5400',
+          flame: '#ff1a1a',
+          yellow: '#ffcc00',
+          track: '#121212',
+          redline: '#d90429',
+          amber: '#fb8500',
+        },
+
+        // Trading Cards Stadium & Foil Palette
+        cards: {
+          stadium: '#081c15',
+          emerald: '#10b981',
+          electric: '#2563eb',
+          gold: '#f59e0b',
+          holo: '#a855f7',
+          slab: '#0f172a',
+          psa: '#dc2626',
+          bgs: '#d97706',
+        },
       },
       fontFamily: {
         walsheim: ['var(--font-lausanne)', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['var(--font-display)', 'var(--font-lausanne)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        racing: ['Impact', 'Haettenschweiler', 'Arial Black', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.04em',
@@ -101,13 +123,18 @@ module.exports = {
         card: 'rgba(0, 0, 0, 0.08) 0px 2px 8px 0px',
         soft: '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
         elevated: '0 20px 40px -15px rgba(0, 0, 0, 0.08)',
-        broadside: 'rgba(0, 0, 0, 0.1) 0px 0px 6px 0px', // Softened to Partiful standard
+        broadside: 'rgba(0, 0, 0, 0.1) 0px 0px 6px 0px',
         'broadside-lg': 'rgba(0, 0, 0, 0.1) 0px 0px 20px 0px',
+        'foil-glow': '0 0 25px rgba(168, 85, 247, 0.4), 0 0 10px rgba(56, 189, 248, 0.3)',
+        'flame-glow': '0 0 25px rgba(255, 84, 0, 0.4), 0 0 12px rgba(255, 204, 0, 0.3)',
+        'slab-depth': '0 10px 30px -5px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.6)',
       },
       animation: {
         'pack-reveal': 'packReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'pulse-subtle': 'pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         float: 'floatSlow 4s ease-in-out infinite',
+        shimmer: 'shimmerSweep 2.5s infinite linear',
+        'foil-tilt': 'foilTilt 3s ease-in-out infinite alternate',
       },
       keyframes: {
         packReveal: {
@@ -122,7 +149,16 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-6px)' },
         },
+        shimmerSweep: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        foilTilt: {
+          '0%': { transform: 'rotate(-1deg) translateY(0px)' },
+          '100%': { transform: 'rotate(1deg) translateY(-4px)' },
+        },
       },
+
     },
   },
   plugins: [],
