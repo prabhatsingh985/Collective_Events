@@ -8,6 +8,7 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "concurrently -n \"api,web\" -c \"blue,green\" \"npm run dev:api\" \"npm run dev:web\"",
     "dev:api": "npm run dev --workspace=@toy-wms/api",
     "dev:web": "npm run dev --workspace=@toy-wms/web",
     "build:shared": "npm run build --workspace=@toy-wms/shared",
@@ -21,6 +22,7 @@
     "test:api": "npm run test --workspace=@toy-wms/api"
   },
   "devDependencies": {
+    "concurrently": "^10.0.5",
     "typescript": "^5.4.5"
   }
 }
