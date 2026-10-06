@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Sparkles, Flame, ShieldCheck, Heart, ArrowRight } from 'lucide-react'
 import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
-import { StoreMobileNav } from '@/components/store/StoreMobileNav'
 
 export const metadata: Metadata = {
   title: 'About CrateMeet Store | India’s Die-Cast & Sports Card Marketplace',
@@ -13,56 +12,56 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col font-sans selection:bg-hw-orange selection:text-white">
+    <div className="min-h-screen bg-pure-canvas text-midnight-ink flex flex-col font-sans selection:bg-party-pink selection:text-midnight-ink">
       <StoreNavbar />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full pb-20 space-y-8">
-        <div className="space-y-3 pb-6 border-b border-zinc-800">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-800 text-zinc-300 inline-flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-hw-yellow" />
+        <div className="space-y-3 pb-6 border-b border-silver/50">
+          <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-party-pink/30 text-midnight-ink border border-party-pink/60 inline-flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-party-pink" />
             <span>Our Story</span>
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-midnight-ink tracking-tight font-display">
             Built by Collectors. For the Culture.
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate leading-relaxed">
             From car meetups in Mumbai to packed box-break tables in Bengaluru, CrateMeet was born out of a simple frustration: it was too hard for Indian collectors to get pristine die-cast grails and sealed sports card wax without paying extortionate customs or receiving creased blister cards.
           </p>
         </div>
 
-        <div className="space-y-6 text-xs text-zinc-300 leading-relaxed">
-          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-            <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-              <Flame className="w-5 h-5 text-hw-orange" />
+        <div className="space-y-6 text-xs text-slate leading-relaxed">
+          <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-3 shadow-sm">
+            <h2 className="text-base font-extrabold text-midnight-ink flex items-center gap-2 font-display">
+              <Flame className="w-5 h-5 text-orange-600" />
               <span>Die-Cast Toy Car Culture</span>
             </h2>
-            <p className="text-zinc-400">
+            <p className="text-slate">
               We treat 1:64 die-cast cars not as disposable toys, but as miniature works of automotive engineering. Spectraflame paint, Red Line Club serialization, and Real Riders rubber treads represent an enduring passion. Every casting we curate is preserved in crystal clamshell armor.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-            <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-emerald-400" />
+          <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-3 shadow-sm">
+            <h2 className="text-base font-extrabold text-midnight-ink flex items-center gap-2 font-display">
+              <Sparkles className="w-5 h-5 text-emerald-600" />
               <span>Sports Trading Card Vault</span>
             </h2>
-            <p className="text-zinc-400">
+            <p className="text-slate">
               The thrill of pulling an autographed rookie or ripping a Panini Prizm hobby box should be accessible to Indian sports enthusiasts. We source directly through verified international channels with unbroken manufacturer seals.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-            <h2 className="text-base font-extrabold text-white flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-blue-400" />
+          <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-3 shadow-sm">
+            <h2 className="text-base font-extrabold text-midnight-ink flex items-center gap-2 font-display">
+              <ShieldCheck className="w-5 h-5 text-blue-600" />
               <span>Physical Events & Swap Meets</span>
             </h2>
-            <p className="text-zinc-400">
+            <p className="text-slate">
               The store operates alongside the CrateMeet events platform, where collectors gather across India to swap, trade, and showcase their collections. Check out our physical community meetups anytime!
             </p>
             <div className="pt-2">
               <Link
                 href="/events"
-                className="inline-flex items-center gap-1.5 font-bold text-hw-orange hover:underline text-xs"
+                className="inline-flex items-center gap-1.5 font-bold text-midnight-ink hover:underline text-xs"
               >
                 <span>Explore Upcoming Physical Collector Meets</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -73,7 +72,6 @@ export default function AboutPage() {
       </main>
 
       <StoreFooter />
-      <StoreMobileNav />
     </div>
   )
 }

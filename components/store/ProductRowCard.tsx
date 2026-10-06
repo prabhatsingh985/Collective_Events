@@ -46,12 +46,12 @@ export function ProductRowCard({ product }: ProductRowCardProps) {
   const sealed = product.productType === 'card-sealed' ? (product as SealedCardProduct) : null
 
   return (
-    <div className="group rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 p-4 transition-all flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div className="group rounded-2xl bg-pure-canvas border border-silver/60 hover:border-silver/90 hover:shadow-card p-4 transition-all duration-200 flex flex-col sm:flex-row items-center justify-between gap-4">
       {/* Thumbnail */}
-      <div className="relative w-full sm:w-28 sm:h-28 aspect-square rounded-lg overflow-hidden bg-black shrink-0 border border-zinc-800">
+      <div className="relative w-full sm:w-28 sm:h-28 aspect-square rounded-xl overflow-hidden bg-fog/20 shrink-0 border border-silver/40">
         <Image src={product.images[0]} alt={product.title} fill className="object-cover group-hover:scale-105 transition-transform" />
         {product.discountPercent > 0 && (
-          <span className="absolute top-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-black bg-emerald-600 text-white">
+          <span className="absolute top-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-black bg-emerald-600 text-pure-canvas">
             {product.discountPercent}% OFF
           </span>
         )}
@@ -59,62 +59,63 @@ export function ProductRowCard({ product }: ProductRowCardProps) {
 
       {/* Details */}
       <div className="flex-1 min-w-0 w-full sm:w-auto">
-        <div className="flex items-center gap-2 mb-1 text-[11px] text-zinc-400">
-          {hw && <span className="font-semibold text-hw-orange">{hw.series} • {hw.year}</span>}
-          {single && <span className="font-semibold text-emerald-400">{single.sport} • {single.team}</span>}
-          {graded && <span className="font-semibold text-amber-400">{graded.gradingCompany} {graded.grade}</span>}
-          {sealed && <span className="font-semibold text-blue-400">{sealed.packType}</span>}
+        <div className="flex items-center gap-2 mb-1 text-[11px] text-slate">
+          {hw && <span className="font-semibold text-orange-600">{hw.series} • {hw.year}</span>}
+          {single && <span className="font-semibold text-emerald-600">{single.sport} • {single.team}</span>}
+          {graded && <span className="font-semibold text-amber-600">{graded.gradingCompany} {graded.grade}</span>}
+          {sealed && <span className="font-semibold text-blue-600">{sealed.packType}</span>}
           <span>•</span>
-          <span>SKU: {product.sku}</span>
+          <span className="font-mono">SKU: {product.sku}</span>
         </div>
 
-        <Link href={`/shop/products/${product.slug}`} className="hover:text-hw-orange transition-colors">
-          <h3 className="font-bold text-base text-white truncate">{product.title}</h3>
+        <Link href={`/shop/products/${product.slug}`} className="hover:underline">
+          <h3 className="font-extrabold text-sm sm:text-base text-midnight-ink truncate">{product.title}</h3>
         </Link>
 
-        <p className="text-xs text-zinc-400 line-clamp-1 mt-1">{product.description}</p>
+        <p className="text-xs text-slate line-clamp-1 mt-1">{product.description}</p>
 
         <div className="flex flex-wrap items-center gap-2 mt-2">
           {isUnique && (
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300">
               Only 1 In Vault
             </span>
           )}
           {product.stock <= 3 && !isUnique && (
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-600/20 text-orange-400">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-900">
               Only {product.stock} left
             </span>
           )}
           {product.badge && (
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-zinc-800 text-zinc-300">
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-black/[0.04] text-midnight-ink border border-silver/40">
               {product.badge}
             </span>
           )}
-          <div className="flex items-center gap-1 text-[11px] text-amber-400">
-            <Star className="w-3 h-3 fill-amber-400" />
+          <div className="flex items-center gap-1 text-[11px] text-amber-600 font-bold">
+            <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
             <span>{product.rating}</span>
-            <span className="text-zinc-500">({product.reviewsCount})</span>
+            <span className="text-slate font-normal">({product.reviewsCount})</span>
           </div>
         </div>
       </div>
 
-      {/* Price & Action */}
-      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-zinc-800">
+      {/* Pricing & Add to Cart Action */}
+      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto shrink-0 gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-silver/40">
         <div className="text-left sm:text-right">
-          <div className="font-mono text-lg font-black text-white">
+          <div className="text-base sm:text-lg font-extrabold text-midnight-ink">
             ₹{product.price.toLocaleString('en-IN')}
           </div>
           {product.mrp > product.price && (
-            <span className="text-xs text-zinc-500 line-through">
+            <div className="text-xs text-slate line-through">
               ₹{product.mrp.toLocaleString('en-IN')}
-            </span>
+            </div>
           )}
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => toggleWishlist(product.id)}
-            className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-red-500 transition-colors"
+            className="p-2 rounded-full border border-silver/50 hover:border-midnight-ink text-slate hover:text-red-500 transition-colors"
+            title="Wishlist"
           >
             <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
           </button>
@@ -122,12 +123,12 @@ export function ProductRowCard({ product }: ProductRowCardProps) {
           <button
             onClick={handleQuickAdd}
             disabled={product.stock <= 0}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+            className={`px-4 py-2 rounded-[8px] text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm ${
               product.stock <= 0
-                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                ? 'bg-silver text-slate cursor-not-allowed'
                 : isAdded
-                ? 'bg-emerald-600 text-white'
-                : 'bg-hw-orange hover:bg-orange-600 text-white'
+                ? 'bg-emerald-600 text-pure-canvas'
+                : 'bg-midnight-ink text-pure-canvas hover:opacity-90 active:scale-[0.98]'
             }`}
           >
             {isAdded ? (
@@ -143,6 +144,10 @@ export function ProductRowCard({ product }: ProductRowCardProps) {
             )}
           </button>
         </div>
+
+        {toastMessage && (
+          <span className="text-[10px] font-bold text-red-600 animate-shake">{toastMessage}</span>
+        )}
       </div>
     </div>
   )

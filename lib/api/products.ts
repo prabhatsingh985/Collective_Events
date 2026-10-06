@@ -222,9 +222,11 @@ export async function getSupplies(limit?: number): Promise<SuppliesProduct[]> {
   return limit ? MOCK_SUPPLIES_PRODUCTS.slice(0, limit) : MOCK_SUPPLIES_PRODUCTS
 }
 
-export async function getRelatedProducts(product: Product, limit: number = 4): Promise<Product[]> {
+export async function getRelatedProducts(productOrId: Product | string, limit: number = 4): Promise<Product[]> {
   await delay()
-  return ALL_PRODUCTS.filter((p) => p.id !== product.id && (p.category === product.category || p.productType === product.productType)).slice(
+  const prod = typeof productOrId === 'string' ? ALL_PRODUCTS.find((p) => p.id === productOrId) : productOrId
+  if (!prod) return ALL_PRODUCTS.slice(0, limit)
+  return ALL_PRODUCTS.filter((p) => p.id !== prod.id && (p.category === prod.category || p.productType === prod.productType)).slice(
     0,
     limit
   )

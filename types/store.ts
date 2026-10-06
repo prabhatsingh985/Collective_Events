@@ -74,6 +74,8 @@ export interface SealedCardProduct extends BaseProduct {
   cardsPerPack: number
   packsPerBox: number
   guaranteedHits: string[]
+  keyChases?: string[]
+  tamperSealType?: string
   isSealed: true
 }
 
@@ -135,6 +137,9 @@ export interface SuppliesProduct extends BaseProduct {
     | 'Storage Vault Cases'
   packSize: number
   compatibility: string
+  material?: string
+  isUVResistant?: boolean
+  isAcidFree?: boolean
 }
 
 export type Product = 
@@ -155,6 +160,7 @@ export interface Drop {
   status: 'live' | 'upcoming' | 'ended'
   startsAt: string
   endsAt: string
+  scheduledAt?: string
   itemIds: string[]
   maxPerCustomer: number
   totalStock: number
@@ -243,4 +249,14 @@ export interface StoreReview {
   comment: string
   verifiedPurchase: boolean
   createdAt: string
+}
+
+export interface SearchResults {
+  products: Product[]
+  suggestions: {
+    label: string
+    type: 'Hot Wheels' | 'Trading Cards' | 'Player' | 'Series'
+    href: string
+  }[]
+  totalHits: number
 }

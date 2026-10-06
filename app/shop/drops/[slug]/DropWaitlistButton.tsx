@@ -22,8 +22,8 @@ export function DropWaitlistButton({ drop }: DropWaitlistButtonProps) {
 
   if (joined) {
     return (
-      <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-4 py-2.5 rounded-xl">
-        <CheckCircle2 className="w-4 h-4" />
+      <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-4 py-2.5 rounded-xl">
+        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
         <span>Waitlist Joined! You'll receive early SMS access.</span>
       </div>
     )
@@ -39,11 +39,11 @@ export function DropWaitlistButton({ drop }: DropWaitlistButtonProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter phone or email"
-          className="px-3 py-2 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-hw-orange"
+          className="px-3 py-2 text-xs rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink placeholder-slate focus:outline-none focus:border-midnight-ink"
         />
         <button
           type="submit"
-          className="px-4 py-2 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-bold text-xs shrink-0"
+          className="px-4 py-2 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs shrink-0 transition-all"
         >
           Confirm
         </button>
@@ -54,9 +54,9 @@ export function DropWaitlistButton({ drop }: DropWaitlistButtonProps) {
   return (
     <button
       onClick={() => setShowInput(true)}
-      className="px-6 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all w-full sm:w-auto"
+      className="px-6 py-3 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all w-full sm:w-auto shadow-sm"
     >
-      <Bell className="w-4 h-4 text-purple-400" />
+      <Bell className="w-4 h-4 text-party-pink" />
       <span>Join Priority Drop Waitlist</span>
     </button>
   )

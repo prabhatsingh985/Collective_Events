@@ -62,54 +62,56 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
   }
 
   return (
-    <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-6 space-y-6 shadow-2xl">
+    <div className="rounded-3xl bg-pure-canvas border border-silver/70 p-6 space-y-6 shadow-card">
       {/* Price Header */}
       <div>
         <div className="flex items-baseline gap-3">
-          <span className="font-mono text-3xl sm:text-4xl font-black text-white">
+          <span className="text-3xl sm:text-4xl font-extrabold text-midnight-ink font-display">
             ₹{product.price.toLocaleString('en-IN')}
           </span>
           {product.mrp > product.price && (
-            <span className="text-base text-zinc-400 line-through">
+            <span className="text-base text-slate line-through">
               ₹{product.mrp.toLocaleString('en-IN')}
             </span>
           )}
           {product.discountPercent > 0 && (
-            <span className="px-2 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-600 text-white shadow">
+            <span className="px-2 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-600 text-pure-canvas shadow-sm">
               {product.discountPercent}% OFF
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2 mt-1.5 text-xs text-zinc-400">
-          <span className="text-zinc-300 font-medium">Inclusive of 18% GST</span>
+        <div className="flex items-center gap-2 mt-1.5 text-xs text-slate">
+          <span className="text-midnight-ink font-medium">Inclusive of 18% GST</span>
           <span>•</span>
-          <span className="text-emerald-400 font-semibold">Free Armored Shipping (orders ₹999+)</span>
+          <span className="text-emerald-700 font-semibold">Free Armored Air Shipping (orders ₹999+)</span>
         </div>
       </div>
 
       {/* Stock Urgency Indicator */}
       <div>
         {isOutOfStock ? (
-          <div className="p-3 rounded-xl bg-red-950/60 border border-red-900/60 text-xs text-red-300 flex items-center gap-2 font-bold">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+          <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 flex items-center gap-2 font-bold">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
             <span>Currently Out of Stock in Vault</span>
           </div>
         ) : isUnique ? (
-          <div className="p-3 rounded-xl bg-amber-950/60 border border-amber-800/80 text-xs text-amber-200 flex items-center justify-between font-bold">
+          <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-between font-bold">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
               <span>Only 1 Available — Unique Collector Piece</span>
             </span>
-            <span className="text-[10px] font-mono text-amber-300 uppercase">Limit 1/Customer</span>
+            <span className="text-[10px] font-mono text-amber-800 uppercase px-2 py-0.5 bg-amber-100 rounded">
+              Limit 1/Customer
+            </span>
           </div>
         ) : product.stock <= 3 ? (
-          <div className="p-3 rounded-xl bg-orange-950/60 border border-orange-800/80 text-xs text-orange-200 flex items-center gap-2 font-bold">
+          <div className="p-3.5 rounded-xl bg-orange-50 border border-orange-200 text-xs text-orange-900 flex items-center gap-2 font-bold">
             <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
             <span>Low Stock Alert: Only {product.stock} units remaining</span>
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+          <div className="flex items-center gap-2 text-xs text-emerald-700 font-bold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span>In Stock — Ready for Express Dispatch</span>
           </div>
         )}
@@ -117,7 +119,7 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
 
       {/* Error Message Toast */}
       {toastError && (
-        <div className="p-3 rounded-xl bg-red-900/40 border border-red-800 text-xs text-red-200 font-semibold animate-shake">
+        <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-semibold animate-shake">
           {toastError}
         </div>
       )}
@@ -126,12 +128,12 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
       {isOutOfStock ? (
         <div className="pt-2">
           {alertSubmitted ? (
-            <p className="text-xs text-emerald-400 font-bold">
+            <p className="text-xs text-emerald-700 font-bold">
               ✓ We will alert you the moment this casting / pack is restocked!
             </p>
           ) : (
             <form onSubmit={handleRestockAlert} className="space-y-2">
-              <span className="text-xs font-bold text-zinc-300 block">
+              <span className="text-xs font-bold text-midnight-ink block">
                 Notify me when restocked:
               </span>
               <div className="flex gap-2">
@@ -140,11 +142,11 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
                   value={alertEmail}
                   onChange={(e) => setAlertEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-3 py-2 text-xs rounded-xl bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-hw-orange"
+                  className="flex-1 px-3 py-2 text-xs rounded-[8px] bg-pure-canvas border border-silver text-midnight-ink placeholder:text-ash focus:outline-none focus:border-midnight-ink"
                 />
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition-colors shrink-0"
+                  className="px-4 py-2 rounded-[8px] bg-midnight-ink text-pure-canvas text-xs font-bold transition-opacity hover:opacity-85 shrink-0"
                 >
                   Alert Me
                 </button>
@@ -157,26 +159,26 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
         <div className="space-y-4">
           {/* Quantity Selector (Hidden or locked if unique item) */}
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-zinc-300">Quantity:</span>
+            <span className="text-xs font-bold text-midnight-ink">Quantity:</span>
             {isUnique ? (
-              <span className="px-3 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono font-bold text-zinc-400">
+              <span className="px-3 py-1 rounded-[8px] bg-black/[0.04] border border-silver text-xs font-mono font-bold text-slate">
                 1 (Single Copy Locked)
               </span>
             ) : (
-              <div className="flex items-center border border-zinc-700 rounded-xl overflow-hidden bg-zinc-950">
+              <div className="flex items-center border border-silver rounded-[8px] overflow-hidden bg-pure-canvas">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="px-3 py-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 text-xs transition-colors"
+                  className="px-3 py-1.5 text-slate hover:text-midnight-ink hover:bg-black/[0.04] text-xs transition-colors"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-4 font-mono text-xs font-black text-white">
+                <span className="px-4 font-mono text-xs font-extrabold text-midnight-ink">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity((q) => Math.min(product.stock, q + 1))}
                   disabled={quantity >= product.stock}
-                  className="px-3 py-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 text-xs transition-colors disabled:opacity-30"
+                  className="px-3 py-1.5 text-slate hover:text-midnight-ink hover:bg-black/[0.04] text-xs transition-colors disabled:opacity-30"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -188,11 +190,11 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
           <div className="space-y-2.5 pt-2">
             <button
               onClick={handleAddToCart}
-              className="w-full py-3.5 rounded-xl bg-zinc-800 hover:bg-zinc-750 border border-zinc-700 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.01] active:scale-[0.99]"
+              className="w-full py-3.5 rounded-[8px] bg-black/[0.04] hover:bg-black/[0.08] border border-silver/70 text-midnight-ink font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
             >
               {isAdded ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
+                  <Check className="w-4 h-4 text-emerald-600" />
                   <span>Added to Cart</span>
                 </>
               ) : (
@@ -205,9 +207,9 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
 
             <button
               onClick={handleBuyNow}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-hw-orange to-red-600 hover:brightness-110 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-orange-600/20 transition-transform hover:scale-[1.01] active:scale-[0.99]"
+              className="w-full py-3.5 rounded-[8px] bg-midnight-ink text-pure-canvas hover:opacity-90 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.99]"
             >
-              <Zap className="w-4 h-4 fill-white" />
+              <Zap className="w-4 h-4 text-party-pink fill-party-pink" />
               <span>Instant Buy Now</span>
             </button>
           </div>
@@ -215,28 +217,28 @@ export function ProductPurchaseCard({ product }: ProductPurchaseCardProps) {
       )}
 
       {/* Wishlist Button */}
-      <div className="pt-2 border-t border-zinc-800 flex items-center justify-between">
+      <div className="pt-2 border-t border-silver/40 flex items-center justify-between">
         <button
           onClick={() => toggleWishlist(product.id)}
-          className="flex items-center gap-2 text-xs font-bold text-zinc-400 hover:text-white transition-colors"
+          className="flex items-center gap-2 text-xs font-bold text-slate hover:text-midnight-ink transition-colors"
         >
           <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : ''}`} />
           <span>{isFavorite ? 'Saved in Wishlist' : 'Add to Wishlist'}</span>
         </button>
 
-        <span className="text-[11px] font-mono text-zinc-500">
+        <span className="text-[11px] font-mono text-ash">
           SKU: {product.sku}
         </span>
       </div>
 
       {/* Trust Mini Strip */}
-      <div className="pt-2 border-t border-zinc-800 text-[11px] text-zinc-400 space-y-1.5">
+      <div className="pt-2 border-t border-silver/40 text-[11px] text-slate space-y-1.5">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
           <span>100% Genuine BIS / Panini Tamper-Seal Inspected</span>
         </div>
         <div className="flex items-center gap-2">
-          <Lock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
           <span>Secure Encrypted UPI & Card Checkout</span>
         </div>
       </div>

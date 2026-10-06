@@ -54,48 +54,48 @@ export function PincodeEstimator() {
   }
 
   return (
-    <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-4 space-y-3">
-      <div className="flex items-center justify-between text-xs font-bold text-zinc-300">
+    <div className="rounded-2xl bg-pure-canvas border border-silver/60 p-4 space-y-3 shadow-sm">
+      <div className="flex items-center justify-between text-xs font-bold text-midnight-ink">
         <span className="flex items-center gap-1.5">
-          <Truck className="w-4 h-4 text-hw-orange" />
+          <Truck className="w-4 h-4 text-orange-600" />
           <span>Check Delivery Estimate</span>
         </span>
-        <span className="text-[11px] font-normal text-emerald-400 font-mono">
+        <span className="text-[11px] font-normal text-emerald-700 font-mono font-bold">
           Free Shipping on ₹999+
         </span>
       </div>
 
       <form onSubmit={checkPincode} className="flex gap-2">
         <div className="relative flex-1">
-          <MapPin className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+          <MapPin className="w-3.5 h-3.5 text-slate absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             maxLength={6}
             value={pincode}
             onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
             placeholder="Enter 6-digit Pincode"
-            className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-hw-orange font-mono"
+            className="w-full pl-8 pr-3 py-1.5 rounded-[8px] bg-pure-canvas border border-silver text-xs text-midnight-ink placeholder:text-ash focus:outline-none focus:border-midnight-ink font-mono"
           />
         </div>
         <button
           type="submit"
-          className="px-3.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs transition-colors shrink-0"
+          className="px-3.5 py-1.5 rounded-[8px] bg-midnight-ink hover:opacity-85 text-pure-canvas font-bold text-xs transition-opacity shrink-0"
         >
           Verify
         </button>
       </form>
 
       {estimate && (
-        <div className="p-3 rounded-lg bg-zinc-950/80 border border-zinc-800/80 text-xs space-y-1">
+        <div className="p-3 rounded-xl bg-black/[0.02] border border-silver/50 text-xs space-y-1">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span className="font-bold text-midnight-ink flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span>Delivers to {estimate.city}</span>
             </span>
-            <span className="font-mono text-emerald-400 font-bold">{estimate.date}</span>
+            <span className="font-mono text-emerald-700 font-bold">{estimate.date}</span>
           </div>
-          <p className="text-[11px] text-zinc-400 flex items-center gap-1">
-            <Clock className="w-3 h-3 text-zinc-500 shrink-0" />
+          <p className="text-[11px] text-slate flex items-center gap-1">
+            <Clock className="w-3 h-3 text-ash shrink-0" />
             <span>Via {estimate.carrier} with live AWB tracking link.</span>
           </p>
         </div>

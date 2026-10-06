@@ -21,8 +21,6 @@ import {
 
 import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
-import { StoreMobileNav } from '@/components/store/StoreMobileNav'
-import { StoreSearchModal } from '@/components/store/StoreSearchModal'
 import { ProductCard } from '@/components/store/ProductCard'
 import { CountdownTimer } from '@/components/store/CountdownTimer'
 import { PackOpeningTeaser } from '@/components/store/PackOpeningTeaser'
@@ -40,7 +38,7 @@ import { getActiveDrop, getDrops } from '@/lib/api/drops'
 import { RecentlyViewedShelf } from './RecentlyViewedShelf'
 
 export const metadata: Metadata = {
-  title: 'Collector Store | Hot Wheels Die-Cast & Trading Cards India',
+  title: 'Collector Store | Hot Wheels Die-Cast & Trading Cards India | CrateMeet',
   description:
     'India’s verified online store for authentic 1:64 die-cast toy cars (Hot Wheels Super Treasure Hunts, RLC, Car Culture) and sports trading cards (Panini Prizm, Topps Chrome, PSA slabs). Fast BlueDart Air express shipping.',
   openGraph: {
@@ -76,193 +74,213 @@ export default async function ShopHomePage() {
   ])
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col font-sans selection:bg-hw-orange selection:text-white">
-      {/* Navigation & Overlays */}
+    <div className="min-h-screen bg-pure-canvas text-midnight-ink flex flex-col font-sans selection:bg-party-pink selection:text-midnight-ink">
+      {/* Store Category & Status Sub-Nav Ribbon */}
       <StoreNavbar />
-      <StoreSearchModal />
 
       {/* Main Content */}
-      <main className="flex-1 pb-16 lg:pb-0">
+      <main className="flex-1 pb-16">
         {/* ============================================================ */}
         {/* 1. HERO SECTION: DUAL-LANE ENTRY PATHS                       */}
         {/* ============================================================ */}
-        <section className="relative overflow-hidden border-b border-zinc-800 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black">
+        <section className="relative overflow-hidden border-b border-silver/40 bg-gradient-to-b from-white via-fog/10 to-pure-canvas py-10 lg:py-16">
           {/* Subtle Ambient Glows */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-hw-orange/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-10 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-party-pink/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-10 right-1/4 w-96 h-96 bg-sky-periwinkle/15 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             {/* Top Tagline Pill */}
             <div className="flex items-center justify-center gap-2 mb-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-zinc-300">India’s Premier Die-Cast & Sports Card Marketplace</span>
-                <span className="text-zinc-600">|</span>
-                <span className="text-hw-yellow font-mono">100% Collector Verified</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pure-canvas border border-silver/60 text-xs font-semibold shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span className="text-midnight-ink font-bold">India’s Premier Die-Cast & Sports Card Marketplace</span>
+                <span className="text-silver">|</span>
+                <span className="text-slate">Tamper-Proof Panini Seals & Mattel MOC Guarantee</span>
               </div>
             </div>
 
-            {/* Main Headline */}
-            <div className="text-center max-w-3xl mx-auto mb-10">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-                CHASE THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-hw-orange via-hw-yellow to-amber-400">GRAIL</span>.{' '}
-                <br className="hidden sm:inline" />
-                RIP THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400">WAX</span>.
+            {/* Headline & Description */}
+            <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-midnight-ink tracking-tight font-display leading-[1.1]">
+                Scattered invites. Real tables.{' '}
+                <span className="underline decoration-party-pink decoration-wavy decoration-2">
+                  Unboxed grails.
+                </span>
               </h1>
-              <p className="mt-4 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                Authentic factory-unpunched Hot Wheels Super $THs, numbered RLC castings, sealed Panini Prizm hobby boxes, and gem mint football rookie slabs. All with armored packaging and express BlueDart Air dispatch.
+              <p className="text-sm sm:text-base text-slate leading-relaxed">
+                From mint unpunched 1971 Datsun Super Treasure Hunts to Gem Mint Bellingham rookies in PSA 10 slabs.
+                Verified vault inventory dispatched nationwide with armored clamshell packaging.
               </p>
             </div>
 
-            {/* Split Dual-Lane Entry Cards & Interactive Pack Teaser */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-              {/* Lane A: Hot Wheels Paddock (5 cols) */}
-              <div className="lg:col-span-4 relative rounded-2xl overflow-hidden bg-gradient-to-br from-zinc-900 to-black border-2 border-orange-500/30 hover:border-orange-500/80 transition-all duration-300 group shadow-2xl flex flex-col justify-between p-6">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-orange-600/10 rounded-full blur-2xl group-hover:scale-125 transition-transform" />
-                
-                {/* Background Car Silhouette / Motif */}
-                <div className="relative z-10">
+            {/* DUAL-LANE HERO CARDS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {/* Lane 1: Hot Wheels Die-Cast (1:64 Scale) */}
+              <Link
+                href="/shop/hot-wheels"
+                className="group relative overflow-hidden rounded-3xl bg-pure-canvas border border-silver/70 p-6 sm:p-8 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between"
+              >
+                <div className="absolute top-0 right-0 w-44 h-44 bg-orange-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform" />
+
+                <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-hw-orange text-white shadow-lg flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-hw-yellow fill-hw-yellow" />
-                      <span>DIE-CAST SPEEDWAY</span>
+                    <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-orange-600 text-pure-canvas shadow-sm flex items-center gap-1.5">
+                      <Flame className="w-3.5 h-3.5 fill-pure-canvas" />
+                      <span>1:64 Scale Die-Cast</span>
                     </span>
-                    <span className="font-mono text-xs font-bold text-zinc-400">1:64 SCALE</span>
+                    <span className="text-xs font-bold text-slate flex items-center gap-1 group-hover:text-midnight-ink transition-colors">
+                      <span>Explore 12 Castings</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase group-hover:text-hw-orange transition-colors">
-                    Hot Wheels & Die-Cast
-                  </h2>
-
-                  <p className="mt-2 text-xs text-zinc-400 leading-relaxed">
-                    Super Treasure Hunts, Red Line Club Exclusives, Car Culture Real Riders, and factory-fresh case mainlines.
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight leading-tight mb-2">
+                    Hot Wheels & Die-Cast Speedway
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate mb-6 leading-relaxed">
+                    Super Treasure Hunts ($TH), Red Line Club (RLC) Chrome grails, Car Culture Real Riders with rubber tires, and factory unpunched blister cards.
                   </p>
+                </div>
 
-                  {/* Highlights tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">Super $TH</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">RLC Exclusives</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">Boulevard</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">Protector Clamshells</span>
+                {/* Visual Thumbnail Strip */}
+                <div className="grid grid-cols-3 gap-2.5 pt-4 border-t border-silver/40">
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=400&q=80"
+                      alt="1971 Datsun 240Z Super $TH"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      Super $TH
+                    </span>
+                  </div>
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=400&q=80"
+                      alt="Nissan Skyline GT-R RLC"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      RLC Chrome
+                    </span>
+                  </div>
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=400&q=80"
+                      alt="Porsche 911 GT3 RS"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      Real Riders
+                    </span>
                   </div>
                 </div>
+              </Link>
 
-                <div className="relative z-10 mt-8 pt-4 border-t border-zinc-800 flex items-center justify-between">
-                  <Link
-                    href="/shop/hot-wheels"
-                    className="w-full py-2.5 px-4 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-orange-600/30 transition-transform group-hover:scale-[1.02]"
-                  >
-                    <span>Enter Hot Wheels Paddock</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+              {/* Lane 2: Sports Trading Cards */}
+              <Link
+                href="/shop/cards"
+                className="group relative overflow-hidden rounded-3xl bg-pure-canvas border border-silver/70 p-6 sm:p-8 shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between"
+              >
+                <div className="absolute top-0 right-0 w-44 h-44 bg-sky-periwinkle/20 rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform" />
 
-              {/* Center: Interactive Pack-Opening Teaser (4 cols) */}
-              <div className="lg:col-span-4 flex items-center justify-center">
-                <PackOpeningTeaser />
-              </div>
-
-              {/* Lane B: Sports Cards Stadium Vault (4 cols) */}
-              <div className="lg:col-span-4 relative rounded-2xl overflow-hidden bg-gradient-to-br from-zinc-900 to-black border-2 border-emerald-500/30 hover:border-emerald-500/80 transition-all duration-300 group shadow-2xl flex flex-col justify-between p-6">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/10 rounded-full blur-2xl group-hover:scale-125 transition-transform" />
-
-                <div className="relative z-10">
+                <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-600 text-white shadow-lg flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-yellow-300" />
-                      <span>THE CARDS VAULT</span>
+                    <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-midnight-ink text-pure-canvas shadow-sm flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-party-pink" />
+                      <span>Sports Cards Vault</span>
                     </span>
-                    <span className="font-mono text-xs font-bold text-zinc-400">PANINI & TOPPS</span>
+                    <span className="text-xs font-bold text-slate flex items-center gap-1 group-hover:text-midnight-ink transition-colors">
+                      <span>Explore 9 Grails</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase group-hover:text-emerald-400 transition-colors">
-                    Sports Trading Cards
-                  </h2>
-
-                  <p className="mt-2 text-xs text-zinc-400 leading-relaxed">
-                    Sealed hobby wax, Panini Prizm blasters, on-card certified autos, and PSA 10 / BGS 9.5 gem rookie slabs.
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight leading-tight mb-2">
+                    Trading Cards, Wax & Graded Slabs
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate mb-6 leading-relaxed">
+                    Factory-sealed Panini Prizm hobby boxes, Topps Chrome UCL blasters, PSA 10 Gem Mint slabs, serial-numbered rookies & authentic on-card autographs.
                   </p>
+                </div>
 
-                  {/* Highlights tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">Prizm Wax</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">Topps Chrome UCL</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">PSA 10 Slabs</span>
-                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">One-Touch Cases</span>
+                {/* Visual Thumbnail Strip */}
+                <div className="grid grid-cols-3 gap-2.5 pt-4 border-t border-silver/40">
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80"
+                      alt="Jude Bellingham Prizm BGS 9.5"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      BGS 9.5
+                    </span>
+                  </div>
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=400&q=80"
+                      alt="Panini Prizm Premier League Hobby Box"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      Sealed Wax
+                    </span>
+                  </div>
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-fog/20 border border-silver/50">
+                    <Image
+                      src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=400&q=80"
+                      alt="Erling Haaland Downtown"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-black bg-black/80 text-white">
+                      Downtown SP
+                    </span>
                   </div>
                 </div>
-
-                <div className="relative z-10 mt-8 pt-4 border-t border-zinc-800 flex items-center justify-between">
-                  <Link
-                    href="/shop/cards"
-                    className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-transform group-hover:scale-[1.02]"
-                  >
-                    <span>Enter Sports Cards Vault</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 2. LIVE NEXT DROP COUNTDOWN BANNER                           */}
+        {/* 2. LIVE DROP COUNTDOWN & STOCK ALLOCATION BAR                */}
         {/* ============================================================ */}
         {activeDrop && (
-          <section className="bg-gradient-to-r from-red-950 via-zinc-900 to-red-950 border-y border-red-900/60 py-6 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-hw-flame/20 border border-hw-flame/40 flex items-center justify-center shrink-0">
-                  <Zap className="w-6 h-6 text-hw-flame animate-pulse" />
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+            <div className="rounded-3xl bg-gradient-to-r from-fog/30 via-party-pink/20 to-sky-periwinkle/20 border border-silver/70 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-2 text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-party-pink text-midnight-ink border border-party-pink/80">
+                    Next Vault Drop
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate">
+                    Scheduled: {new Date(activeDrop.startsAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                  </span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.2 rounded text-[10px] font-black uppercase tracking-wider bg-hw-flame text-white">
-                      LIVE DROP
-                    </span>
-                    <span className="text-xs text-zinc-400 font-mono">Limit {activeDrop.maxPerCustomer} Per Customer</span>
-                  </div>
-                  <h3 className="text-base sm:text-lg font-black text-white mt-1">
-                    {activeDrop.title}
-                  </h3>
-                  <p className="text-xs text-zinc-400 line-clamp-1 max-w-xl">
-                    {activeDrop.tagline}
-                  </p>
-                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-midnight-ink tracking-tight">
+                  {activeDrop.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate max-w-xl">
+                  {activeDrop.description}
+                </p>
               </div>
 
-              {/* Stock Bar & Countdown */}
-              <div className="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
-                <div className="flex flex-col gap-1 w-full sm:w-48">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-zinc-400">Remaining:</span>
-                    <span className="font-bold text-hw-yellow">
-                      {activeDrop.remainingStock} of {activeDrop.totalStock} left
-                    </span>
-                  </div>
-                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-hw-orange h-full rounded-full transition-all duration-500"
-                      style={{
-                        width: `${Math.round((activeDrop.remainingStock / activeDrop.totalStock) * 100)}%`,
-                      }}
-                    />
-                  </div>
+              <div className="flex flex-col sm:flex-row items-center gap-5 shrink-0">
+                <div className="bg-pure-canvas border border-silver/60 rounded-2xl p-3 px-5 shadow-sm">
+                  <CountdownTimer targetDate={activeDrop.startsAt} />
                 </div>
-
-                <CountdownTimer
-                  targetDate={activeDrop.endsAt}
-                  label="Drop Closes In"
-                />
-
                 <Link
-                  href="/shop/drops"
-                  className="px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shrink-0 transition-transform hover:scale-105"
+                  href={`/shop/drops/${activeDrop.slug}`}
+                  className="px-6 py-3 rounded-[8px] bg-midnight-ink text-pure-canvas hover:opacity-90 active:scale-[0.98] transition-all text-xs font-bold flex items-center gap-2 shadow-sm"
                 >
-                  <span>Shop Drop</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>View Allocation</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
@@ -270,169 +288,173 @@ export default async function ShopHomePage() {
         )}
 
         {/* ============================================================ */}
-        {/* 3. SHELF: TREASURE HUNT & SUPER $TH SHOWCASE                  */}
+        {/* 3. SHELF: SUPER TREASURE HUNTS ($TH) & RLC DIE-CAST          */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-zinc-800">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
+          <div className="flex items-end justify-between mb-6 pb-4 border-b border-silver/40">
             <div>
-              <div className="flex items-center gap-2 text-hw-orange text-xs font-bold uppercase tracking-wider mb-1">
-                <Flame className="w-4 h-4 fill-hw-orange" />
-                <span>The Holy Grails</span>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-orange-600 text-pure-canvas flex items-center gap-1 shadow-sm">
+                  <Flame className="w-3 h-3 fill-pure-canvas" />
+                  <span>1:64 Scale Toy Castings</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-slate">
+                  Spectraflame Paint & Real Riders
+                </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Super Treasure Hunts & RLC Exclusives
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight font-display">
+                Super Treasure Hunts ($TH) & RLC Exclusives
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Real Riders rubber tires, Spectraflame automotive paint, and unpunched mint blister cards.
-              </p>
             </div>
-
             <Link
-              href="/shop/hot-wheels?series=Super+Treasure+Hunt+($TH)"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-hw-orange hover:text-orange-400 transition-colors"
+              href="/shop/hot-wheels?treasureHuntType=Super+$TH"
+              className="text-xs font-bold text-midnight-ink hover:underline flex items-center gap-1"
             >
-              <span>View All Treasure Hunts</span>
+              <span>View All Die-Cast</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {treasureHunts.map((product) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {treasureHunts.slice(0, 4).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 4. SHELF: HOT FOOTBALL & SPORTS CARDS (SINGLES & SLABS)      */}
+        {/* 4. INTERACTIVE PACK OPENING TEASER & COMMUNITY BREAK BANNER   */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-850">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-zinc-800">
-            <div>
-              <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">
-                <Sparkles className="w-4 h-4 text-emerald-400" />
-                <span>On-Card Autos & Gem Slabs</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Hot Football Singles & Graded Rookies
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <div className="rounded-3xl bg-gradient-to-br from-fog/20 via-sky-periwinkle/15 to-party-pink/20 border border-silver/70 p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-midnight-ink text-pure-canvas inline-flex items-center gap-1.5 shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-party-pink" />
+                <span>Micro-Collector Experience</span>
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-midnight-ink tracking-tight font-display leading-tight">
+                Simulate Ripping Panini Packs or Popping Hot Wheels Blisters
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Authentic PSA 10 & BGS 9.5 slabs, Panini Downtown inserts, and numbered UEFA Champions League cards.
+              <p className="text-xs sm:text-sm text-slate leading-relaxed">
+                Test your pull luck before you buy! Tap below to unwrap authentic digital hobby pack teasers with genuine foil Sheen or carded blister unboxings. Pull a Downtown or a Super $TH and instantly claim it into your cart.
               </p>
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-midnight-ink">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                  <span>Real product pool items</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                  <span>Immediate 10-minute hold reservation</span>
+                </span>
+              </div>
             </div>
 
-            <Link
-              href="/shop/cards"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-            >
-              <span>View All Sports Cards</span>
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[...singleCards, ...gradedSlabs].slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            <div className="lg:col-span-6">
+              <PackOpeningTeaser />
+            </div>
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 5. SHELF: SEALED BOXES & HOBBY PACKS                        */}
+        {/* 5. SHELF: SEALED CARD BOXES & BLASTERS                        */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-850">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-zinc-800">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <div className="flex items-end justify-between mb-6 pb-4 border-b border-silver/40">
             <div>
-              <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-wider mb-1">
-                <Package className="w-4 h-4 text-blue-400" />
-                <span>Zero Reseals • Panini Hologram Intact</span>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-cards-stadium text-pure-canvas flex items-center gap-1 shadow-sm">
+                  <Package className="w-3 h-3 text-yellow-300" />
+                  <span>Factory Sealed Wax</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-slate">
+                  Panini & Topps Hologram Shrink Wrap
+                </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Factory Sealed Wax & Blasters
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight font-display">
+                Sealed Hobby Boxes, Blasters & Multipacks
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Panini Prizm, Donruss Optic, and Topps Chrome boxes ready for your next big personal box break.
-              </p>
             </div>
-
             <Link
               href="/shop/sealed"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-xs font-bold text-midnight-ink hover:underline flex items-center gap-1"
             >
-              <span>Explore Sealed Wax</span>
+              <span>View All Wax</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {sealedPacks.map((product) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {sealedPacks.slice(0, 4).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 6. SHELF: NEW ARRIVALS & RESTOCKS                           */}
+        {/* 6. SHELF: GRADED SLABS (PSA 10 & BGS 9.5)                    */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-850">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-zinc-800">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <div className="flex items-end justify-between mb-6 pb-4 border-b border-silver/40">
             <div>
-              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
-                <TrendingUp className="w-4 h-4 text-amber-400" />
-                <span>Fresh from the Vault</span>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-midnight-ink text-pure-canvas flex items-center gap-1 shadow-sm">
+                  <ShieldCheck className="w-3 h-3 text-party-pink" />
+                  <span>Certified Slabs</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-slate">
+                  PSA 10 Gem Mint & BGS 9.5 True Gem
+                </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                New Arrivals
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight font-display">
+                PSA & BGS Graded Cards (Slabs)
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Newly cataloged castings, graded rookie cards, and restocked supplies.
-              </p>
             </div>
-
             <Link
-              href="/shop?sortBy=newest"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors"
+              href="/shop/graded"
+              className="text-xs font-bold text-midnight-ink hover:underline flex items-center gap-1"
             >
-              <span>Explore All New Arrivals</span>
+              <span>View All Slabs</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {newArrivals.slice(0, 8).map((product) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {gradedSlabs.slice(0, 4).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 7. SHELF: PROTECTIVE COLLECTOR SUPPLIES                      */}
+        {/* 7. SHELF: PROTECTIVE SUPPLIES & ACCESSORIES                  */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-850">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-zinc-800">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <div className="flex items-end justify-between mb-6 pb-4 border-b border-silver/40">
             <div>
-              <div className="flex items-center gap-2 text-zinc-400 text-xs font-bold uppercase tracking-wider mb-1">
-                <ShieldCheck className="w-4 h-4 text-zinc-300" />
-                <span>Armored Storage Solutions</span>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-600 text-pure-canvas flex items-center gap-1 shadow-sm">
+                  <Layers className="w-3 h-3 text-pure-canvas" />
+                  <span>Armored Protection</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-slate">
+                  UV Blocking & Acid Free
+                </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Collector Supplies & Blister Cases
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-midnight-ink tracking-tight font-display">
+                Clamshell Protectors & Magnetic One-Touch Cases
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Acid-free PET clamshell cases for Hot Wheels cards and 35pt magnetic one-touch card slabs.
-              </p>
             </div>
-
             <Link
               href="/shop/supplies"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-300 hover:text-white transition-colors"
+              className="text-xs font-bold text-midnight-ink hover:underline flex items-center gap-1"
             >
-              <span>Shop All Supplies</span>
+              <span>View All Supplies</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {supplies.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -440,105 +462,15 @@ export default async function ShopHomePage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 8. SHOP BY SERIES & LEAGUE TILES                            */}
+        {/* 8. RECENTLY VIEWED SHELF (Client-Side Zustand)                */}
         {/* ============================================================ */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-850">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Explore by Series & League
-            </h2>
-            <p className="text-xs text-zinc-400 mt-1">
-              Direct access to collector favorite castings and world football competitions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {[
-              { title: 'Super $TH', href: '/shop/hot-wheels?series=Super+Treasure+Hunt+($TH)', badge: 'Die-Cast', count: 'Rare' },
-              { title: 'RLC Club', href: '/shop/hot-wheels?series=Red+Line+Club+(RLC)', badge: 'Mattel', count: 'Exclusive' },
-              { title: 'Car Culture', href: '/shop/hot-wheels?series=Car+Culture+Premium', badge: 'Real Riders', count: 'Premium' },
-              { title: 'Premier League', href: '/shop/cards?league=Premier+League', badge: 'Soccer', count: 'Cards' },
-              { title: 'Champions League', href: '/shop/cards?league=UEFA+Champions+League', badge: 'Topps', count: 'Cards' },
-              { title: 'PSA 10 Slabs', href: '/shop/graded', badge: 'Gem Mint', count: 'Graded' },
-            ].map((cat, i) => (
-              <Link
-                key={i}
-                href={cat.href}
-                className="group p-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-center flex flex-col justify-between hover:bg-zinc-850 transition-all duration-200"
-              >
-                <div>
-                  <span className="text-[10px] font-mono uppercase text-zinc-400 group-hover:text-hw-orange">
-                    {cat.badge}
-                  </span>
-                  <h4 className="font-extrabold text-sm text-white mt-1 group-hover:text-white">
-                    {cat.title}
-                  </h4>
-                </div>
-                <span className="text-[11px] font-medium text-zinc-400 mt-3 group-hover:text-zinc-300">
-                  Browse {cat.count} →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 9. RECENTLY VIEWED SHELF (HYDRATED FROM LOCAL STORAGE)       */}
-        {/* ============================================================ */}
-        <RecentlyViewedShelf />
-
-        {/* ============================================================ */}
-        {/* 10. DROP NOTIFICATION SIGNUP CTA                            */}
-        {/* ============================================================ */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-orange-950 via-zinc-900 to-indigo-950 border border-zinc-800 p-8 sm:p-12 text-center shadow-2xl">
-            <div className="max-w-2xl mx-auto">
-              <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-hw-orange text-white inline-block mb-3 shadow">
-                VIP Collector List
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Never Miss a High-Demand Drop
-              </h2>
-              <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                Super Treasure Hunts and Panini Prizm hobby boxes sell out in under 3 minutes. Receive instant SMS & email priority notifications 15 minutes before public drop launch.
-              </p>
-
-              <form className="mt-6 flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your collector email"
-                  className="flex-1 px-4 py-3 rounded-xl bg-zinc-950/80 border border-zinc-700 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-hw-orange"
-                />
-                <button
-                  type="button"
-                  className="px-6 py-3 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-extrabold text-sm transition-transform hover:scale-105 active:scale-95 shadow-lg"
-                >
-                  Join Drop List
-                </button>
-              </form>
-
-              <div className="mt-4 flex items-center justify-center gap-6 text-[11px] text-zinc-400">
-                <span className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  Zero Spam
-                </span>
-                <span className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  Instant SMS Drop Link
-                </span>
-                <span className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  Early Cart Access
-                </span>
-              </div>
-            </div>
-          </div>
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <RecentlyViewedShelf />
         </section>
       </main>
 
-      {/* Footer & Mobile Navigation */}
+      {/* Trust & Guarantee Strip */}
       <StoreFooter />
-      <StoreMobileNav />
     </div>
   )
 }

@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 import { HelpCircle, ChevronDown } from 'lucide-react'
 import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
-import { StoreMobileNav } from '@/components/store/StoreMobileNav'
 
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions (FAQ) | CrateMeet Store',
@@ -39,38 +38,37 @@ export default function FaqPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col font-sans selection:bg-hw-orange selection:text-white">
+    <div className="min-h-screen bg-pure-canvas text-midnight-ink flex flex-col font-sans selection:bg-party-pink selection:text-midnight-ink">
       <StoreNavbar />
 
       <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full pb-20 space-y-8">
-        <div className="space-y-3 pb-6 border-b border-zinc-800">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-800 text-zinc-300 inline-flex items-center gap-1.5">
-            <HelpCircle className="w-3.5 h-3.5 text-hw-orange" />
+        <div className="space-y-3 pb-6 border-b border-silver/50">
+          <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-fog border border-silver/60 text-midnight-ink inline-flex items-center gap-1.5 font-bold">
+            <HelpCircle className="w-3.5 h-3.5 text-midnight-ink" />
             <span>Help Center</span>
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-midnight-ink tracking-tight font-display">
             Frequently Asked Questions
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-400">
+          <p className="text-xs sm:text-sm text-slate">
             Everything you need to know about purchasing die-cast cars and trading card wax in India.
           </p>
         </div>
 
         <div className="space-y-4 text-xs">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-              <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <span className="text-hw-orange font-mono">Q:</span>
+            <div key={idx} className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
+              <h3 className="text-sm font-extrabold text-midnight-ink flex items-center gap-2 font-display">
+                <span className="text-orange-600 font-mono">Q:</span>
                 <span>{faq.q}</span>
               </h3>
-              <p className="text-zinc-400 pl-4 leading-relaxed text-xs">{faq.a}</p>
+              <p className="text-slate pl-4 leading-relaxed text-xs">{faq.a}</p>
             </div>
           ))}
         </div>
       </main>
 
       <StoreFooter />
-      <StoreMobileNav />
     </div>
   )
 }

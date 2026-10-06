@@ -24,7 +24,8 @@ export async function getDropBySlug(slug: string): Promise<Drop | null> {
   return MOCK_DROPS.find((d) => d.slug === slug) || null
 }
 
-export async function getDropItems(drop: Drop): Promise<Product[]> {
+export async function getDropItems(dropOrIds: Drop | string[]): Promise<Product[]> {
   await delay()
-  return ALL_PRODUCTS.filter((p) => drop.itemIds.includes(p.id))
+  const ids = Array.isArray(dropOrIds) ? dropOrIds : dropOrIds.itemIds
+  return ALL_PRODUCTS.filter((p) => ids && ids.includes(p.id))
 }

@@ -41,7 +41,6 @@ import {
 } from 'lucide-react'
 import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
-import { StoreMobileNav } from '@/components/store/StoreMobileNav'
 import { useStore } from '@/lib/store/useStore'
 import { ALL_PRODUCTS, MOCK_DROPS, MOCK_COUPONS } from '@/lib/mock-store-data'
 import { Product, Order, Drop, Coupon } from '@/types/store'
@@ -166,20 +165,20 @@ export default function AdminStorePage() {
   })
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col font-sans selection:bg-hw-orange selection:text-white">
+    <div className="min-h-screen bg-pure-canvas text-midnight-ink flex flex-col font-sans selection:bg-party-pink selection:text-midnight-ink">
       <StoreNavbar />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full pb-20">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-zinc-800 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-silver/50 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase bg-amber-500 text-black">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase bg-party-pink/40 text-midnight-ink border border-party-pink">
                 SELLER VAULT MANAGER
               </span>
-              <span className="text-xs text-zinc-400 font-mono">CrateMeet WMS Mumbai Hub</span>
+              <span className="text-xs text-slate font-mono">CrateMeet WMS Mumbai Hub</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-midnight-ink tracking-tight font-display">
               Seller & Inventory Operations
             </h1>
           </div>
@@ -187,23 +186,23 @@ export default function AdminStorePage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab('addProduct')}
-              className="px-4 py-2 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-orange-600/20"
+              className="px-4 py-2 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Product</span>
             </button>
             <button
               onClick={() => setActiveTab('csv')}
-              className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-200 text-xs font-bold flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-fog hover:bg-silver/40 text-midnight-ink text-xs font-bold flex items-center gap-1.5 border border-silver/60 transition-colors"
             >
-              <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
+              <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
               <span>Bulk CSV</span>
             </button>
           </div>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex border-b border-zinc-800 mb-8 overflow-x-auto text-xs font-bold">
+        <div className="flex border-b border-silver/50 mb-8 overflow-x-auto text-xs font-bold">
           {[
             { id: 'overview', label: 'Dashboard & Sales', icon: LayoutDashboard },
             { id: 'inventory', label: `Inventory Table (${productList.length})`, icon: Boxes },
@@ -221,11 +220,11 @@ export default function AdminStorePage() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-5 py-3 transition-all whitespace-nowrap border-b-2 ${
                   isActive
-                    ? 'border-hw-orange text-white bg-zinc-900/60'
-                    : 'border-transparent text-zinc-400 hover:text-white'
+                    ? 'border-midnight-ink text-midnight-ink bg-fog/60'
+                    : 'border-transparent text-slate hover:text-midnight-ink hover:bg-fog/30'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-hw-orange' : 'text-zinc-500'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-midnight-ink' : 'text-slate'}`} />
                 <span>{tab.label}</span>
               </button>
             )
@@ -237,78 +236,78 @@ export default function AdminStorePage() {
           <div className="space-y-8">
             {/* KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate flex items-center justify-between">
                   <span>Today's Revenue</span>
-                  <DollarSign className="w-4 h-4 text-emerald-400" />
+                  <DollarSign className="w-4 h-4 text-emerald-600" />
                 </span>
-                <div className="font-mono text-2xl sm:text-3xl font-black text-white">
+                <div className="font-mono text-2xl sm:text-3xl font-black text-midnight-ink">
                   ₹58,990
                 </div>
-                <span className="text-[11px] text-emerald-400 flex items-center gap-1 font-semibold">
+                <span className="text-[11px] text-emerald-700 flex items-center gap-1 font-semibold">
                   <TrendingUp className="w-3.5 h-3.5" />
                   <span>+24.5% vs yesterday</span>
                 </span>
               </div>
 
-              <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate flex items-center justify-between">
                   <span>Active Orders</span>
-                  <Package className="w-4 h-4 text-blue-400" />
+                  <Package className="w-4 h-4 text-blue-600" />
                 </span>
-                <div className="font-mono text-2xl sm:text-3xl font-black text-white">
+                <div className="font-mono text-2xl sm:text-3xl font-black text-midnight-ink">
                   {allOrders.length}
                 </div>
-                <span className="text-[11px] text-zinc-400">
+                <span className="text-[11px] text-slate">
                   2 Pending BlueDart scan
                 </span>
               </div>
 
-              <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate flex items-center justify-between">
                   <span>Low Stock Grails</span>
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
+                  <AlertTriangle className="w-4 h-4 text-amber-600" />
                 </span>
-                <div className="font-mono text-2xl sm:text-3xl font-black text-amber-300">
+                <div className="font-mono text-2xl sm:text-3xl font-black text-amber-700">
                   {productList.filter((p) => p.stock <= 2).length} items
                 </div>
-                <span className="text-[11px] text-zinc-400">
+                <span className="text-[11px] text-slate">
                   Under 2 copies in stock
                 </span>
               </div>
 
-              <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate flex items-center justify-between">
                   <span>Collector Rating</span>
-                  <Sparkles className="w-4 h-4 text-hw-yellow" />
+                  <Sparkles className="w-4 h-4 text-party-pink" />
                 </span>
-                <div className="font-mono text-2xl sm:text-3xl font-black text-white">
+                <div className="font-mono text-2xl sm:text-3xl font-black text-midnight-ink">
                   4.95 / 5.0
                 </div>
-                <span className="text-[11px] text-emerald-400">
+                <span className="text-[11px] text-emerald-700">
                   100% Positive packing feedback
                 </span>
               </div>
             </div>
 
             {/* Sales Chart with Recharts */}
-            <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+            <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-4 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-extrabold text-base text-white">
+                  <h3 className="font-extrabold text-base text-midnight-ink font-display">
                     7-Day Sales Volume: Hot Wheels vs Sports Cards
                   </h3>
-                  <p className="text-xs text-zinc-400">
+                  <p className="text-xs text-slate">
                     Revenue performance across both collector categories in INR (₹)
                   </p>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-bold">
-                  <span className="flex items-center gap-1.5 text-hw-orange">
-                    <span className="w-2.5 h-2.5 rounded-full bg-hw-orange" />
+                  <span className="flex items-center gap-1.5 text-orange-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-orange-600" />
                     <span>Hot Wheels</span>
                   </span>
-                  <span className="flex items-center gap-1.5 text-emerald-400">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                  <span className="flex items-center gap-1.5 text-emerald-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
                     <span>Trading Cards</span>
                   </span>
                 </div>
@@ -319,23 +318,23 @@ export default function AdminStorePage() {
                   <AreaChart data={REVENUE_DATA}>
                     <defs>
                       <linearGradient id="hwGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#ff5400" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#ff5400" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#ea580c" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#ea580c" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00d4aa" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#00d4aa" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#059669" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#059669" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                    <XAxis dataKey="day" stroke="#71717a" fontSize={11} />
-                    <YAxis stroke="#71717a" fontSize={11} tickFormatter={(v) => `₹${v / 1000}k`} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="day" stroke="#6b7280" fontSize={11} />
+                    <YAxis stroke="#6b7280" fontSize={11} tickFormatter={(v) => `₹${v / 1000}k`} />
                     <Tooltip
-                      contentStyle={{ backgroundColor: '#09090b', borderColor: '#27272a', borderRadius: '0.75rem', fontSize: '12px' }}
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e5e7eb', borderRadius: '1rem', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                       formatter={(value: any) => [`₹${Number(value).toLocaleString('en-IN')}`, '']}
                     />
-                    <Area type="monotone" dataKey="hotWheels" stroke="#ff5400" strokeWidth={2} fillOpacity={1} fill="url(#hwGrad)" name="Hot Wheels" />
-                    <Area type="monotone" dataKey="cards" stroke="#00d4aa" strokeWidth={2} fillOpacity={1} fill="url(#cardGrad)" name="Trading Cards" />
+                    <Area type="monotone" dataKey="hotWheels" stroke="#ea580c" strokeWidth={2} fillOpacity={1} fill="url(#hwGrad)" name="Hot Wheels" />
+                    <Area type="monotone" dataKey="cards" stroke="#059669" strokeWidth={2} fillOpacity={1} fill="url(#cardGrad)" name="Trading Cards" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -347,15 +346,15 @@ export default function AdminStorePage() {
         {activeTab === 'inventory' && (
           <div className="space-y-4">
             {/* Filter Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-2xl bg-pure-canvas border border-silver/60 shadow-sm">
               <div className="relative flex-1 w-full sm:w-auto">
-                <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={searchInventory}
                   onChange={(e) => setSearchInventory(e.target.value)}
                   placeholder="Search casting, card, or SKU..."
-                  className="w-full pl-9 pr-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-hw-orange"
+                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-fog/50 border border-silver/60 text-xs text-midnight-ink placeholder-slate focus:outline-none focus:border-midnight-ink"
                 />
               </div>
 
@@ -363,7 +362,7 @@ export default function AdminStorePage() {
                 <select
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
-                  className="p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-300"
+                  className="p-2 rounded-xl bg-fog/50 border border-silver/60 text-xs text-midnight-ink focus:outline-none focus:border-midnight-ink"
                 >
                   <option value="all">All Product Types</option>
                   <option value="hot-wheels">Hot Wheels</option>
@@ -376,55 +375,55 @@ export default function AdminStorePage() {
             </div>
 
             {/* Inventory Table */}
-            <div className="rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shadow-xl">
+            <div className="rounded-3xl bg-pure-canvas border border-silver/60 overflow-hidden shadow-sm">
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-zinc-300">
-                  <thead className="bg-zinc-850 text-[11px] uppercase tracking-wider text-zinc-400 border-b border-zinc-800">
+                <table className="w-full text-left text-xs text-midnight-ink">
+                  <thead className="bg-fog/60 text-[11px] uppercase tracking-wider text-slate border-b border-silver/50">
                     <tr>
-                      <th className="py-3 px-4">Item & SKU</th>
-                      <th className="py-3 px-4">Category</th>
-                      <th className="py-3 px-4">Price / MRP</th>
-                      <th className="py-3 px-4">Stock</th>
-                      <th className="py-3 px-4">Status</th>
-                      <th className="py-3 px-4 text-right">Inline Stock Adjust</th>
+                      <th className="py-3 px-4 font-bold">Item & SKU</th>
+                      <th className="py-3 px-4 font-bold">Category</th>
+                      <th className="py-3 px-4 font-bold">Price / MRP</th>
+                      <th className="py-3 px-4 font-bold">Stock</th>
+                      <th className="py-3 px-4 font-bold">Status</th>
+                      <th className="py-3 px-4 text-right font-bold">Inline Stock Adjust</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800">
+                  <tbody className="divide-y divide-silver/40">
                     {filteredProducts.map((p) => {
                       const isLow = p.stock <= 2
                       return (
-                        <tr key={p.id} className="hover:bg-zinc-850/50 transition-colors">
+                        <tr key={p.id} className="hover:bg-fog/30 transition-colors">
                           <td className="py-3 px-4 flex items-center gap-3">
-                            <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-black shrink-0 border border-zinc-800">
+                            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-fog shrink-0 border border-silver/60">
                               <Image src={p.images[0]} alt={p.title} fill className="object-cover" />
                             </div>
                             <div className="min-w-0">
-                              <span className="font-bold text-white block truncate max-w-xs">{p.title}</span>
-                              <span className="text-[10px] font-mono text-zinc-500">{p.sku}</span>
+                              <span className="font-bold text-midnight-ink block truncate max-w-xs">{p.title}</span>
+                              <span className="text-[10px] font-mono text-slate">{p.sku}</span>
                             </div>
                           </td>
 
                           <td className="py-3 px-4">
-                            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-zinc-800 text-zinc-300">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-fog text-midnight-ink border border-silver/60">
                               {p.productType}
                             </span>
                           </td>
 
                           <td className="py-3 px-4 font-mono">
-                            <strong className="text-white">₹{p.price.toLocaleString('en-IN')}</strong>
-                            <span className="text-zinc-500 line-through text-[11px] block">
+                            <strong className="text-midnight-ink">₹{p.price.toLocaleString('en-IN')}</strong>
+                            <span className="text-slate line-through text-[11px] block">
                               ₹{p.mrp.toLocaleString('en-IN')}
                             </span>
                           </td>
 
                           <td className="py-3 px-4">
                             <span
-                              className={`font-mono font-bold px-2 py-0.5 rounded text-xs ${
+                              className={`font-mono font-bold px-2 py-0.5 rounded text-xs border ${
                                 p.stock === 0
-                                  ? 'bg-red-500/20 text-red-400'
+                                  ? 'bg-red-50 text-red-700 border-red-200'
                                   : isLow
-                                  ? 'bg-amber-500/20 text-amber-300'
-                                  : 'bg-emerald-500/20 text-emerald-400'
+                                  ? 'bg-amber-50 text-amber-700 border-amber-200'
+                                  : 'bg-emerald-50 text-emerald-700 border-emerald-200'
                               }`}
                             >
                               {p.stock} units
@@ -433,24 +432,24 @@ export default function AdminStorePage() {
 
                           <td className="py-3 px-4">
                             {p.stock > 0 ? (
-                              <span className="text-emerald-400 text-[11px] font-semibold">Active</span>
+                              <span className="text-emerald-700 text-[11px] font-semibold">Active</span>
                             ) : (
-                              <span className="text-red-400 text-[11px] font-semibold">Out of Stock</span>
+                              <span className="text-red-700 text-[11px] font-semibold">Out of Stock</span>
                             )}
                           </td>
 
                           <td className="py-3 px-4 text-right">
-                            <div className="inline-flex items-center gap-1 bg-zinc-950 p-1 rounded-lg border border-zinc-800">
+                            <div className="inline-flex items-center gap-1 bg-fog p-1 rounded-xl border border-silver/60">
                               <button
                                 onClick={() => handleUpdateStock(p.id, -1)}
-                                className="px-2 py-0.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded font-bold"
+                                className="px-2 py-0.5 text-midnight-ink hover:bg-silver/40 rounded font-bold transition-colors"
                               >
                                 -
                               </button>
-                              <span className="font-mono px-2 text-xs font-bold text-white">{p.stock}</span>
+                              <span className="font-mono px-2 text-xs font-bold text-midnight-ink">{p.stock}</span>
                               <button
                                 onClick={() => handleUpdateStock(p.id, 1)}
-                                className="px-2 py-0.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded font-bold"
+                                className="px-2 py-0.5 text-midnight-ink hover:bg-silver/40 rounded font-bold transition-colors"
                               >
                                 +
                               </button>
@@ -469,52 +468,52 @@ export default function AdminStorePage() {
         {/* ================= TAB 3: ORDERS MANAGEMENT ================= */}
         {activeTab === 'orders' && (
           <div className="space-y-4">
-            <div className="rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shadow-xl">
-              <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
-                <h3 className="font-extrabold text-sm text-white">Collector Consignments & Tracking</h3>
-                <span className="text-xs text-zinc-400 font-mono">{allOrders.length} Total Orders</span>
+            <div className="rounded-3xl bg-pure-canvas border border-silver/60 overflow-hidden shadow-sm">
+              <div className="p-4 border-b border-silver/50 flex items-center justify-between">
+                <h3 className="font-extrabold text-sm text-midnight-ink font-display">Collector Consignments & Tracking</h3>
+                <span className="text-xs text-slate font-mono">{allOrders.length} Total Orders</span>
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-zinc-300">
-                  <thead className="bg-zinc-850 text-[11px] uppercase tracking-wider text-zinc-400 border-b border-zinc-800">
+                <table className="w-full text-left text-xs text-midnight-ink">
+                  <thead className="bg-fog/60 text-[11px] uppercase tracking-wider text-slate border-b border-silver/50">
                     <tr>
-                      <th className="py-3 px-4">Order & Date</th>
-                      <th className="py-3 px-4">Customer & City</th>
-                      <th className="py-3 px-4">Total</th>
-                      <th className="py-3 px-4">Carrier & AWB</th>
-                      <th className="py-3 px-4">Status</th>
-                      <th className="py-3 px-4 text-right">Operations Action</th>
+                      <th className="py-3 px-4 font-bold">Order & Date</th>
+                      <th className="py-3 px-4 font-bold">Customer & City</th>
+                      <th className="py-3 px-4 font-bold">Total</th>
+                      <th className="py-3 px-4 font-bold">Carrier & AWB</th>
+                      <th className="py-3 px-4 font-bold">Status</th>
+                      <th className="py-3 px-4 text-right font-bold">Operations Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800">
+                  <tbody className="divide-y divide-silver/40">
                     {allOrders.map((o) => (
-                      <tr key={o.id} className="hover:bg-zinc-850/50 transition-colors">
+                      <tr key={o.id} className="hover:bg-fog/30 transition-colors">
                         <td className="py-3 px-4">
-                          <span className="font-mono font-bold text-white block">{o.id}</span>
-                          <span className="text-[10px] text-zinc-500">
+                          <span className="font-mono font-bold text-midnight-ink block">{o.id}</span>
+                          <span className="text-[10px] text-slate">
                             {new Date(o.createdAt).toLocaleDateString()}
                           </span>
                         </td>
 
                         <td className="py-3 px-4">
-                          <span className="font-bold text-white block">{o.shippingAddress.fullName}</span>
-                          <span className="text-[11px] text-zinc-400">
+                          <span className="font-bold text-midnight-ink block">{o.shippingAddress.fullName}</span>
+                          <span className="text-[11px] text-slate">
                             {o.shippingAddress.city} ({o.shippingAddress.pincode})
                           </span>
                         </td>
 
-                        <td className="py-3 px-4 font-mono font-bold text-white">
+                        <td className="py-3 px-4 font-mono font-bold text-midnight-ink">
                           ₹{o.total.toLocaleString('en-IN')}
                         </td>
 
                         <td className="py-3 px-4">
-                          <span className="text-zinc-300 font-bold block">{o.courier}</span>
-                          <span className="text-[10px] font-mono text-zinc-500">{o.trackingAwb}</span>
+                          <span className="text-midnight-ink font-bold block">{o.courier}</span>
+                          <span className="text-[10px] font-mono text-slate">{o.trackingAwb}</span>
                         </td>
 
                         <td className="py-3 px-4">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/20 text-blue-400">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
                             {o.status}
                           </span>
                         </td>
@@ -523,7 +522,7 @@ export default function AdminStorePage() {
                           {o.status === 'PACKED' && (
                             <button
                               onClick={() => handleUpdateOrderStatus(o.id, 'IN_TRANSIT')}
-                              className="px-2.5 py-1 rounded bg-hw-orange text-white text-[11px] font-bold"
+                              className="px-2.5 py-1 rounded-xl bg-midnight-ink text-pure-canvas text-[11px] font-bold hover:bg-midnight-ink/90 transition-all"
                             >
                               Dispatch Air Manifest
                             </button>
@@ -531,7 +530,7 @@ export default function AdminStorePage() {
                           {o.status !== 'DELIVERED' && (
                             <button
                               onClick={() => handleUpdateOrderStatus(o.id, 'DELIVERED')}
-                              className="px-2.5 py-1 rounded bg-emerald-600 text-white text-[11px] font-bold"
+                              className="px-2.5 py-1 rounded-xl bg-emerald-600 text-white text-[11px] font-bold hover:bg-emerald-700 transition-all"
                             >
                               Mark Delivered
                             </button>
@@ -551,20 +550,20 @@ export default function AdminStorePage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {dropsList.map((drop) => (
-                <div key={drop.id} className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
+                <div key={drop.id} className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-3 shadow-sm">
                   <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-600 text-white font-mono">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-100 text-red-700 border border-red-200 font-mono">
                       {drop.status}
                     </span>
-                    <span className="text-xs font-mono text-zinc-400">
+                    <span className="text-xs font-mono text-slate">
                       Limit {drop.maxPerCustomer}/customer
                     </span>
                   </div>
-                  <h4 className="font-bold text-sm text-white line-clamp-1">{drop.title}</h4>
-                  <p className="text-xs text-zinc-400 line-clamp-2">{drop.description}</p>
-                  <div className="pt-2 text-xs space-y-1 font-mono text-zinc-400">
+                  <h4 className="font-bold text-sm text-midnight-ink line-clamp-1">{drop.title}</h4>
+                  <p className="text-xs text-slate line-clamp-2">{drop.description}</p>
+                  <div className="pt-2 text-xs space-y-1 font-mono text-slate border-t border-silver/40">
                     <div>Total Allocation: {drop.totalStock} units</div>
-                    <div>Remaining: <strong className="text-hw-yellow">{drop.remainingStock}</strong></div>
+                    <div>Remaining: <strong className="text-orange-600">{drop.remainingStock}</strong></div>
                   </div>
                 </div>
               ))}
@@ -577,17 +576,17 @@ export default function AdminStorePage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {couponsList.map((c) => (
-                <div key={c.code} className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-2">
+                <div key={c.code} className="p-5 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-base font-black text-white bg-zinc-950 px-2.5 py-1 rounded border border-zinc-800">
+                    <span className="font-mono text-base font-black text-midnight-ink bg-fog px-2.5 py-1 rounded-xl border border-silver/60">
                       {c.code}
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       Active
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-300 font-medium">{c.description}</p>
-                  <div className="text-[11px] text-zinc-500 font-mono">
+                  <p className="text-xs text-midnight-ink font-medium">{c.description}</p>
+                  <div className="text-[11px] text-slate font-mono">
                     Discount: {c.type === 'percent' ? `${c.value}%` : `₹${c.value}`}
                   </div>
                 </div>
@@ -598,25 +597,25 @@ export default function AdminStorePage() {
 
         {/* ================= TAB 6: ADD PRODUCT FORM ================= */}
         {activeTab === 'addProduct' && (
-          <div className="max-w-2xl mx-auto rounded-2xl bg-zinc-900 border border-zinc-800 p-6 sm:p-8 space-y-6 shadow-2xl">
-            <h2 className="text-xl font-black text-white pb-3 border-b border-zinc-800">
+          <div className="max-w-2xl mx-auto rounded-3xl bg-pure-canvas border border-silver/60 p-6 sm:p-8 space-y-6 shadow-sm">
+            <h2 className="text-xl font-black text-midnight-ink pb-3 border-b border-silver/50 font-display">
               Catalog New Collector Casting or Wax
             </h2>
 
             {prodAddedSuccess && (
-              <div className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>Product successfully cataloged and published to vault!</span>
               </div>
             )}
 
             <form onSubmit={handleCreateProduct} className="space-y-4 text-xs">
               <div>
-                <label className="text-zinc-400 font-bold block mb-1">Product Category</label>
+                <label className="text-midnight-ink font-bold block mb-1">Product Category</label>
                 <select
                   value={prodType}
                   onChange={(e) => setProdType(e.target.value as any)}
-                  className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white text-xs"
+                  className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink text-xs focus:outline-none focus:border-midnight-ink"
                 >
                   <option value="hot-wheels">Hot Wheels Die-Cast 1:64</option>
                   <option value="card-sealed">Sealed Sports Card Box / Wax</option>
@@ -627,43 +626,43 @@ export default function AdminStorePage() {
               </div>
 
               <div>
-                <label className="text-zinc-400 font-bold block mb-1">Product Title</label>
+                <label className="text-midnight-ink font-bold block mb-1">Product Title</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. 1971 Datsun 240Z Super Treasure Hunt ($TH)"
                   value={prodTitle}
                   onChange={(e) => setProdTitle(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white text-xs"
+                  className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink text-xs placeholder-slate focus:outline-none focus:border-midnight-ink"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="text-zinc-400 font-bold block mb-1">Selling Price (₹)</label>
+                  <label className="text-midnight-ink font-bold block mb-1">Selling Price (₹)</label>
                   <input
                     type="number"
                     value={prodPrice}
                     onChange={(e) => setProdPrice(Number(e.target.value))}
-                    className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs"
+                    className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink font-mono text-xs focus:outline-none focus:border-midnight-ink"
                   />
                 </div>
                 <div>
-                  <label className="text-zinc-400 font-bold block mb-1">MRP (₹)</label>
+                  <label className="text-midnight-ink font-bold block mb-1">MRP (₹)</label>
                   <input
                     type="number"
                     value={prodMrp}
                     onChange={(e) => setProdMrp(Number(e.target.value))}
-                    className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs"
+                    className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink font-mono text-xs focus:outline-none focus:border-midnight-ink"
                   />
                 </div>
                 <div>
-                  <label className="text-zinc-400 font-bold block mb-1">Initial Stock</label>
+                  <label className="text-midnight-ink font-bold block mb-1">Initial Stock</label>
                   <input
                     type="number"
                     value={prodStock}
                     onChange={(e) => setProdStock(Number(e.target.value))}
-                    className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs"
+                    className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink font-mono text-xs focus:outline-none focus:border-midnight-ink"
                   />
                 </div>
               </div>
@@ -672,11 +671,11 @@ export default function AdminStorePage() {
               {prodType === 'hot-wheels' && (
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div>
-                    <label className="text-zinc-400 font-bold block mb-1">Casting Series</label>
+                    <label className="text-midnight-ink font-bold block mb-1">Casting Series</label>
                     <select
                       value={prodSeries}
                       onChange={(e) => setProdSeries(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white text-xs"
+                      className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink text-xs focus:outline-none focus:border-midnight-ink"
                     >
                       <option>Super Treasure Hunt ($TH)</option>
                       <option>Red Line Club (RLC)</option>
@@ -686,11 +685,11 @@ export default function AdminStorePage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-zinc-400 font-bold block mb-1">Blister Packaging Condition</label>
+                    <label className="text-midnight-ink font-bold block mb-1">Blister Packaging Condition</label>
                     <select
                       value={prodCondition}
                       onChange={(e) => setProdCondition(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-white text-xs"
+                      className="w-full p-2.5 rounded-xl bg-fog/50 border border-silver/60 text-midnight-ink text-xs focus:outline-none focus:border-midnight-ink"
                     >
                       <option>Mint on Card (MOC)</option>
                       <option>Short Card MOC</option>
@@ -702,7 +701,7 @@ export default function AdminStorePage() {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-600/20"
+                className="w-full py-3.5 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs uppercase tracking-wider transition-all"
               >
                 Publish to Vault Catalog
               </button>
@@ -712,27 +711,27 @@ export default function AdminStorePage() {
 
         {/* ================= TAB 7: BULK CSV IMPORT ================= */}
         {activeTab === 'csv' && (
-          <div className="max-w-2xl mx-auto rounded-2xl bg-zinc-900 border border-zinc-800 p-6 sm:p-8 space-y-6">
-            <h2 className="text-xl font-black text-white pb-3 border-b border-zinc-800">
+          <div className="max-w-2xl mx-auto rounded-3xl bg-pure-canvas border border-silver/60 p-6 sm:p-8 space-y-6 shadow-sm">
+            <h2 className="text-xl font-black text-midnight-ink pb-3 border-b border-silver/50 font-display">
               Bulk CSV Inventory Ingestion
             </h2>
 
             <div
               onClick={() => setCsvUploaded(true)}
-              className="border-2 border-dashed border-zinc-700 hover:border-hw-orange p-8 rounded-2xl text-center cursor-pointer bg-zinc-950/60 transition-colors"
+              className="border-2 border-dashed border-silver hover:border-midnight-ink p-8 rounded-2xl text-center cursor-pointer bg-fog/30 transition-colors"
             >
-              <UploadCloud className="w-10 h-10 text-zinc-500 mx-auto mb-2" />
-              <span className="font-bold text-sm text-white block">
+              <UploadCloud className="w-10 h-10 text-slate mx-auto mb-2" />
+              <span className="font-bold text-sm text-midnight-ink block">
                 Click or Drop Collector Catalog CSV
               </span>
-              <span className="text-xs text-zinc-500 block mt-1">
+              <span className="text-xs text-slate block mt-1">
                 Columns: SKU, Title, Type, Series, Condition, Price, Stock
               </span>
             </div>
 
             {csvUploaded && (
               <div className="space-y-3 pt-2">
-                <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+                <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
                   ✓ Parsed hot_wheels_case_2026.csv (42 rows ready)
                 </div>
                 <button
@@ -741,7 +740,7 @@ export default function AdminStorePage() {
                     setCsvUploaded(false)
                     setActiveTab('inventory')
                   }}
-                  className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs"
+                  className="w-full py-3 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs transition-all"
                 >
                   Commit Batch Import to Database
                 </button>
@@ -752,7 +751,6 @@ export default function AdminStorePage() {
       </main>
 
       <StoreFooter />
-      <StoreMobileNav />
     </div>
   )
 }

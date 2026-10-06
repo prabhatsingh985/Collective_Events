@@ -60,29 +60,29 @@ export function PackOpeningTeaser() {
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto rounded-2xl bg-zinc-950 border border-zinc-800 p-5 shadow-2xl overflow-hidden select-none">
+    <div className="relative w-full max-w-md mx-auto rounded-3xl bg-pure-canvas border border-silver/70 p-6 shadow-card overflow-hidden select-none">
       {/* Background Foil Mesh */}
-      <div className="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-gradient-to-br from-amber-500/10 via-emerald-500/10 to-transparent blur-2xl pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-party-pink/20 blur-3xl pointer-events-none" />
 
       {/* Header with Switcher */}
-      <div className="flex items-center justify-between pb-3 border-b border-zinc-800/80 mb-4">
+      <div className="flex items-center justify-between pb-3 border-b border-silver/40 mb-4">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-300">
-            Interactive Pack Teaser
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+          <span className="text-xs font-extrabold uppercase tracking-wider text-midnight-ink">
+            Interactive Pack Reveal
           </span>
         </div>
 
-        <div className="flex items-center gap-1 bg-zinc-900 p-1 rounded-lg border border-zinc-800">
+        <div className="flex items-center gap-1 bg-black/[0.04] p-1 rounded-full border border-silver/40">
           <button
             onClick={() => {
               setPackType('card')
               setState('idle')
             }}
-            className={`px-2 py-1 rounded text-[11px] font-bold transition-all ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all ${
               packType === 'card'
-                ? 'bg-cards-stadium text-white shadow'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-midnight-ink text-pure-canvas shadow-sm'
+                : 'text-slate hover:text-midnight-ink'
             }`}
           >
             Hobby Pack
@@ -92,10 +92,10 @@ export function PackOpeningTeaser() {
               setPackType('hw')
               setState('idle')
             }}
-            className={`px-2 py-1 rounded text-[11px] font-bold transition-all ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all ${
               packType === 'hw'
-                ? 'bg-hw-orange text-white shadow'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-orange-600 text-pure-canvas shadow-sm'
+                : 'text-slate hover:text-midnight-ink'
             }`}
           >
             Die-Cast Blister
@@ -104,7 +104,7 @@ export function PackOpeningTeaser() {
       </div>
 
       {/* Interactive Stage */}
-      <div className="relative aspect-[4/3] rounded-xl overflow-hidden flex items-center justify-center bg-zinc-900/90 border border-zinc-800">
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden flex items-center justify-center bg-black/[0.02] border border-silver/50">
         <AnimatePresence mode="wait">
           {state === 'idle' && (
             <motion.div
@@ -116,125 +116,104 @@ export function PackOpeningTeaser() {
               onClick={handleRip}
             >
               {packType === 'card' ? (
-                <div className="relative w-36 h-48 rounded-lg bg-gradient-to-br from-indigo-900 via-emerald-800 to-amber-900 border-2 border-amber-400/50 shadow-2xl flex flex-col justify-between p-3 card-foil-shine group-hover:scale-105 transition-transform duration-300">
+                <div className="relative w-36 h-48 rounded-xl bg-gradient-to-br from-indigo-900 via-emerald-800 to-amber-900 border-2 border-amber-400/50 shadow-xl flex flex-col justify-between p-3 card-foil-shine group-hover:scale-105 transition-transform duration-300">
                   <div className="text-[10px] font-mono font-black text-amber-300 tracking-widest uppercase">
                     PANINI PRIZM
                   </div>
-                  <div className="flex flex-col items-center">
-                    <Sparkles className="w-8 h-8 text-amber-300 animate-bounce" />
-                    <span className="text-xs font-black text-white mt-1">SEALED HOBBY</span>
-                    <span className="text-[9px] text-zinc-300">Guaranteed Auto or Case Hit</span>
+                  <div className="text-center">
+                    <Sparkles className="w-8 h-8 text-yellow-300 mx-auto animate-pulse" />
+                    <span className="text-xs font-black text-white mt-1 block">HOBBY PACK</span>
                   </div>
-                  <div className="text-[9px] font-mono text-zinc-400 text-center">
-                    PULL TO RIP ⚡
-                  </div>
+                  <div className="text-[9px] font-mono text-zinc-300 text-right">TAMPER SEALED</div>
                 </div>
               ) : (
-                <div className="relative w-36 h-48 rounded-lg bg-gradient-to-br from-zinc-800 via-orange-950 to-zinc-900 border-2 border-orange-500/60 shadow-2xl flex flex-col justify-between p-3 group-hover:scale-105 transition-transform duration-300">
-                  <div className="text-[10px] font-black text-hw-yellow tracking-widest uppercase flex items-center gap-1">
-                    <Flame className="w-3.5 h-3.5 text-hw-flame fill-hw-flame" />
-                    <span>RLC EXCLUSIVE</span>
+                <div className="relative w-36 h-48 rounded-xl bg-gradient-to-br from-blue-900 via-orange-800 to-red-950 border-2 border-orange-400/50 shadow-xl flex flex-col justify-between p-3 hw-blister-gloss group-hover:scale-105 transition-transform duration-300">
+                  <div className="flex items-center justify-between">
+                    <Flame className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    <span className="text-[10px] font-black text-yellow-300">SUPER $TH</span>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-8 rounded bg-orange-600/30 border border-orange-400 flex items-center justify-center text-[10px] font-bold text-white shadow-inner">
-                      1:64 DIE-CAST
-                    </div>
-                    <span className="text-xs font-black text-white mt-2">MINT CLAMSHELL</span>
-                    <span className="text-[9px] text-zinc-300">Spectraflame Paint Finish</span>
+                  <div className="text-center">
+                    <span className="text-2xl">🏎️</span>
+                    <span className="text-[11px] font-black text-white mt-1 block">1:64 DIE-CAST</span>
                   </div>
-                  <div className="text-[9px] font-mono text-amber-400 text-center">
-                    POP BLISTER ⚡
-                  </div>
+                  <div className="text-[9px] font-mono text-zinc-300 text-right">UNPUNCHED CARD</div>
                 </div>
               )}
 
-              <button className="mt-4 px-4 py-2 rounded-full bg-white text-black font-black text-xs hover:bg-zinc-200 transition-colors flex items-center gap-2 shadow-lg group-hover:scale-105">
-                <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>Click to Rip Teaser ({packType === 'card' ? 'Football Card' : 'Hot Wheels'})</span>
-              </button>
+              <p className="mt-4 text-xs font-bold text-midnight-ink flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5 text-orange-600 fill-orange-600 animate-bounce" />
+                <span>Click to {packType === 'card' ? 'rip pack' : 'pop blister card'}!</span>
+              </p>
             </motion.div>
           )}
 
           {state === 'ripping' && (
             <motion.div
-              key="ripping"
-              initial={{ rotate: -5 }}
-              animate={{ rotate: [5, -5, 5, 0], scale: [1, 1.08, 0.95, 1.1] }}
-              transition={{ duration: 1.1, repeat: 0 }}
-              className="flex flex-col items-center justify-center gap-3"
+              key="ripping-anim"
+              initial={{ scale: 1 }}
+              animate={{
+                rotate: [-2, 2, -3, 3, 0],
+                scale: [1, 1.05, 0.95, 1.1, 1],
+              }}
+              transition={{ duration: 1.1, ease: 'easeInOut' }}
+              className="flex flex-col items-center justify-center text-center p-6"
             >
-              <div className="relative w-32 h-44 rounded-lg bg-gradient-to-r from-amber-400 via-red-500 to-emerald-400 animate-pulse flex items-center justify-center text-white font-black text-sm shadow-2xl">
-                <Sparkles className="w-10 h-10 animate-spin text-white" />
-              </div>
-              <span className="font-mono text-xs font-black uppercase text-amber-400 tracking-wider animate-pulse">
-                Ripping factory foil seal...
-              </span>
+              <div className="w-16 h-16 rounded-full border-4 border-orange-500 border-t-transparent animate-spin mb-3" />
+              <p className="text-xs font-extrabold uppercase tracking-wider text-midnight-ink">
+                Inspecting Holograms & Corners...
+              </p>
             </motion.div>
           )}
 
           {state === 'revealed' && revealedProduct && (
             <motion.div
-              key="revealed"
-              initial={{ scale: 0.8, opacity: 0, y: 10 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              transition={{ type: 'spring', damping: 20 }}
-              className="flex flex-col items-center justify-center p-3 w-full h-full"
+              key="revealed-hit"
+              initial={{ opacity: 0, scale: 0.8, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: 'spring', damping: 15 }}
+              className="p-4 w-full h-full flex flex-col justify-between"
             >
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-lg overflow-hidden border-2 border-amber-400 shadow-2xl">
-                <Image
-                  src={revealedProduct.images[0]}
-                  alt={revealedProduct.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-black/80 text-[9px] font-mono font-bold text-amber-300">
-                  {revealedProduct.badge || 'GRAIL HIT'}
+              <div className="flex items-start gap-3">
+                <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-fog/20 shrink-0 border border-silver/50">
+                  <Image
+                    src={revealedProduct.images[0]}
+                    alt={revealedProduct.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-
-              <div className="mt-2 text-center max-w-[280px]">
-                <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase">
-                  HIT REVEALED 🎉
-                </span>
-                <h4 className="text-xs font-bold text-white line-clamp-1">
-                  {revealedProduct.title}
-                </h4>
-                <div className="flex items-center justify-center gap-2 mt-1">
-                  <span className="text-sm font-extrabold text-amber-300 font-mono">
+                <div className="flex-1 min-w-0">
+                  <span className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase bg-party-pink text-midnight-ink inline-block mb-1">
+                    Vault Hit Pulled!
+                  </span>
+                  <h4 className="font-extrabold text-xs text-midnight-ink line-clamp-2">
+                    {revealedProduct.title}
+                  </h4>
+                  <div className="text-sm font-extrabold text-midnight-ink mt-1">
                     ₹{revealedProduct.price.toLocaleString('en-IN')}
-                  </span>
-                  <span className="text-[10px] text-zinc-400 line-through">
-                    ₹{revealedProduct.mrp.toLocaleString('en-IN')}
-                  </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-3">
+              <div className="flex items-center gap-2 pt-2 border-t border-silver/40">
                 <button
                   onClick={handleClaim}
-                  className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-colors flex items-center gap-1.5 shadow"
+                  className="flex-1 py-2 rounded-[8px] bg-midnight-ink hover:opacity-90 text-pure-canvas text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                 >
                   <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>Add To Cart</span>
+                  <span>Add Hit to Cart</span>
                 </button>
                 <button
                   onClick={handleReset}
-                  className="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold transition-colors flex items-center gap-1"
+                  className="p-2 rounded-[8px] bg-pure-canvas border border-silver/60 text-slate hover:text-midnight-ink transition-colors"
+                  title="Rip another"
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Rip Another</span>
                 </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      {/* Footer hint */}
-      <div className="mt-3 text-[11px] text-zinc-400 text-center flex items-center justify-center gap-1.5">
-        <span>Authentic Mint Castings & Panini Wax</span>
-        <span>•</span>
-        <span className="text-zinc-500">Zero resealed packs guaranteed</span>
       </div>
     </div>
   )

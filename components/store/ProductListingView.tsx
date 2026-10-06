@@ -139,17 +139,17 @@ export function ProductListingView({
 
         {/* Empty State */}
         {filteredProducts.length === 0 ? (
-          <div className="py-20 flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800">
-            <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center text-zinc-500 mb-4">
+          <div className="py-20 flex flex-col items-center justify-center text-center p-6 rounded-3xl bg-pure-canvas border border-silver/60 shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-fog flex items-center justify-center text-slate mb-4 border border-silver/40">
               <PackageOpen className="w-8 h-8" />
             </div>
-            <h3 className="font-extrabold text-lg text-white">No items found</h3>
-            <p className="text-xs text-zinc-400 mt-1 max-w-sm">
+            <h3 className="font-extrabold text-lg text-midnight-ink font-display">No items found</h3>
+            <p className="text-xs text-slate mt-1 max-w-sm">
               We couldn't find any collector items matching your selected criteria. Try adjusting or clearing your filters.
             </p>
             <button
               onClick={handleResetFilters}
-              className="mt-5 px-4 py-2 rounded-xl bg-hw-orange hover:bg-orange-600 text-white font-bold text-xs transition-colors"
+              className="mt-5 px-4 py-2 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas font-bold text-xs transition-all shadow-sm"
             >
               Reset All Filters
             </button>
@@ -177,7 +177,7 @@ export function ProductListingView({
               <div className="mt-12 text-center">
                 <button
                   onClick={() => setDisplayCount((prev) => prev + 12)}
-                  className="px-6 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-bold text-zinc-200 hover:text-white transition-all shadow"
+                  className="px-6 py-2.5 rounded-xl bg-midnight-ink hover:bg-midnight-ink/90 text-pure-canvas text-xs font-bold transition-all shadow-sm"
                 >
                   Load More ({filteredProducts.length - displayCount} remaining)
                 </button>

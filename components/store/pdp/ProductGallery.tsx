@@ -41,14 +41,14 @@ export function ProductGallery({
           <button
             key={idx}
             onClick={() => setSelectedIdx(idx)}
-            className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-zinc-900 border-2 transition-all ${
+            className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-fog/20 border-2 transition-all ${
               selectedIdx === idx
-                ? 'border-hw-orange shadow-lg shadow-orange-500/20 scale-102'
-                : 'border-zinc-800 hover:border-zinc-700 opacity-70 hover:opacity-100'
+                ? 'border-midnight-ink shadow-md scale-102'
+                : 'border-silver/60 hover:border-silver/90 opacity-70 hover:opacity-100'
             }`}
           >
             <Image src={img} alt={`${title} angle ${idx + 1}`} fill className="object-cover" />
-            <span className="absolute bottom-1 right-1 text-[9px] font-mono font-bold bg-black/80 px-1 rounded text-zinc-300">
+            <span className="absolute bottom-1 right-1 text-[9px] font-mono font-bold bg-black/75 px-1 rounded text-white">
               #{idx + 1}
             </span>
           </button>
@@ -56,21 +56,21 @@ export function ProductGallery({
       </div>
 
       {/* Main Image Stage */}
-      <div className="flex-1 relative aspect-square rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-2xl group">
+      <div className="flex-1 relative aspect-square rounded-3xl overflow-hidden bg-pure-canvas border border-silver/60 shadow-card group">
         {/* Badges Overlay */}
         <div className="absolute top-4 left-4 z-20 flex flex-col gap-2 pointer-events-none">
           {badge && (
-            <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-hw-orange text-white shadow-xl flex items-center gap-1.5">
-              {isHotWheels && <Flame className="w-3.5 h-3.5 text-hw-yellow fill-hw-yellow" />}
-              {isCard && <Sparkles className="w-3.5 h-3.5 text-yellow-300" />}
+            <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-midnight-ink text-pure-canvas shadow-md flex items-center gap-1.5">
+              {isHotWheels && <Flame className="w-3.5 h-3.5 text-party-pink fill-party-pink" />}
+              {isCard && <Sparkles className="w-3.5 h-3.5 text-party-pink" />}
               <span>{badge}</span>
             </span>
           )}
         </div>
 
         {/* Zoom Hint */}
-        <div className="absolute bottom-4 right-4 z-20 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-zinc-300 text-xs font-medium flex items-center gap-1.5 border border-white/10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
-          <ZoomIn className="w-3.5 h-3.5 text-hw-orange" />
+        <div className="absolute bottom-4 right-4 z-20 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-midnight-ink text-xs font-bold flex items-center gap-1.5 border border-silver/50 shadow-sm pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+          <ZoomIn className="w-3.5 h-3.5 text-midnight-blue" />
           <span>Hover to Zoom</span>
         </div>
 
