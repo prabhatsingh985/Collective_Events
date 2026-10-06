@@ -1,28 +1,31 @@
 {
-  "name": "toy-wms-monorepo",
+  "name": "cratemeet",
   "version": "1.0.0",
   "private": true,
-  "description": "Production-grade Warehouse Management System for Toy Distribution Center in India",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "description": "CrateMeet — Die-Cast & Sports Trading Card Event Discovery & Official Hot Wheels Collector Store",
   "scripts": {
-    "dev": "concurrently -n \"api,web\" -c \"blue,green\" \"npm run dev:api\" \"npm run dev:web\"",
-    "dev:api": "npm run dev --workspace=@toy-wms/api",
-    "dev:web": "npm run dev --workspace=@toy-wms/web",
-    "build:shared": "npm run build --workspace=@toy-wms/shared",
-    "build:api": "npm run build --workspace=@toy-wms/api",
-    "build:web": "npm run build --workspace=@toy-wms/web",
-    "build": "npm run build:shared && npm run build:api && npm run build:web",
-    "prisma:generate": "npm run prisma:generate --workspace=@toy-wms/api",
-    "prisma:migrate": "npm run prisma:migrate --workspace=@toy-wms/api",
-    "prisma:studio": "npm run prisma:studio --workspace=@toy-wms/api",
-    "seed": "npm run seed --workspace=@toy-wms/api",
-    "test:api": "npm run test --workspace=@toy-wms/api"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.453.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
-    "concurrently": "^10.0.5",
-    "typescript": "^5.4.5"
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
   }
 }
