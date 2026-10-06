@@ -1,0 +1,1072 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum UserRole {
+  ADMIN
+  WAREHOUSE_MANAGER
+  WAREHOUSE_ASSOCIATE
+  QC
+}
+
+enum LocationType {
+  STORAGE
+  RECEIVING
+  PICKING
+  PACKING
+  STAGING
+  RETURNS
+  DAMAGED
+  QC
+}
+
+enum MovementType {
+  PO_RECEIVE
+  PUTAWAY
+  ORDER_RESERVE
+  ORDER_UNRESERVE
+  PICK
+  PACK
+  SHIP
+  CUSTOMER_RETURN
+  RTO_RECEIVE
+  RESTOCK
+  DAMAGE_TRANSFER
+  SCRAP
+  ADJUSTMENT_ADD
+  ADJUSTMENT_DEDUCT
+  CYCLE_COUNT
+}
+
+enum ReferenceDocType {
+  PURCHASE_ORDER
+  GRN
+  PUTAWAY_TASK
+  ORDER
+  PICK_LIST
+  PACKAGE
+  SHIPMENT
+  RETURN
+  STOCK_ADJUSTMENT
+  CYCLE_COUNT
+}
+
+enum AdjustmentReason {
+  DAMAGE
+  LOSS
+  FOUND
+  COUNT_CORRECTION
+  OTHER
+}
+
+enum AdjustmentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum POStatus {
+  DRAFT
+  SENT
+  PARTIAL
+  RECEIVED
+  CANCELLED
+}
+
+enum GRNStatus {
+  DRAFT
+  COMPLETED
+  REJECTED
+}
+
+enum QCStatus {
+  PENDING
+  PASSED
+  FAILED
+  PARTIAL
+}
+
+enum PutawayStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderSource {
+  WEBSITE
+  MANUAL
+  AMAZON
+  FLIPKART
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  ALLOCATED
+  PICKING
+  PICKED
+  PACKING
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+  RTO
+}
+
+enum PaymentMode {
+  PREPAID
+  COD
+}
+
+enum ReservationStatus {
+  ACTIVE
+  RELEASED
+  FULFILLED
+}
+
+enum PickListStatus {
+  CREATED
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum PickTaskStatus {
+  PENDING
+  IN_PROGRESS
+  PICKED
+  SHORT_PICKED
+  SKIPPED
+}
+
+enum PackageStatus {
+  PACKING
+  PACKED
+  SEALED
+}
+
+enum PackagingMaterialType {
+  BOX
+  MAILER_BAG
+  BUBBLE_WRAP
+  TAPE
+  THERMAL_LABEL
+  OTHER
+}
+
+enum ShippingProviderType {
+  MOCK
+  SHIPROCKET
+  DELHIVERY
+  BLUEDART
+}
+
+enum ShipmentStatus {
+  MANIFESTED
+  PICKUP_SCHEDULED
+  PICKED_UP
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  RTO_INITIATED
+  RTO_DELIVERED
+  CANCELLED
+  FAILED
+}
+
+enum ReturnType {
+  CUSTOMER_RETURN
+  RTO
+}
+
+enum ReturnStatus {
+  REQUESTED
+  RECEIVED
+  INSPECTED
+  RESOLVED
+  REJECTED
+}
+
+enum ReturnReason {
+  DEFECTIVE
+  WRONG_ITEM
+  NOT_AS_DESCRIBED
+  DAMAGED_IN_TRANSIT
+  BUYER_MIND_CHANGED
+  UNDELIVERED_RTO
+  OTHER
+}
+
+enum ItemCondition {
+  UNOPENED
+  OPENED_LIKE_NEW
+  DAMAGED
+  MISSING_PARTS
+}
+
+enum ReturnDisposition {
+  RESTOCK
+  DAMAGED
+  SCRAP
+}
+
+enum RefundStatus {
+  NONE
+  PENDING
+  APPROVED
+  REJECTED
+  PROCESSED
+}
+
+enum ReplacementStatus {
+  NONE
+  REQUESTED
+  DISPATCHED
+}
+
+enum AlertType {
+  LOW_STOCK
+  SHIPMENT_DELAY
+  QC_REJECTION
+  ORDER_SLA_BREACH
+  SYSTEM
+}
+
+enum AlertSeverity {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+// ==========================================
+// CORE / USERS / AUTH
+// ==========================================
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  name         String
+  role         UserRole      @default(WAREHOUSE_ASSOCIATE)
+  phone        String?
+  isActive     Boolean       @default(true)
+  warehouseId  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  warehouse            Warehouse?        @relation(fields: [warehouseId], references: [id])
+  refreshTokens        RefreshToken[]
+  auditLogs            AuditLog[]
+  assignedPutawayTasks PutawayTask[]     @relation("AssignedPutaway")
+  completedPutawayTasks PutawayTask[]    @relation("CompletedPutaway")
+  assignedPickLists    PickList[]        @relation("AssignedPickList")
+  pickedTasks          PickTask[]        @relation("PickedByUser")
+  packedPackages       Package[]         @relation("PackedByUser")
+  requestedAdjustments StockAdjustment[] @relation("RequestedAdjustments")
+  approvedAdjustments  StockAdjustment[] @relation("ApprovedAdjustments")
+  receivedGRNs         GRN[]             @relation("ReceivedGRNs")
+  createdPOs           PurchaseOrder[]   @relation("CreatedPOs")
+  receivedReturns      Return[]          @relation("ReceivedReturns")
+  inspectedReturns     Return[]          @relation("InspectedReturns")
+  ledgersPerformed     InventoryLedger[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+// ==========================================
+// WAREHOUSE & LOCATIONS
+// ==========================================
+
+model Warehouse {
+  id           String       @id @default(uuid())
+  code         String       @unique // e.g. "BLR-DC-01"
+  name         String
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  pincode      String
+  country      String       @default("India")
+  gstin        String?      // GSTIN of DC
+  phone        String?
+  email        String?
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  users          User[]
+  locations      Location[]
+  stockLevels    StockLevel[]
+  orders         Order[]
+  purchaseOrders PurchaseOrder[]
+  grns           GRN[]
+
+  @@index([code])
+}
+
+model Location {
+  id           String       @id @default(uuid())
+  warehouseId  String
+  code         String       @unique // e.g. "A-01-B-05" (Aisle-Rack-Shelf-Bin)
+  aisle        String       // "A"
+  rack         String       // "01"
+  shelf        String       // "B"
+  bin          String       // "05"
+  type         LocationType @default(STORAGE)
+  barcode      String       @unique // Barcode encoded string for scanning
+  capacity     Int          @default(100)
+  pickSequence Int          @default(0)   // Routing order for S-curve path
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  warehouse        Warehouse         @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  stockLevels      StockLevel[]
+  fromLedgers      InventoryLedger[] @relation("FromLocation")
+  toLedgers        InventoryLedger[] @relation("ToLocation")
+  pickTasks        PickTask[]
+  reservations     Reservation[]
+  fromPutaways     PutawayTask[]     @relation("FromPutawayLocation")
+  toPutaways       PutawayTask[]     @relation("ToPutawayLocation")
+  restockReturns   ReturnItem[]      @relation("RestockLocation")
+  stockAdjustments StockAdjustment[]
+
+  @@unique([warehouseId, code])
+  @@index([barcode])
+  @@index([type])
+  @@index([pickSequence])
+}
+
+// ==========================================
+// PRODUCT CATALOG (TOY SPECIFIC & INDIAN COMPLIANCE)
+// ==========================================
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products    Product[]
+}
+
+model Brand {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products    Product[]
+}
+
+model Product {
+  id                   String       @id @default(uuid())
+  sku                  String       @unique
+  barcode              String       @unique
+  name                 String
+  description          String?
+  categoryId           String
+  brandId              String
+  costPrice            Decimal      @db.Decimal(10, 2)
+  sellingPrice         Decimal      @db.Decimal(10, 2)
+  gstPercent           Decimal      @default(18.00) @db.Decimal(5, 2)
+  hsnCode              String       @default("950300")
+  weightGrams          Decimal      @db.Decimal(10, 2)
+  lengthCm             Decimal      @db.Decimal(10, 2)
+  widthCm              Decimal      @db.Decimal(10, 2)
+  heightCm             Decimal      @db.Decimal(10, 2)
+  reorderLevel         Int          @default(10)
+  reorderQty           Int          @default(50)
+  isActive             Boolean      @default(true)
+  images               String[]     @default([])
+
+  // Indian BIS & Toy Safety Compliance
+  bisCertNumber        String
+  ageGroup             String
+  safetyDocUrl         String?
+  chokingHazardWarning Boolean      @default(false)
+  batteryRequired      Boolean      @default(false)
+  batteryIncluded      Boolean      @default(false)
+  materialType         String?
+
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  category             Category              @relation(fields: [categoryId], references: [id])
+  brand                Brand                 @relation(fields: [brandId], references: [id])
+  stockLevels          StockLevel[]
+  ledgers              InventoryLedger[]
+  adjustments          StockAdjustment[]
+  supplierPrices       SupplierProductPrice[]
+  poItems              PurchaseOrderItem[]
+  grnItems             GRNItem[]
+  putawayTasks         PutawayTask[]
+  orderItems           OrderItem[]
+  reservations         Reservation[]
+  pickTasks            PickTask[]
+  packageItems         PackageItem[]
+  returnItems          ReturnItem[]
+
+  @@index([sku])
+  @@index([barcode])
+  @@index([categoryId])
+  @@index([brandId])
+}
+
+// ==========================================
+// INVENTORY STOCK BUCKETS & IMMUTABLE LEDGER
+// ==========================================
+
+model StockLevel {
+  id          String    @id @default(uuid())
+  warehouseId String
+  locationId  String
+  productId   String
+
+  // Operational stock buckets
+  onHand      Int       @default(0)
+  reserved    Int       @default(0)
+  damaged     Int       @default(0)
+  returned    Int       @default(0)
+  inTransit   Int       @default(0)
+  incoming    Int       @default(0)
+  lostMissing Int       @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  location    Location  @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([locationId, productId])
+  @@index([productId])
+  @@index([warehouseId])
+}
+
+model InventoryLedger {
+  id             String           @id @default(uuid())
+  productId      String
+  fromLocationId String?
+  toLocationId   String?
+  movementType   MovementType
+  quantity       Int
+
+  beforeOnHand   Int
+  afterOnHand    Int
+  beforeReserved Int
+  afterReserved  Int
+
+  referenceType  ReferenceDocType
+  referenceId    String
+  reason         String?
+  performedById  String
+  createdAt      DateTime         @default(now())
+
+  product        Product          @relation(fields: [productId], references: [id])
+  fromLocation   Location?        @relation("FromLocation", fields: [fromLocationId], references: [id])
+  toLocation     Location?        @relation("ToLocation", fields: [toLocationId], references: [id])
+  performedBy    User             @relation(fields: [performedById], references: [id])
+
+  @@index([productId])
+  @@index([referenceId])
+  @@index([movementType])
+  @@index([createdAt])
+}
+
+model StockAdjustment {
+  id               String           @id @default(uuid())
+  adjustmentNumber String           @unique
+  productId        String
+  locationId       String
+  quantity         Int
+  reason           AdjustmentReason
+  notes            String
+  status           AdjustmentStatus @default(PENDING)
+  requestedById    String
+  approvedById     String?
+  approvedAt       DateTime?
+  ledgerId         String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  product          Product          @relation(fields: [productId], references: [id])
+  location         Location         @relation(fields: [locationId], references: [id])
+  requestedBy      User             @relation("RequestedAdjustments", fields: [requestedById], references: [id])
+  approvedBy       User?            @relation("ApprovedAdjustments", fields: [approvedById], references: [id])
+
+  @@index([adjustmentNumber])
+  @@index([status])
+}
+
+// ==========================================
+// SUPPLIERS & PROCUREMENT
+// ==========================================
+
+model Supplier {
+  id            String                 @id @default(uuid())
+  code          String                 @unique
+  name          String
+  contactPerson String?
+  email         String
+  phone         String
+  address       String
+  city          String
+  state         String
+  pincode       String
+  gstin         String?
+  pan           String?
+  leadTimeDays  Int                    @default(7)
+  paymentTerms  String                 @default("NET_30")
+  moq           Int                    @default(10)
+  rating        Decimal?               @db.Decimal(3, 2)
+  isActive      Boolean                @default(true)
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+
+  prices        SupplierProductPrice[]
+  purchaseOrders PurchaseOrder[]
+
+  @@index([code])
+}
+
+model SupplierProductPrice {
+  id           String   @id @default(uuid())
+  supplierId   String
+  productId    String
+  unitPrice    Decimal  @db.Decimal(10, 2)
+  moq          Int      @default(1)
+  leadTimeDays Int      @default(7)
+  supplierSku  String?
+  isPrimary    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  supplier     Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([supplierId, productId])
+}
+
+model PurchaseOrder {
+  id                   String              @id @default(uuid())
+  poNumber             String              @unique
+  warehouseId          String
+  supplierId           String
+  status               POStatus            @default(DRAFT)
+  expectedDeliveryDate DateTime?
+  subtotal             Decimal             @default(0) @db.Decimal(12, 2)
+  taxAmount            Decimal             @default(0) @db.Decimal(12, 2)
+  totalAmount          Decimal             @default(0) @db.Decimal(12, 2)
+  notes                String?
+  createdById          String
+  sentAt               DateTime?
+  closedAt             DateTime?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  warehouse            Warehouse           @relation(fields: [warehouseId], references: [id])
+  supplier             Supplier            @relation(fields: [supplierId], references: [id])
+  createdBy            User                @relation("CreatedPOs", fields: [createdById], references: [id])
+  items                PurchaseOrderItem[]
+  grns                 GRN[]
+
+  @@index([poNumber])
+  @@index([status])
+}
+
+model PurchaseOrderItem {
+  id              String        @id @default(uuid())
+  purchaseOrderId String
+  productId       String
+  expectedQty     Int
+  receivedQty     Int           @default(0)
+  unitPrice       Decimal       @db.Decimal(10, 2)
+  gstPercent      Decimal       @default(18.00) @db.Decimal(5, 2)
+  taxAmount       Decimal       @db.Decimal(10, 2)
+  totalPrice      Decimal       @db.Decimal(12, 2)
+
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  product         Product       @relation(fields: [productId], references: [id])
+
+  @@unique([purchaseOrderId, productId])
+}
+
+// ==========================================
+// RECEIVING, GRN, QC & PUTAWAY
+// ==========================================
+
+model GRN {
+  id                    String        @id @default(uuid())
+  grnNumber             String        @unique
+  purchaseOrderId       String
+  warehouseId           String
+  supplierInvoiceNumber String
+  supplierInvoiceDate   DateTime
+  supplierInvoiceAmount Decimal?      @db.Decimal(12, 2)
+  invoiceAttachmentUrl  String?
+  status                GRNStatus     @default(DRAFT)
+  receivedById          String
+  receivedAt            DateTime      @default(now())
+  notes                 String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  purchaseOrder         PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+  warehouse             Warehouse     @relation(fields: [warehouseId], references: [id])
+  receivedBy            User          @relation("ReceivedGRNs", fields: [receivedById], references: [id])
+  items                 GRNItem[]
+  putawayTasks          PutawayTask[]
+
+  @@index([grnNumber])
+}
+
+model GRNItem {
+  id              String        @id @default(uuid())
+  grnId           String
+  productId       String
+  expectedQty     Int
+  receivedQty     Int
+  acceptedQty     Int           @default(0)
+  rejectedQty     Int           @default(0)
+  qcStatus        QCStatus      @default(PENDING)
+  qcNotes         String?
+  rejectionReason String?
+  batchNumber     String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  grn             GRN           @relation(fields: [grnId], references: [id], onDelete: Cascade)
+  product         Product       @relation(fields: [productId], references: [id])
+  putawayTasks    PutawayTask[]
+
+  @@unique([grnId, productId])
+}
+
+model PutawayTask {
+  id                     String        @id @default(uuid())
+  taskNumber             String        @unique
+  grnId                  String
+  grnItemId              String
+  productId              String
+  fromLocationId         String
+  toLocationId           String
+  quantity               Int
+  status                 PutawayStatus @default(PENDING)
+  assignedToId           String?
+  completedById          String?
+  completedAt            DateTime?
+  scannedProductBarcode  String?
+  scannedLocationBarcode String?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  grn                    GRN           @relation(fields: [grnId], references: [id])
+  grnItem                GRNItem       @relation(fields: [grnItemId], references: [id])
+  product                Product       @relation(fields: [productId], references: [id])
+  fromLocation           Location      @relation("FromPutawayLocation", fields: [fromLocationId], references: [id])
+  toLocation             Location      @relation("ToPutawayLocation", fields: [toLocationId], references: [id])
+  assignedTo             User?         @relation("AssignedPutaway", fields: [assignedToId], references: [id])
+  completedBy            User?         @relation("CompletedPutaway", fields: [completedById], references: [id])
+
+  @@index([taskNumber])
+  @@index([status])
+}
+
+// ==========================================
+// ORDERS, ALLOCATION & RESERVATIONS
+// ==========================================
+
+model Order {
+  id                   String        @id @default(uuid())
+  orderNumber          String        @unique
+  idempotencyKey       String?       @unique
+  warehouseId          String
+  source               OrderSource   @default(WEBSITE)
+  status               OrderStatus   @default(PENDING)
+  paymentMode          PaymentMode   @default(PREPAID)
+
+  customerName         String
+  customerEmail        String
+  customerPhone        String
+
+  shippingAddressLine1 String
+  shippingAddressLine2 String?
+  shippingCity         String
+  shippingState        String
+  shippingPincode      String
+  shippingCountry      String        @default("India")
+
+  billingAddressLine1  String?
+  billingAddressLine2  String?
+  billingCity          String?
+  billingState         String?
+  billingPincode       String?
+  billingCountry       String?       @default("India")
+
+  subtotal             Decimal       @db.Decimal(12, 2)
+  cgst                 Decimal       @default(0) @db.Decimal(10, 2)
+  sgst                 Decimal       @default(0) @db.Decimal(10, 2)
+  igst                 Decimal       @default(0) @db.Decimal(10, 2)
+  taxAmount            Decimal       @db.Decimal(10, 2)
+  shippingFee          Decimal       @default(0) @db.Decimal(10, 2)
+  discount             Decimal       @default(0) @db.Decimal(10, 2)
+  totalAmount          Decimal       @db.Decimal(12, 2)
+  codAmount            Decimal       @default(0) @db.Decimal(12, 2)
+
+  notes                String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  warehouse            Warehouse     @relation(fields: [warehouseId], references: [id])
+  items                OrderItem[]
+  reservations         Reservation[]
+  pickTasks            PickTask[]
+  packages             Package[]
+  shipments            Shipment[]
+  returns              Return[]
+
+  @@index([orderNumber])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id           String        @id @default(uuid())
+  orderId      String
+  productId    String
+  sku          String
+  name         String
+  quantity     Int
+  unitPrice    Decimal       @db.Decimal(10, 2)
+  taxPercent   Decimal       @default(18.00) @db.Decimal(5, 2)
+  taxAmount    Decimal       @db.Decimal(10, 2)
+  totalPrice   Decimal       @db.Decimal(12, 2)
+
+  allocatedQty Int           @default(0)
+  pickedQty    Int           @default(0)
+  packedQty    Int           @default(0)
+
+  order        Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product      Product       @relation(fields: [productId], references: [id])
+  reservations Reservation[]
+  pickTasks    PickTask[]
+  packageItems PackageItem[]
+  returnItems  ReturnItem[]
+
+  @@unique([orderId, productId])
+}
+
+model Reservation {
+  id          String            @id @default(uuid())
+  orderId     String
+  orderItemId String
+  productId   String
+  locationId  String
+  quantity    Int
+  status      ReservationStatus @default(ACTIVE)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  order       Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderItem   OrderItem         @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  product     Product           @relation(fields: [productId], references: [id])
+  location    Location          @relation(fields: [locationId], references: [id])
+
+  @@index([orderId])
+  @@index([productId, locationId])
+}
+
+// ==========================================
+// PICKING & ROUTE OPTIMIZATION
+// ==========================================
+
+model PickList {
+  id             String         @id @default(uuid())
+  pickListNumber String         @unique
+  status         PickListStatus @default(CREATED)
+  assignedToId   String?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  assignedTo     User?          @relation("AssignedPickList", fields: [assignedToId], references: [id])
+  tasks          PickTask[]
+
+  @@index([pickListNumber])
+  @@index([status])
+}
+
+model PickTask {
+  id                     String         @id @default(uuid())
+  pickListId             String
+  orderId                String
+  orderItemId            String
+  productId              String
+  locationId             String
+  requestedQty           Int
+  pickedQty              Int            @default(0)
+  shortPickedQty         Int            @default(0)
+  status                 PickTaskStatus @default(PENDING)
+  routeSequence          Int            @default(0)
+  scannedBarcode         String?
+  scannedLocationBarcode String?
+  pickedById             String?
+  pickedAt               DateTime?
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+
+  pickList               PickList       @relation(fields: [pickListId], references: [id], onDelete: Cascade)
+  order                  Order          @relation(fields: [orderId], references: [id])
+  orderItem              OrderItem      @relation(fields: [orderItemId], references: [id])
+  product                Product        @relation(fields: [productId], references: [id])
+  location               Location       @relation(fields: [locationId], references: [id])
+  pickedBy               User?          @relation("PickedByUser", fields: [pickedById], references: [id])
+
+  @@index([pickListId])
+  @@index([status])
+  @@index([routeSequence])
+}
+
+// ==========================================
+// PACKING & PACKAGING MATERIALS
+// ==========================================
+
+model PackagingMaterial {
+  id                     String                @id @default(uuid())
+  code                   String                @unique
+  name                   String
+  type                   PackagingMaterialType @default(BOX)
+  lengthCm               Decimal               @db.Decimal(8, 2)
+  widthCm                Decimal               @db.Decimal(8, 2)
+  heightCm               Decimal               @db.Decimal(8, 2)
+  maxWeightCapacityGrams Decimal               @db.Decimal(10, 2)
+  unitCost               Decimal               @db.Decimal(10, 2)
+  stockQuantity          Int                   @default(100)
+  reorderLevel           Int                   @default(20)
+  reorderQty             Int                   @default(100)
+  isActive               Boolean               @default(true)
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  packages               Package[]
+
+  @@index([code])
+}
+
+model Package {
+  id                     String             @id @default(uuid())
+  packageNumber          String             @unique
+  orderId                String
+  packagingMaterialId    String?
+  boxCode                String?
+  actualWeightGrams      Decimal            @db.Decimal(10, 2)
+  lengthCm               Decimal            @db.Decimal(8, 2)
+  widthCm                Decimal            @db.Decimal(8, 2)
+  heightCm               Decimal            @db.Decimal(8, 2)
+  volumetricWeightGrams  Decimal            @db.Decimal(10, 2)
+  chargeableWeightGrams  Decimal            @db.Decimal(10, 2)
+  status                 PackageStatus      @default(PACKING)
+  packedById             String
+  packedAt               DateTime           @default(now())
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+
+  order                  Order              @relation(fields: [orderId], references: [id])
+  packagingMaterial      PackagingMaterial? @relation(fields: [packagingMaterialId], references: [id])
+  packedBy               User               @relation("PackedByUser", fields: [packedById], references: [id])
+  items                  PackageItem[]
+  shipment               Shipment?
+
+  @@index([packageNumber])
+}
+
+model PackageItem {
+  id          String    @id @default(uuid())
+  packageId   String
+  orderItemId String
+  productId   String
+  quantity    Int
+
+  package     Package   @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  orderItem   OrderItem @relation(fields: [orderItemId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
+}
+
+// ==========================================
+// SHIPPING & CARRIER ADAPTER
+// ==========================================
+
+model Shipment {
+  id                 String                  @id @default(uuid())
+  shipmentNumber     String                  @unique
+  orderId            String
+  packageId          String                  @unique
+  provider           ShippingProviderType    @default(MOCK)
+  courierName        String
+  awbNumber          String                  @unique
+  shippingLabelUrl   String?
+  invoiceUrl         String?
+  status             ShipmentStatus          @default(MANIFESTED)
+  pickupScheduledAt  DateTime?
+  shippedAt          DateTime?
+  deliveredAt        DateTime?
+  codAmount          Decimal                 @default(0) @db.Decimal(12, 2)
+  shippingCharges    Decimal                 @default(0) @db.Decimal(10, 2)
+  cancellationReason String?
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+
+  order              Order                   @relation(fields: [orderId], references: [id])
+  package            Package                 @relation(fields: [packageId], references: [id])
+  trackingEvents     ShipmentTrackingEvent[]
+  returns            Return[]
+
+  @@index([shipmentNumber])
+  @@index([awbNumber])
+  @@index([status])
+}
+
+model ShipmentTrackingEvent {
+  id             String    @id @default(uuid())
+  shipmentId     String
+  status         String
+  location       String?
+  description    String
+  eventTimestamp DateTime
+  rawPayload     Json?
+  createdAt      DateTime  @default(now())
+
+  shipment       Shipment  @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([shipmentId])
+}
+
+// ==========================================
+// RETURNS & RTO (RETURN TO ORIGIN)
+// ==========================================
+
+model Return {
+  id                String       @id @default(uuid())
+  returnNumber      String       @unique
+  orderId           String
+  shipmentId        String?
+  type              ReturnType   @default(CUSTOMER_RETURN)
+  status            ReturnStatus @default(REQUESTED)
+  trackingNumber    String?
+  receivedAt        DateTime?
+  receivedById      String?
+  inspectedById     String?
+  inspectedAt       DateTime?
+  totalRefundAmount Decimal?     @db.Decimal(12, 2)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  order             Order        @relation(fields: [orderId], references: [id])
+  shipment          Shipment?    @relation(fields: [shipmentId], references: [id])
+  receivedBy        User?        @relation("ReceivedReturns", fields: [receivedById], references: [id])
+  inspectedBy       User?        @relation("InspectedReturns", fields: [inspectedById], references: [id])
+  items             ReturnItem[]
+
+  @@index([returnNumber])
+  @@index([status])
+}
+
+model ReturnItem {
+  id                String            @id @default(uuid())
+  returnId          String
+  orderItemId       String
+  productId         String
+  quantity          Int
+  reason            ReturnReason
+  condition         ItemCondition     @default(UNOPENED)
+  missingComponents Boolean           @default(false)
+  damagedPackaging  Boolean           @default(false)
+  qcNotes           String?
+  disposition       ReturnDisposition @default(RESTOCK)
+  restockLocationId String?
+  refundStatus      RefundStatus      @default(PENDING)
+  replacementStatus ReplacementStatus @default(NONE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  return            Return            @relation(fields: [returnId], references: [id], onDelete: Cascade)
+  orderItem         OrderItem         @relation(fields: [orderItemId], references: [id])
+  product           Product           @relation(fields: [productId], references: [id])
+  restockLocation   Location?         @relation("RestockLocation", fields: [restockLocationId], references: [id])
+
+  @@index([returnId])
+}
+
+// ==========================================
+// SYSTEM ALERTS & AUDIT LOGS
+// ==========================================
+
+model Alert {
+  id         String        @id @default(uuid())
+  type       AlertType
+  severity   AlertSeverity @default(INFO)
+  title      String
+  message    String
+  entityType String?
+  entityId   String?
+  metadata   Json?
+  isRead     Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+
+  @@index([type])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  userEmail  String?
+  userRole   String?
+  action     String
+  entityType String
+  entityId   String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+  @@index([createdAt])
+}
