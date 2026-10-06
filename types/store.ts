@@ -195,7 +195,7 @@ export interface OrderTimelineStep {
   status: OrderStatus
   title: string
   description: string
-  timestamp: string
+  timestamp?: string
   location?: string
   completed: boolean
 }
