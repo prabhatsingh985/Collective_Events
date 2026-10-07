@@ -331,7 +331,9 @@ Bring your trade cases — our dedicated 10-table open swap zone is active throu
       vendorSlotsFilled: 24,
       highlightCastings: ['Twin Mill', 'Bone Shaker', 'Datsun 510 Wagon $TH', 'Custom 69 Chevy C10 RLC', 'Rodger Dodger'],
       highlightModels: ['Twin Mill', 'Bone Shaker', 'Datsun 510 Wagon $TH', 'Custom 69 Chevy C10 RLC', 'Rodger Dodger'],
+      featuredSeries: ['red-line-club', 'classics', 'flying-colors'],
     },
+    featuredSeries: ['red-line-club', 'classics', 'flying-colors'],
     faqs: [
       { question: 'Can I bring cars to trade without a trader table?', answer: 'Yes! General pass holders are welcome to carry up to 2 personal cases (approx 20-30 cars) and trade freely at the designated Open Swap Zones.' },
       { question: 'Is parking available at the venue?', answer: 'Covered basement parking is available at the pavilion on a first-come, first-served basis.' },
@@ -576,7 +578,9 @@ Featuring an open builder pit where artists demonstrate hydro-dipping, precision
       vendorSlotsFilled: 18,
       highlightCastings: ['1968 Redline Corvette', 'Bone Shaker Custom Build', 'Custom 77 Dodge Van', 'Twin Mill Spectraflame'],
       highlightModels: ['1968 Redline Corvette', 'Bone Shaker Custom Build', 'Custom 77 Dodge Van', 'Twin Mill Spectraflame'],
+      featuredSeries: ['classics', 'super-chromes', 'car-culture'],
     },
+    featuredSeries: ['classics', 'super-chromes', 'car-culture'],
     faqs: [
       { question: 'Can kids participate in custom builds?', answer: 'Yes! We have an Under-16 junior modding exhibition category with free starter blanks.' },
     ],

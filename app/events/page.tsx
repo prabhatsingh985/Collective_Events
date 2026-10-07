@@ -20,6 +20,7 @@ import {
   ChevronDown,
 } from 'lucide-react'
 import Link from 'next/link'
+import { allHotwheelsSeries } from '@/data/hotwheels'
 
 function EventsDiscoveryContent() {
   const searchParams = useSearchParams()
@@ -30,12 +31,14 @@ function EventsDiscoveryContent() {
   const initialCity = searchParams.get('city') || 'all'
   const initialQuery = searchParams.get('q') || ''
   const initialType = searchParams.get('type') || 'all'
+  const initialSeries = searchParams.get('series') || 'all'
   const initialFeatured = searchParams.get('featured') === 'true'
 
   const [search, setSearch] = useState(initialQuery)
   const [category, setCategory] = useState(initialCategory)
   const [city, setCity] = useState(initialCity)
   const [eventType, setEventType] = useState(initialType)
+  const [seriesFilter, setSeriesFilter] = useState(initialSeries)
   const [priceFilter, setPriceFilter] = useState<'all' | 'free' | 'paid'>('all')
   const [sortBy, setSortBy] = useState<'date' | 'popularity' | 'price-asc' | 'price-desc'>('date')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
@@ -49,6 +52,7 @@ function EventsDiscoveryContent() {
     if (searchParams.get('city')) setCity(searchParams.get('city')!)
     if (searchParams.get('q')) setSearch(searchParams.get('q')!)
     if (searchParams.get('type')) setEventType(searchParams.get('type')!)
+    if (searchParams.get('series')) setSeriesFilter(searchParams.get('series')!)
   }, [searchParams])
 
   // Filter logic
@@ -69,6 +73,15 @@ function EventsDiscoveryContent() {
       // Category
       if (category !== 'all' && evt.category !== category) {
         return false
+      }
+
+      // Series filter
+      if (seriesFilter !== 'all') {
+        const hasSeries =
+          evt.featuredSeries?.includes(seriesFilter) ||
+          evt.hotWheelsDetails?.featuredSeries?.includes(seriesFilter) ||
+          evt.tags?.some((t) => t.toLowerCase() === seriesFilter.toLowerCase())
+        if (!hasSeries) return false
       }
 
       // City
@@ -101,13 +114,14 @@ function EventsDiscoveryContent() {
       }
       return 0
     })
-  }, [events, search, category, city, eventType, priceFilter, sortBy, initialFeatured])
+  }, [events, search, category, seriesFilter, city, eventType, priceFilter, sortBy, initialFeatured])
 
   // Active filters count
   const activeFiltersCount = [
     category !== 'all',
     city !== 'all',
     eventType !== 'all',
+    seriesFilter !== 'all',
     priceFilter !== 'all',
     search.trim() !== '',
   ].filter(Boolean).length
@@ -117,6 +131,7 @@ function EventsDiscoveryContent() {
     setCategory('all')
     setCity('all')
     setEventType('all')
+    setSeriesFilter('all')
     setPriceFilter('all')
   }
 
@@ -214,6 +229,12 @@ function EventsDiscoveryContent() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/[0.04] border border-silver/60 rounded-full text-xs font-semibold text-midnight-ink">
                 {city}
                 <X className="w-3.5 h-3.5 cursor-pointer hover:text-midnight-ink" onClick={() => setCity('all')} />
+              </span>
+            )}
+            {seriesFilter !== 'all' && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-semibold text-amber-900 dark:text-amber-300 capitalize">
+                🏎️ {seriesFilter.replace(/-/g, ' ')}
+                <X className="w-3.5 h-3.5 cursor-pointer hover:text-midnight-ink" onClick={() => setSeriesFilter('all')} />
               </span>
             )}
             <button
@@ -386,6 +407,34 @@ function EventsDiscoveryContent() {
               </p>
             </div>
 
+            {/* Hot Wheels Series Filter */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate flex items-center justify-between">
+                <span>Hot Wheels Series</span>
+                {seriesFilter !== 'all' && (
+                  <button
+                    type="button"
+                    onClick={() => setSeriesFilter('all')}
+                    className="text-[10px] text-slate hover:text-midnight-ink font-semibold"
+                  >
+                    Reset
+                  </button>
+                )}
+              </label>
+              <select
+                value={seriesFilter}
+                onChange={(e) => setSeriesFilter(e.target.value)}
+                className="w-full p-2.5 text-xs rounded-[8px] border border-silver bg-pure-canvas text-midnight-ink focus:outline-none focus:border-midnight-ink cursor-pointer"
+              >
+                <option value="all">All Series</option>
+                {allHotwheelsSeries.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
 
             {/* City */}
             <div className="space-y-1.5">
@@ -533,6 +582,22 @@ function EventsDiscoveryContent() {
                 <p className="text-[10px] text-amber-900 font-medium bg-amber-500/10 p-2 rounded-lg border border-amber-500/20 leading-tight">
                   💡 Hot Wheels = die-cast toy collecting (1:64 scale), not real cars.
                 </p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate">Hot Wheels Series</label>
+                <select
+                  value={seriesFilter}
+                  onChange={(e) => setSeriesFilter(e.target.value)}
+                  className="w-full p-2.5 text-xs rounded-lg border border-silver bg-pure-canvas"
+                >
+                  <option value="all">All Series</option>
+                  {allHotwheelsSeries.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
 

@@ -18,6 +18,7 @@ export function Navbar() {
 
   const navLinks = [
     { label: 'Explore Drops', href: '/events' },
+    { label: 'HW Catalog', href: '/catalog' },
     { label: '🔥 Hot Wheels Store', href: '/shop' },
     { label: 'My Vault', href: '/collection' },
     { label: 'Trade Hub', href: '/trades' },

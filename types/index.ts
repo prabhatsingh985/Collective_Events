@@ -47,6 +47,7 @@ export interface HotWheelsDetails {
   vendorSlotsFilled: number
   highlightCastings?: string[]
   highlightModels: string[]
+  featuredSeries?: string[]
 }
 
 export interface FootballCardDetails {
@@ -113,6 +114,7 @@ export interface EventItem {
   schedule: EventScheduleItem[]
   hotWheelsDetails?: HotWheelsDetails
   footballCardDetails?: FootballCardDetails
+  featuredSeries?: string[]
   faqs: { question: string; answer: string }[]
   tags: string[]
   priceMin: number

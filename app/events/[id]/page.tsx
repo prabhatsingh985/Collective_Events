@@ -327,6 +327,29 @@ export default function EventDetailPage() {
                   </div>
                 </div>
 
+                {/* Featured Catalog Series */}
+                {((event.featuredSeries && event.featuredSeries.length > 0) || (event.hotWheelsDetails?.featuredSeries && event.hotWheelsDetails.featuredSeries.length > 0)) && (
+                  <div className="space-y-2 pt-2 border-t border-silver/30">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate flex items-center justify-between">
+                      <span>Featured Hot Wheels Catalog Series:</span>
+                      <Link href="/catalog" className="text-amber-700 dark:text-amber-400 font-semibold normal-case text-xs hover:underline">
+                        Explore Catalog →
+                      </Link>
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries || []).map((sId) => (
+                        <Link
+                          key={sId}
+                          href={`/catalog/series/${sId}`}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500/10 text-amber-900 dark:text-amber-300 text-xs font-bold rounded-full border border-amber-500/30 hover:bg-amber-500/20 transition-all shadow-xs capitalize"
+                        >
+                          <span>🏎️ {sId.replace(/-/g, ' ')}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Rare Castings Expected Grid */}
                 {((event.hotWheelsDetails.castingsExpected && event.hotWheelsDetails.castingsExpected.length > 0) || (event.hotWheelsDetails.carsExpected && event.hotWheelsDetails.carsExpected.length > 0)) && (
                   <div className="space-y-3">

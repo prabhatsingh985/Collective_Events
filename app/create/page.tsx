@@ -8,6 +8,7 @@ import { useApp } from '../../context/AppContext'
 import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
 import { EventItem, TicketTier } from '../../types'
+import { allHotwheelsSeries } from '@/data/hotwheels'
 import {
   Check,
   Calendar,
@@ -86,6 +87,7 @@ export default function CreateEventWizardPage() {
   const [rlcExclusivesAllowed, setRlcExclusivesAllowed] = useState(true)
   const [auctionScheduled, setAuctionScheduled] = useState(true)
   const [tradingZonesCount, setTradingZonesCount] = useState(10)
+  const [featuredSeries, setFeaturedSeries] = useState<string[]>(['car-culture', 'classics'])
 
   const [cardBrands, setCardBrands] = useState('Panini, Topps, Futera')
   const [gradingServices, setGradingServices] = useState('PSA, BGS')
@@ -215,8 +217,10 @@ export default function CreateEventWizardPage() {
               vendorSlotsFilled: 12,
               highlightCastings: ['Twin Mill', 'Datsun 510 Wagon $TH', 'Custom 69 Chevy C10'],
               highlightModels: ['Twin Mill', 'Datsun 510 Wagon $TH', 'Custom 69 Chevy C10'],
+              featuredSeries: featuredSeries,
             }
           : undefined,
+      featuredSeries: category === 'hot-wheels' || category === 'die-cast' ? featuredSeries : undefined,
       footballCardDetails:
         category === 'football-cards'
           ? {
@@ -825,6 +829,74 @@ export default function CreateEventWizardPage() {
                       onChange={(e) => setTradingZonesCount(Number(e.target.value))}
                       className="w-full p-3 bg-pure-canvas border border-silver rounded-lg text-xs font-medium text-midnight-ink focus:outline-none focus:ring-2 focus:ring-midnight-ink/20"
                     />
+                  </div>
+
+                  {/* Optional Multi-Select Featured Series */}
+                  <div className="space-y-2 pt-2 border-t border-silver/40">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-semibold text-midnight-ink block">
+                        Featured Catalog Series (Optional Tagging)
+                      </label>
+                      <span className="text-[11px] font-semibold text-slate">
+                        {featuredSeries.length} selected
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate">
+                      Tag series to link this event directly to the Hot Wheels Reference Catalog.
+                    </p>
+
+                    {/* Active Selected Chips */}
+                    {featuredSeries.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 p-2 bg-fog/60 border border-silver rounded-lg">
+                        {featuredSeries.map((sId) => {
+                          const ser = allHotwheelsSeries.find((s) => s.id === sId)
+                          return (
+                            <span
+                              key={sId}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-midnight-ink text-pure-canvas shadow-xs"
+                            >
+                              <span>🏎️ {ser?.name || sId}</span>
+                              <button
+                                type="button"
+                                onClick={() => setFeaturedSeries(featuredSeries.filter((id) => id !== sId))}
+                                className="hover:text-red-300"
+                              >
+                                ×
+                              </button>
+                            </span>
+                          )
+                        })}
+                      </div>
+                    )}
+
+                    {/* Quick Popular Picks + Dropdown */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {['car-culture', 'classics', 'red-line-club', 'flying-colors', 'boulevard', 'super-chromes', 'the-hot-ones', 'acceleracers', 'batman', 'elite-64'].map((sId) => {
+                        const isSelected = featuredSeries.includes(sId)
+                        const ser = allHotwheelsSeries.find((s) => s.id === sId)
+                        return (
+                          <button
+                            key={sId}
+                            type="button"
+                            onClick={() => {
+                              if (isSelected) {
+                                setFeaturedSeries(featuredSeries.filter((id) => id !== sId))
+                              } else {
+                                setFeaturedSeries([...featuredSeries, sId])
+                              }
+                            }}
+                            className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+                              isSelected
+                                ? 'bg-amber-500/20 text-amber-900 dark:text-amber-300 border-amber-500/40 font-bold'
+                                : 'bg-pure-canvas text-slate border-silver/70 hover:border-midnight-ink hover:text-midnight-ink'
+                            }`}
+                          >
+                            {isSelected ? '✓ ' : '+ '}
+                            {ser?.name || sId}
+                          </button>
+                        )
+                      })}
+                    </div>
                   </div>
                 </div>
               )}

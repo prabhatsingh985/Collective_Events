@@ -61,6 +61,22 @@ export function EventCard({ event, viewMode = 'grid', showPackReveal = false }: 
                 {event.city} ({event.venue})
               </span>
             </div>
+
+            {/* Featured Series chips */}
+            {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries) && (event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.length > 0 && (
+              <div className="flex flex-wrap gap-1 pt-1">
+                {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.slice(0, 3).map((sId) => (
+                  <Link
+                    key={sId}
+                    href={`/catalog/series/${sId}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 transition-colors capitalize"
+                  >
+                    🏎️ {sId.replace(/-/g, ' ')}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -182,6 +198,27 @@ export function EventCard({ event, viewMode = 'grid', showPackReveal = false }: 
           <p className="text-xs text-slate line-clamp-2 leading-relaxed font-normal">
             {event.tagline}
           </p>
+
+          {/* Featured Series chips */}
+          {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries) && (event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.length > 0 && (
+            <div className="flex flex-wrap gap-1 pt-1">
+              {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.slice(0, 3).map((sId) => (
+                <Link
+                  key={sId}
+                  href={`/catalog/series/${sId}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 transition-colors capitalize"
+                >
+                  🏎️ {sId.replace(/-/g, ' ')}
+                </Link>
+              ))}
+              {(event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.length > 3 && (
+                <span className="text-[10px] font-bold text-slate px-1.5 py-0.5">
+                  +{(event.featuredSeries || event.hotWheelsDetails?.featuredSeries)!.length - 3}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Footer: Organizer + Overlapping Guest Avatars with +N pill */}
