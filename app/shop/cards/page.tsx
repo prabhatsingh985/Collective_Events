@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getTradingCardProducts } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Sports Trading Cards & Wax | Panini Prizm, Topps Chrome, Rookies | CrateMeet',
+  title: 'Sports Trading Cards & Wax | Panini Prizm, Topps Chrome, Rookies | CollectorEvents',
   description:
     'Shop authentic football, soccer & sports cards in India. Sealed hobby boxes, retail blasters, certified on-card autographs, and PSA/BGS graded gem mint singles.',
 }

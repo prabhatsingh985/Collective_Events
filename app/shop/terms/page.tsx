@@ -4,7 +4,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | CrateMeet Store',
+  title: 'Terms of Service | CollectorEvents Store',
   description: 'Terms and conditions governing purchases, drops, allocations, and collector sales.',
 }
 

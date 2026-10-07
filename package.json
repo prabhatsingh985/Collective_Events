@@ -1,8 +1,8 @@
 {
-  "name": "cratemeet",
+  "name": "collectorevents",
   "version": "1.0.0",
   "private": true,
-  "description": "CrateMeet — Die-Cast & Sports Trading Card Event Discovery & Official Hot Wheels Collector Store",
+  "description": "CollectorEvents — Events for People Who Collect Experiences & Official Hot Wheels Collector Store",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

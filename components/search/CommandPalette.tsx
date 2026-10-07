@@ -331,7 +331,7 @@ export function CommandPalette() {
         {/* Footer info */}
         <div className="px-4 py-2.5 bg-fog/50 border-t border-silver/60 flex items-center justify-between text-[11px] text-slate">
           <span>Navigate with mouse or arrow keys</span>
-          <span>CrateMeet Discovery Network</span>
+          <span>CollectorEvents Discovery Network</span>
         </div>
       </div>
     </div>

@@ -3161,7 +3161,7 @@ export const MOCK_COMMUNITY_POSTS: CommunityPost[] = [
     category: 'hot-wheels',
     postType: 'trade',
     title: 'Looking for 1999 R34 Skyline Mainlines (Blue or Silver) — Have $TH Datsun 240Z for Trade',
-    content: `Need the original 1999 first edition casting to complete my vintage Skyline wall. Card condition doesn't have to be mint as long as the blister isn't cracked. Willing to bundle with cash top-up or trade my 2022 Datsun 240Z Super Treasure Hunt. Hit me up in DMs or propose directly on CrateMeet!`,
+    content: `Need the original 1999 first edition casting to complete my vintage Skyline wall. Card condition doesn't have to be mint as long as the blister isn't cracked. Willing to bundle with cash top-up or trade my 2022 Datsun 240Z Super Treasure Hunt. Hit me up in DMs or propose directly on CollectorEvents!`,
     images: [
       'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=800&q=80',
     ],

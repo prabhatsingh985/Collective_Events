@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getGradedCards } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Graded Sports Cards (Slabs) | PSA 10 Gem Mint & BGS 9.5 | CrateMeet',
+  title: 'Graded Sports Cards (Slabs) | PSA 10 Gem Mint & BGS 9.5 | CollectorEvents',
   description:
     'Shop authenticated and graded football & sports card slabs in India. PSA 10 Gem Mint and BGS 9.5 True Gem grails with verified certification numbers.',
 }

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import NextLink from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useApp } from '@/context/AppContext'
 import { Search, Bell, Bookmark, Plus, Menu, X, Sparkles, ShoppingBag, Flame } from 'lucide-react'
@@ -35,34 +36,39 @@ export function Navbar() {
         <Sparkles className="w-3.5 h-3.5 text-midnight-blue shrink-0" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 lg:gap-4">
         {/* Left: Brand Wordmark */}
-        <div className="flex items-center gap-6">
-          <NextLink href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-[8px] bg-midnight-ink text-pure-canvas flex items-center justify-center font-bold text-sm tracking-tight shadow-sm group-hover:scale-105 transition-transform">
-              ✨
-            </div>
+        <div className="flex items-center gap-3 xl:gap-6 shrink-0">
+          <NextLink href="/" className="flex items-center gap-2.5 group shrink-0">
+            <Image
+              src="/brand/logo-mark.png"
+              alt="CollectorEvents"
+              width={34}
+              height={34}
+              className="object-contain group-hover:scale-105 transition-transform shrink-0"
+              priority
+            />
             <div className="flex flex-col">
               <span className="font-extrabold text-xl tracking-tight text-midnight-ink leading-none">
-                Crate<span className="text-slate">Meet</span>
+                Collector<span className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] bg-clip-text text-transparent">Events</span>
               </span>
-              <span className="text-[10px] font-medium tracking-tight text-ash leading-tight">
+              <span className="text-[10px] font-medium tracking-tight text-ash leading-tight hidden sm:block">
                 Die-Cast & Card Gatherings
               </span>
             </div>
           </NextLink>
 
           {/* Desktop Nav Items with Partiful Warm Sand Active State */}
-          <nav className="hidden lg:flex items-center gap-1 pl-4 border-l border-silver/40">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 pl-3 xl:pl-4 border-l border-silver/40 shrink-0">
             {navLinks.map((link) => {
               const active = isActive(link.href)
               return (
                 <NextLink
                   key={link.href}
                   href={link.href}
-                  className={`px-3.5 py-1.5 text-sm font-semibold rounded-[4px] transition-all relative ${
+                  className={`px-2.5 xl:px-3.5 py-1.5 text-xs xl:text-sm font-semibold rounded-[4px] transition-all relative whitespace-nowrap ${
                     active
-                      ? 'text-midnight-ink font-bold after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-warm-sand'
+                      ? 'text-midnight-ink font-bold after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-warm-sand'
                       : 'text-slate hover:text-midnight-ink hover:bg-black/[0.03]'
                   }`}
                 >
@@ -73,28 +79,29 @@ export function Navbar() {
           </nav>
         </div>
 
-        {/* Center: Quick Search Trigger */}
-        <div className="hidden md:flex flex-1 max-w-xs lg:max-w-md mx-2">
+        {/* Center: Quick Search Trigger (Fixed 36px height, responsive width, no text wrapping) */}
+        <div className="hidden md:flex items-center flex-1 max-w-[160px] lg:max-w-[200px] xl:max-w-[280px] mx-2 shrink-0">
           <button
+            type="button"
             onClick={() => setIsSearchOpen(true)}
-            className="w-full flex items-center justify-between px-4 py-2 bg-black/[0.03] hover:bg-black/[0.05] border border-silver/50 rounded-full text-slate hover:text-midnight-ink transition-all text-xs font-medium"
+            className="w-full h-9 flex items-center justify-between px-3 bg-black/[0.03] hover:bg-black/[0.06] border border-silver/50 rounded-full text-slate hover:text-midnight-ink transition-all text-xs font-medium overflow-hidden whitespace-nowrap"
           >
-            <span className="flex items-center gap-2">
-              <Search className="w-4 h-4 text-slate" />
-              <span>Search drops, cards, cities...</span>
+            <span className="flex items-center gap-2 min-w-0 truncate">
+              <Search className="w-3.5 h-3.5 text-slate shrink-0" />
+              <span className="truncate">Search events...</span>
             </span>
-            <kbd className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-pure-canvas border border-silver/70 rounded-full text-graphite shadow-sm">
+            <kbd className="hidden xl:inline-flex shrink-0 ml-1.5 px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-pure-canvas border border-silver/70 rounded text-graphite shadow-2xs">
               ⌘K
             </kbd>
           </button>
         </div>
 
         {/* Right: Actions, Notifications, Profile & Host CTA */}
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5 shrink-0">
           {/* Mobile Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="md:hidden w-9 h-9 rounded-full border border-silver/50 flex items-center justify-center text-graphite hover:text-midnight-ink"
+            className="md:hidden w-9 h-9 shrink-0 rounded-full border border-silver/50 flex items-center justify-center text-graphite hover:text-midnight-ink"
             aria-label="Open search"
           >
             <Search className="w-4 h-4" />
@@ -103,7 +110,7 @@ export function Navbar() {
           {/* Saved Events Bookmark */}
           <NextLink
             href="/saved"
-            className="relative w-9 h-9 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-graphite hover:text-midnight-ink hover:border-silver transition-colors"
+            className="relative w-9 h-9 shrink-0 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-graphite hover:text-midnight-ink hover:border-silver transition-colors"
             title="Saved Events"
           >
             <Bookmark className="w-4 h-4" />
@@ -117,7 +124,7 @@ export function Navbar() {
           {/* Notifications Bell */}
           <NextLink
             href="/notifications"
-            className="relative w-9 h-9 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-graphite hover:text-midnight-ink hover:border-silver transition-colors"
+            className="relative w-9 h-9 shrink-0 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-graphite hover:text-midnight-ink hover:border-silver transition-colors"
             title="Notifications"
           >
             <Bell className="w-4 h-4" />
@@ -131,7 +138,7 @@ export function Navbar() {
           {/* Cart Drawer Trigger */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="relative w-9 h-9 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-midnight-ink hover:border-midnight-ink transition-colors"
+            className="relative w-9 h-9 shrink-0 rounded-full border border-silver/50 bg-pure-canvas flex items-center justify-center text-midnight-ink hover:border-midnight-ink transition-colors"
             title="Open Collector Cart"
           >
             <ShoppingBag className="w-4 h-4 text-midnight-ink" />
@@ -145,32 +152,31 @@ export function Navbar() {
           {/* User Profile Mini Badge */}
           <NextLink
             href={`/profile/${currentUser.username}`}
-
-            className="hidden sm:flex items-center gap-2 p-1 pr-3 rounded-full border border-silver/60 bg-pure-canvas hover:border-midnight-ink transition-colors"
+            className="hidden sm:flex items-center gap-1.5 p-1 pr-1.5 xl:pr-3 rounded-full border border-silver/60 bg-pure-canvas hover:border-midnight-ink transition-colors shrink-0"
           >
             <img
               src={currentUser.avatar}
               alt={currentUser.name}
-              className="w-7 h-7 rounded-full object-cover"
+              className="w-7 h-7 rounded-full object-cover shrink-0"
             />
-            <span className="text-xs font-semibold text-midnight-ink">
+            <span className="hidden xl:inline text-xs font-semibold text-midnight-ink truncate max-w-[90px]">
               @{currentUser.username}
             </span>
           </NextLink>
 
-          {/* Partiful Primary CTA: Filled Black Button with 8px radius */}
+          {/* Partiful Primary CTA */}
           <NextLink
             href="/create"
-            className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2 bg-midnight-ink text-pure-canvas font-bold text-sm rounded-[8px] hover:opacity-85 active:scale-[0.98] transition-all shadow-sm"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 xl:px-5 py-2 bg-midnight-ink text-pure-canvas font-bold text-xs xl:text-sm rounded-[8px] hover:opacity-85 active:scale-[0.98] transition-all shadow-sm shrink-0 whitespace-nowrap"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0" />
             <span>Host Meet</span>
           </NextLink>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-9 h-9 rounded-full border border-silver/50 flex items-center justify-center text-midnight-ink"
+            className="lg:hidden w-9 h-9 shrink-0 rounded-full border border-silver/50 flex items-center justify-center text-midnight-ink"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

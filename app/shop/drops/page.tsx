@@ -10,7 +10,7 @@ import { getDrops } from '@/lib/api/drops'
 import { Drop } from '@/types/store'
 
 export const metadata: Metadata = {
-  title: 'Collector Drops & Pre-Orders | Super $TH & Prizm Hobby Wax | CrateMeet',
+  title: 'Collector Drops & Pre-Orders | Super $TH & Prizm Hobby Wax | CollectorEvents',
   description:
     'Join scheduled grail drops for rare Hot Wheels Super Treasure Hunts and Panini Prizm hobby boxes. Strict customer allocations with live waitlist.',
 }

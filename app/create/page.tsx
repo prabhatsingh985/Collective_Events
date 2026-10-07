@@ -94,7 +94,7 @@ export default function CreateEventWizardPage() {
   // Autosave Draft
   useEffect(() => {
     try {
-      const draft = localStorage.getItem('cratemeet_event_draft')
+      const draft = localStorage.getItem('collectorevents_event_draft')
       if (draft) {
         const parsed = JSON.parse(draft)
         if (parsed.title) setTitle(parsed.title)
@@ -109,7 +109,7 @@ export default function CreateEventWizardPage() {
   useEffect(() => {
     try {
       localStorage.setItem(
-        'cratemeet_event_draft',
+        'collectorevents_event_draft',
         JSON.stringify({ title, tagline, description, venue, city, category, eventType })
       )
     } catch {}
@@ -752,7 +752,7 @@ export default function CreateEventWizardPage() {
                   {/* Toy Disclaimer Banner */}
                   <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-950 font-medium">
                     <strong className="block text-amber-800 uppercase tracking-wider text-[11px] mb-0.5">Die-Cast Toy Gathering Guidelines:</strong>
-                    CrateMeet Hot Wheels events are exclusively for 1:64 scale die-cast toy car collecting (blister packaging, $TH hunts, RLC numbered exclusives, and 1:64 custom wheel swaps) — not real automotive sales or track days.
+                    CollectorEvents Hot Wheels events are exclusively for 1:64 scale die-cast toy car collecting (blister packaging, $TH hunts, RLC numbered exclusives, and 1:64 custom wheel swaps) — not real automotive sales or track days.
                   </div>
 
                   <div>
@@ -885,7 +885,7 @@ export default function CreateEventWizardPage() {
                   Your Event is Live! 🏁
                 </h2>
                 <p className="text-xs sm:text-sm text-slate font-normal max-w-sm mx-auto">
-                  &quot;{createdEventResult.title}&quot; is published on CrateMeet and discoverable by collectors in {createdEventResult.city}.
+                  &quot;{createdEventResult.title}&quot; is published on CollectorEvents and discoverable by collectors in {createdEventResult.city}.
                 </p>
               </div>
 

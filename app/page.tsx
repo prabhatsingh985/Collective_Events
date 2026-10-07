@@ -125,19 +125,19 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: Statement Headline & Search Bar */}
           <div className="lg:col-span-7 space-y-6 text-pure-canvas">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pure-canvas/15 backdrop-blur-md border border-pure-canvas/20 text-xs font-semibold text-pure-canvas">
-              <Sparkles className="w-3.5 h-3.5 text-party-pink" />
-              <span>Celebrating Die-Cast & Sports Card Drops in 2026</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pure-canvas/15 backdrop-blur-md border border-pure-canvas/20 text-xs font-semibold text-pure-canvas">
+              <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" />
+              <span className="tracking-wider uppercase text-[11px] font-bold">DISCOVER · ATTEND · CREATE</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-pure-canvas leading-[1.05]">
-              The page stays quiet.
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-pure-canvas leading-[1.05]">
+              Events for People
               <br />
-              <span className="text-party-pink">The meet explodes with color.</span>
+              Who Collect <span className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] bg-clip-text text-transparent">Experiences</span>
             </h1>
 
             <p className="text-base sm:text-lg text-pure-canvas/80 max-w-xl font-normal leading-relaxed">
-              India&apos;s curated discovery platform for downhill Hot Wheels drag meets, live hobby box breaks, PSA grading summits, and collector swap meets.
+              Find the best events, meet like-minded people and collect unforgettable moments.
             </p>
 
             {/* Partiful Unified Search Bar */}
@@ -317,7 +317,7 @@ export default function HomePage() {
               Scattered invites. Real tables. Unboxed grails.
             </h2>
             <p className="text-sm sm:text-base text-slate font-normal leading-relaxed">
-              CrateMeet turns collector events into physical celebrations. From mint 1971 Datsun Super Treasure Hunts to Gem Mint Bellingham rookies, see what is walking through the door before you arrive.
+              CollectorEvents turns collector events into physical celebrations. From mint 1971 Datsun Super Treasure Hunts to Gem Mint Bellingham rookies, see what is walking through the door before you arrive.
             </p>
             <div className="pt-2 flex items-center gap-3">
               <Link

@@ -6,7 +6,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Returns & 7-Day Collector Inspection Policy | CrateMeet Store',
+  title: 'Returns & 7-Day Collector Inspection Policy | CollectorEvents Store',
   description: 'Zero hassle returns and replacements for collector blister cards and sealed boxes.',
 }
 

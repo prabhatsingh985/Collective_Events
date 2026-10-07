@@ -59,7 +59,7 @@ export default function TradesHubPage() {
       offeredItemIds: selectedOfferIds,
       requestedItemIds: selectedRequestIds,
       cashTopUpINR: Number(cashTopUp),
-      note: tradeMessage || 'Trade proposed on CrateMeet.',
+      note: tradeMessage || 'Trade proposed on CollectorEvents.',
     })
 
     confetti({
@@ -123,7 +123,7 @@ export default function TradesHubPage() {
             <span className="flex items-center gap-2 text-midnight-ink font-medium">
               <Sparkles className="w-4 h-4 text-party-pink shrink-0" />
               <span>
-                <strong>Verified In-Person Handshakes:</strong> Inspect blister cards and slab certification seals at any registered CrateMeet event before final handover.
+                <strong>Verified In-Person Handshakes:</strong> Inspect blister cards and slab certification seals at any registered CollectorEvents event before final handover.
               </span>
             </span>
             <Link

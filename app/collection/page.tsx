@@ -101,7 +101,7 @@ export default function CollectionDashboardPage() {
       photos: [newPhoto],
       description: isHW
         ? `1:64 scale die-cast toy casting: ${newTitle}. Series: ${newSeries || 'Mainline'}. Wheels: ${newWheelType}. Packaging: ${newPackagingCondition}.`
-        : 'Added to vault via CrateMeet manager.',
+        : 'Added to vault via CollectorEvents manager.',
       rarityBadge: newGrading !== 'None' ? `${newGrading} ${newGradeScore}` : (isHW ? 'Collector Die-Cast' : 'Collector Mint'),
     })
 

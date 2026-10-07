@@ -291,7 +291,7 @@ export function StoreCartDrawer() {
                     type="text"
                     value={couponInput}
                     onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
-                    placeholder="Coupon (CRATE10, MINT200)"
+                    placeholder="Coupon (COLLECTOR10, MINT200)"
                     className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-zinc-300 focus:outline-none focus:border-zinc-800 bg-white font-mono uppercase"
                   />
                 </div>

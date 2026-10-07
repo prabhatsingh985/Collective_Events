@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getSealedCards } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Factory Sealed Card Boxes & Blasters | Panini Prizm, Topps Chrome | CrateMeet',
+  title: 'Factory Sealed Card Boxes & Blasters | Panini Prizm, Topps Chrome | CollectorEvents',
   description:
     'Shop authentic factory-sealed football and sports card hobby boxes, blasters, and wax packs in India. 100% manufacturer shrink wrap intact.',
 }

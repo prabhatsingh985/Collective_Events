@@ -294,7 +294,7 @@ export const useStore = create<StoreState>()(
       setHasHydrated: (state: boolean) => set({ hasHydrated: state }),
     }),
     {
-      name: 'cratemeet_store_v1',
+      name: 'collectorevents_store_v1',
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)

@@ -177,7 +177,7 @@ export default function OnboardingPage() {
 
     addToast({
       type: 'success',
-      title: 'Welcome to CrateMeet! ✨',
+      title: 'Welcome to CollectorEvents! ✨',
       message: `Your hub is calibrated for ${selectedCity} collectors.`,
     })
 
@@ -483,10 +483,10 @@ export default function OnboardingPage() {
                 disabled={isFinishing}
               >
                 {isFinishing ? (
-                  <span>Entering CrateMeet...</span>
+                  <span>Entering CollectorEvents...</span>
                 ) : (
                   <>
-                    <span>Enter CrateMeet</span>
+                    <span>Enter CollectorEvents</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}

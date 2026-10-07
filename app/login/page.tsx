@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useApp } from '../../context/AppContext'
 import { Button } from '../../components/ui/Button'
@@ -13,7 +14,7 @@ export default function LoginPage() {
   const router = useRouter()
   const { addToast } = useApp()
 
-  const [email, setEmail] = useState('shreyash@cratemeet.com')
+  const [email, setEmail] = useState('shreyash@collectorevents.com')
   const [password, setPassword] = useState('••••••••••••')
   const [forgotModalOpen, setForgotModalOpen] = useState(false)
   const [resetEmail, setResetEmail] = useState('')
@@ -23,7 +24,7 @@ export default function LoginPage() {
     addToast({
       type: 'success',
       title: 'Welcome Back, Shreyash! ⚡',
-      message: 'Signed in successfully to CrateMeet.',
+      message: 'Signed in successfully to CollectorEvents.',
     })
     router.push('/')
   }
@@ -51,12 +52,16 @@ export default function LoginPage() {
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 select-none bg-pure-canvas">
       <div className="w-full max-w-md bg-pure-canvas border border-silver rounded-2xl shadow-card p-6 sm:p-8 space-y-6">
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-midnight-ink text-pure-canvas flex items-center justify-center font-bold text-sm shadow-sm">
-              <Sparkles className="w-4 h-4 text-party-pink" />
-            </div>
-            <span className="font-display font-bold text-2xl tracking-tight text-midnight-ink">
-              CrateMeet
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <Image
+              src="/brand/logo-mark.png"
+              alt="CollectorEvents"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <span className="font-extrabold text-2xl tracking-tight text-midnight-ink">
+              Collector<span className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] bg-clip-text text-transparent">Events</span>
             </span>
           </Link>
           <h2 className="font-display font-bold text-2xl text-midnight-ink">
@@ -143,7 +148,7 @@ export default function LoginPage() {
               required
               value={resetEmail}
               onChange={(e) => setResetEmail(e.target.value)}
-              placeholder="shreyash@cratemeet.com"
+              placeholder="shreyash@collectorevents.com"
               className="w-full p-2.5 bg-pure-canvas border border-silver rounded-lg text-xs font-medium text-midnight-ink focus:outline-none focus:ring-2 focus:ring-midnight-ink/20"
             />
           </div>

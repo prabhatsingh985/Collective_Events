@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = await getProductBySlug(params.slug)
   if (!product) {
     return {
-      title: 'Product Not Found | CrateMeet Store',
+      title: 'Product Not Found | CollectorEvents Store',
     }
   }
 
   return {
-    title: `${product.title} | CrateMeet Official Collector Store`,
+    title: `${product.title} | CollectorEvents Official Collector Store`,
     description: product.description,
     openGraph: {
       title: product.title,
@@ -71,7 +71,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'CrateMeet Vault',
+        name: 'CollectorEvents Vault',
       },
     },
     aggregateRating: {

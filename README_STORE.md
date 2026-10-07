@@ -1,7 +1,7 @@
-# CrateMeet Online Collector Store ⚡🏎️⚽
+# CollectorEvents Online Collector Store ⚡🏎️⚽
 **High-Fidelity Online Store for Hot Wheels / Die-Cast Toy Cars & Sports Trading Cards (Panini / Topps)**
 
-A production-grade, collector-focused Next.js App Router frontend seamlessly integrated into the CrateMeet platform. Built with Next.js 14, TypeScript (strict), Tailwind CSS, Zustand, and Framer Motion.
+A production-grade, collector-focused Next.js App Router frontend seamlessly integrated into the CollectorEvents platform. Built with Next.js 14, TypeScript (strict), Tailwind CSS, Zustand, and Framer Motion.
 
 ---
 

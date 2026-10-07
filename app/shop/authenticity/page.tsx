@@ -5,7 +5,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Authenticity Guarantee & Grading Policy | CrateMeet Store',
+  title: 'Authenticity Guarantee & Grading Policy | CollectorEvents Store',
   description: 'Our verification promise for Hot Wheels die-cast castings and Panini/Topps sports cards.',
 }
 
@@ -55,7 +55,7 @@ export default function AuthenticityPolicyPage() {
               <span>Sports Trading Cards: Zero Reseals Promise</span>
             </h2>
             <p className="text-slate">
-              We know the fear of bought-out resealed boxes in the card hobby. Every hobby box and retail blaster sold at CrateMeet comes with intact, unbroken manufacturer hologram shrink wrap from Panini America or Topps / Fanatics.
+              We know the fear of bought-out resealed boxes in the card hobby. Every hobby box and retail blaster sold at CollectorEvents comes with intact, unbroken manufacturer hologram shrink wrap from Panini America or Topps / Fanatics.
             </p>
             <ul className="space-y-1.5 pt-1 text-slate">
               <li className="flex items-center gap-2">

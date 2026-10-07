@@ -4,7 +4,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | CrateMeet Store',
+  title: 'Privacy Policy | CollectorEvents Store',
   description: 'How we protect your collector personal information and shipping details.',
 }
 
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
           <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-2 shadow-sm">
             <h2 className="text-sm font-bold text-midnight-ink font-display">3. Payment Security</h2>
             <p className="text-slate">
-              Payment credentials (UPI IDs, card numbers) are processed through 256-bit SSL encrypted payment gateway interfaces. CrateMeet does not store raw credit card numbers or CVV codes.
+              Payment credentials (UPI IDs, card numbers) are processed through 256-bit SSL encrypted payment gateway interfaces. CollectorEvents does not store raw credit card numbers or CVV codes.
             </p>
           </div>
         </div>

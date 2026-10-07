@@ -110,18 +110,18 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 const STORAGE_KEYS = {
-  SAVED_EVENTS: 'cratemeet_saved_events',
-  TICKETS: 'cratemeet_tickets',
-  COLLECTION: 'cratemeet_collection',
-  TRADES: 'cratemeet_trades',
-  POSTS: 'cratemeet_posts',
-  NOTIFICATIONS: 'cratemeet_notifications',
-  EVENTS: 'cratemeet_events',
-  USER: 'cratemeet_current_user',
-  ONBOARDING: 'cratemeet_onboarding',
-  CART: 'cratemeet_cart',
-  ORDERS: 'cratemeet_orders',
-  SHOP_PRODUCTS: 'cratemeet_shop_products',
+  SAVED_EVENTS: 'collectorevents_saved_events',
+  TICKETS: 'collectorevents_tickets',
+  COLLECTION: 'collectorevents_collection',
+  TRADES: 'collectorevents_trades',
+  POSTS: 'collectorevents_posts',
+  NOTIFICATIONS: 'collectorevents_notifications',
+  EVENTS: 'collectorevents_events',
+  USER: 'collectorevents_current_user',
+  ONBOARDING: 'collectorevents_onboarding',
+  CART: 'collectorevents_cart',
+  ORDERS: 'collectorevents_orders',
+  SHOP_PRODUCTS: 'collectorevents_shop_products',
 }
 
 

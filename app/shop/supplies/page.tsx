@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getSupplies } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Collector Protective Supplies | Clamshell Cases & Magnetic One-Touch | CrateMeet',
+  title: 'Collector Protective Supplies | Clamshell Cases & Magnetic One-Touch | CollectorEvents',
   description:
     'Protect your Hot Wheels blisters and sports cards with UV-resistant clamshell cases, magnetic 35pt one-touches, and penny sleeves.',
 }

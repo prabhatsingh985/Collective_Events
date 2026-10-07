@@ -980,7 +980,7 @@ export const MOCK_SUPPLIES_PRODUCTS: SuppliesProduct[] = [
   {
     id: 'sup-1',
     slug: 'hot-wheels-blister-protectors-10-pack',
-    title: 'CrateMeet Armored Hot Wheels Blister Protectors (10-Pack Clamshell Cases)',
+    title: 'CollectorEvents Armored Hot Wheels Blister Protectors (10-Pack Clamshell Cases)',
     productType: 'supplies',
     category: 'supplies',
     supplyType: 'Blister Clamshell Protector',
@@ -1139,7 +1139,7 @@ export const MOCK_ORDERS: Order[] = [
     courier: 'BlueDart Air Express',
     trackingAwb: 'BD-884920192',
     timeline: [
-      { status: 'PACKED', title: 'Box Packed & Corner Edge Guards Fitted', description: 'Item verified in mint blister condition. Bubble wrapped in double-wall carton.', timestamp: '2026-10-06 15:45', location: 'CrateMeet WMS Hub (Mumbai)', completed: true },
+      { status: 'PACKED', title: 'Box Packed & Corner Edge Guards Fitted', description: 'Item verified in mint blister condition. Bubble wrapped in double-wall carton.', timestamp: '2026-10-06 15:45', location: 'CollectorEvents WMS Hub (Mumbai)', completed: true },
       { status: 'LABEL_GENERATED', title: 'BlueDart Air AWB Generated', description: 'Manifest barcode BD-884920192 printed.', timestamp: '2026-10-06 16:10', location: 'Bandra Sorting Center', completed: true },
       { status: 'PICKED_UP', title: 'Carrier Scanned Package', description: 'Package picked up by BlueDart Express logistics team.', timestamp: '2026-10-06 17:30', location: 'BKC Air Gateway', completed: true },
       { status: 'IN_TRANSIT', title: 'Departed Mumbai Central Air Hub', description: 'Package in transit for local delivery station dispatch.', timestamp: '2026-10-06 21:15', location: 'Santacruz Hub', completed: true },
@@ -1186,6 +1186,7 @@ export const MOCK_ORDERS: Order[] = [
 ]
 
 export const MOCK_COUPONS: Coupon[] = [
+  { code: 'COLLECTOR10', type: 'percent', value: 10, minOrderValue: 999, description: '10% off on all orders above ₹999', expiresAt: '2026-12-31' },
   { code: 'CRATE10', type: 'percent', value: 10, minOrderValue: 999, description: '10% off on all orders above ₹999', expiresAt: '2026-12-31' },
   { code: 'MINT200', type: 'flat', value: 200, minOrderValue: 1499, description: '₹200 instant savings on orders above ₹1,499', expiresAt: '2026-11-30' },
   { code: 'FIRSTDROP', type: 'percent', value: 15, minOrderValue: 2499, description: '15% off for new collector orders', expiresAt: '2026-12-31' },
@@ -1199,7 +1200,7 @@ export const MOCK_REVIEWS: StoreReview[] = [
     authorLocation: 'Mumbai',
     rating: 5,
     title: 'Pristine international short card condition!',
-    comment: 'Was nervous ordering a Super $TH online in India, but CrateMeet packed it in a heavy clamshell with corner edge guards and zero card crease. Verified real rider rubber tires. Truly collector-grade packaging.',
+    comment: 'Was nervous ordering a Super $TH online in India, but CollectorEvents packed it in a heavy clamshell with corner edge guards and zero card crease. Verified real rider rubber tires. Truly collector-grade packaging.',
     verifiedPurchase: true,
     createdAt: '2026-09-28T16:20:00Z',
   },

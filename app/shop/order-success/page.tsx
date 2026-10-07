@@ -193,7 +193,7 @@ function OrderSuccessContent() {
           href="/shop"
           className="text-xs font-bold text-slate hover:text-midnight-ink flex items-center justify-center gap-1 transition-colors"
         >
-          <span>Back to CrateMeet Store</span>
+          <span>Back to CollectorEvents Store</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>

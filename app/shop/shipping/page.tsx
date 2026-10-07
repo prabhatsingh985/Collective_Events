@@ -5,7 +5,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Shipping & Armored Packaging Guarantee | CrateMeet Store',
+  title: 'Shipping & Armored Packaging Guarantee | CollectorEvents Store',
   description: 'How we pack and deliver Hot Wheels and sports card wax safely across India.',
 }
 

@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getHotWheelsProducts } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Hot Wheels & Die-Cast Toy Cars | Super $TH, RLC, Mainlines | CrateMeet',
+  title: 'Hot Wheels & Die-Cast Toy Cars | Super $TH, RLC, Mainlines | CollectorEvents',
   description:
     'Shop authentic 1:64 scale die-cast toy cars in India. Factory unpunched Super Treasure Hunts ($TH), Red Line Club (RLC) Chrome editions, Car Culture Real Riders, and Blvd series.',
 }

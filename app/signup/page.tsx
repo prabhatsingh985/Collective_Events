@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useApp } from '../../context/AppContext'
 import { Button } from '../../components/ui/Button'
@@ -26,7 +27,7 @@ export default function SignupPage() {
     }
     addToast({
       type: 'success',
-      title: 'Welcome to CrateMeet! 🏎️',
+      title: 'Welcome to CollectorEvents! 🏎️',
       message: 'Let’s personalize your collector discovery experience.',
     })
     router.push('/onboarding')
@@ -36,12 +37,16 @@ export default function SignupPage() {
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 select-none bg-pure-canvas">
       <div className="w-full max-w-md bg-pure-canvas border border-silver rounded-2xl shadow-card p-6 sm:p-8 space-y-6">
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-midnight-ink text-pure-canvas flex items-center justify-center font-bold text-sm shadow-sm">
-              <Sparkles className="w-4 h-4 text-party-pink" />
-            </div>
-            <span className="font-display font-bold text-2xl tracking-tight text-midnight-ink">
-              CrateMeet
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <Image
+              src="/brand/logo-mark.png"
+              alt="CollectorEvents"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <span className="font-extrabold text-2xl tracking-tight text-midnight-ink">
+              Collector<span className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] bg-clip-text text-transparent">Events</span>
             </span>
           </Link>
           <h2 className="font-display font-bold text-2xl text-midnight-ink">

@@ -239,7 +239,7 @@ export function StoreSearchModal() {
             <CornerDownLeft className="w-3 h-3 text-slate" />
             <span>Press Enter to view all results</span>
           </span>
-          <span className="font-semibold text-midnight-ink">CrateMeet Vault Search</span>
+          <span className="font-semibold text-midnight-ink">CollectorEvents Vault Search</span>
         </div>
       </motion.div>
     </div>

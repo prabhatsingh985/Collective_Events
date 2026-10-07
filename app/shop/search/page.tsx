@@ -6,7 +6,7 @@ import { ProductListingView } from '@/components/store/ProductListingView'
 import { getProducts } from '@/lib/api/products'
 
 export const metadata: Metadata = {
-  title: 'Search Results | CrateMeet Collector Store',
+  title: 'Search Results | CollectorEvents Collector Store',
   description: 'Search results for Hot Wheels die-cast castings and sports trading cards.',
 }
 

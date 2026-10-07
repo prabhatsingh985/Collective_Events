@@ -110,7 +110,7 @@ export default function AccountPage() {
                 </span>
               </div>
               <p className="text-xs text-slate mt-0.5 font-mono">
-                +91 98201 55902 • shreyash@cratemeet.com
+                +91 98201 55902 • shreyash@collectorevents.com
               </p>
             </div>
           </div>
@@ -343,7 +343,7 @@ export default function AccountPage() {
                                 <Link
                                   href={`/collection?addTitle=${encodeURIComponent(item.product.title)}&type=${item.product.category}`}
                                   className="px-2.5 py-1 rounded-xl bg-fog hover:bg-silver/40 text-[11px] font-bold text-midnight-ink border border-silver/50 flex items-center gap-1 transition-colors"
-                                  title="Add to CrateMeet Collector Vault"
+                                  title="Add to CollectorEvents Collector Vault"
                                 >
                                   <Sparkles className="w-3 h-3 text-party-pink" />
                                   <span>Add to My Collection</span>

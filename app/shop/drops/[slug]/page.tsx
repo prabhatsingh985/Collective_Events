@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const drop = await getDropBySlug(params.slug)
   if (!drop) {
     return {
-      title: 'Drop Not Found | CrateMeet',
+      title: 'Drop Not Found | CollectorEvents',
     }
   }
 
   return {
-    title: `${drop.title} | Official Vault Drop Allocation | CrateMeet`,
+    title: `${drop.title} | Official Vault Drop Allocation | CollectorEvents`,
     description: drop.description,
     openGraph: {
       title: drop.title,

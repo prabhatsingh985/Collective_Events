@@ -38,11 +38,11 @@ import { getActiveDrop, getDrops } from '@/lib/api/drops'
 import { RecentlyViewedShelf } from './RecentlyViewedShelf'
 
 export const metadata: Metadata = {
-  title: 'Collector Store | Hot Wheels Die-Cast & Trading Cards India | CrateMeet',
+  title: 'Collector Store | Hot Wheels Die-Cast & Trading Cards India | CollectorEvents',
   description:
     'India’s verified online store for authentic 1:64 die-cast toy cars (Hot Wheels Super Treasure Hunts, RLC, Car Culture) and sports trading cards (Panini Prizm, Topps Chrome, PSA slabs). Fast BlueDart Air express shipping.',
   openGraph: {
-    title: 'CrateMeet Collector Store — Hot Wheels & Sports Cards Vault',
+    title: 'CollectorEvents Collector Store — Hot Wheels & Sports Cards Vault',
     description: 'Shop verified Super Treasure Hunts, factory-sealed hobby wax, and PSA/BGS slabs.',
     images: ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80'],
   },

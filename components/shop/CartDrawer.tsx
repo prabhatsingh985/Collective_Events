@@ -43,7 +43,7 @@ export function CartDrawer() {
   // Shipping Form State
   const [customerName, setCustomerName] = useState(currentUser.name || 'Shreyash Srivastava')
   const [customerPhone, setCustomerPhone] = useState('+91 98201 55902')
-  const [customerEmail, setCustomerEmail] = useState('shreyash@cratemeet.com')
+  const [customerEmail, setCustomerEmail] = useState('shreyash@collectorevents.com')
   const [customerAddress, setCustomerAddress] = useState('Flat 402, Sea Green Apartments, Bandra West')
   const [customerCity, setCustomerCity] = useState('Mumbai')
   const [customerPincode, setCustomerPincode] = useState('400050')
@@ -63,15 +63,15 @@ export function CartDrawer() {
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault()
     const code = couponCode.trim().toUpperCase()
-    if (code === 'CRATE10') {
+    if (code === 'COLLECTOR10' || code === 'CRATE10') {
       const discount = Math.round(subtotal * 0.1)
       setAppliedDiscount(discount)
-      setDiscountCodeMessage('Coupon CRATE10 applied! 10% collector discount saved.')
+      setDiscountCodeMessage('Coupon COLLECTOR10 applied! 10% collector discount saved.')
     } else if (code === 'MINT200') {
       setAppliedDiscount(200)
       setDiscountCodeMessage('Coupon MINT200 applied! ₹200 instant savings.')
     } else {
-      setDiscountCodeMessage('Invalid coupon code. Try CRATE10 or MINT200.')
+      setDiscountCodeMessage('Invalid coupon code. Try COLLECTOR10 or MINT200.')
     }
   }
 
@@ -499,7 +499,7 @@ export function CartDrawer() {
                   </div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate">Fulfillment Engine:</span>
-                    <span className="font-bold text-midnight-blue">CrateMeet WMS Hub</span>
+                    <span className="font-bold text-midnight-blue">CollectorEvents WMS Hub</span>
                   </div>
                 </div>
 

@@ -6,7 +6,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'About CrateMeet Store | India’s Die-Cast & Sports Card Marketplace',
+  title: 'About CollectorEvents Store | India’s Die-Cast & Sports Card Marketplace',
   description: 'Built by collectors for collectors. Bridging Indian die-cast and sports card culture.',
 }
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
             Built by Collectors. For the Culture.
           </h1>
           <p className="text-xs sm:text-sm text-slate leading-relaxed">
-            From car meetups in Mumbai to packed box-break tables in Bengaluru, CrateMeet was born out of a simple frustration: it was too hard for Indian collectors to get pristine die-cast grails and sealed sports card wax without paying extortionate customs or receiving creased blister cards.
+            From car meetups in Mumbai to packed box-break tables in Bengaluru, CollectorEvents was born out of a simple frustration: it was too hard for Indian collectors to get pristine die-cast grails and sealed sports card wax without paying extortionate customs or receiving creased blister cards.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function AboutPage() {
               <span>Physical Events & Swap Meets</span>
             </h2>
             <p className="text-slate">
-              The store operates alongside the CrateMeet events platform, where collectors gather across India to swap, trade, and showcase their collections. Check out our physical community meetups anytime!
+              The store operates alongside the CollectorEvents platform, where collectors gather across India to swap, trade, and showcase their collections. Check out our physical community meetups anytime!
             </p>
             <div className="pt-2">
               <Link

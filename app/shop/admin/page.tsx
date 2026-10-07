@@ -176,7 +176,7 @@ export default function AdminStorePage() {
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase bg-party-pink/40 text-midnight-ink border border-party-pink">
                 SELLER VAULT MANAGER
               </span>
-              <span className="text-xs text-slate font-mono">CrateMeet WMS Mumbai Hub</span>
+              <span className="text-xs text-slate font-mono">CollectorEvents WMS Mumbai Hub</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-midnight-ink tracking-tight font-display">
               Seller & Inventory Operations

@@ -175,7 +175,7 @@ export default function AdminDashboardPage() {
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-spearmint animate-pulse" />
               <span className="font-bold text-xs uppercase tracking-wider">
-                CrateMeet Internal Administration & WMS Operations
+                CollectorEvents Internal Administration & WMS Operations
               </span>
               <span className="px-2 py-0.5 bg-pure-canvas/20 rounded-full text-[10px] text-pure-canvas font-mono">
                 ROLE: SuperAdmin (WMS Authorized)
@@ -974,7 +974,7 @@ export default function AdminDashboardPage() {
                 </div>
                 <div>
                   <p className="font-bold text-[10px] uppercase text-graphite">SHIP FROM:</p>
-                  <p className="font-bold">CrateMeet WMS Hub (Mumbai)</p>
+                  <p className="font-bold">CollectorEvents WMS Hub (Mumbai)</p>
                   <p>Gate 3, Bandra Kurla Complex</p>
                   <p>Mumbai, MH 400051</p>
                   <p className="mt-1 font-mono text-[10px]">Weight: {activeLabelModalOrder.wms?.packedWeightKg || '0.35'} kg</p>

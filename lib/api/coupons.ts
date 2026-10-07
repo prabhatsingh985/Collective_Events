@@ -12,7 +12,7 @@ export async function validateCoupon(
   const coupon = MOCK_COUPONS.find((c) => c.code === cleanCode)
 
   if (!coupon) {
-    return { valid: false, discount: 0, error: 'Invalid coupon code. Try CRATE10 or MINT200' }
+    return { valid: false, discount: 0, error: 'Invalid coupon code. Try COLLECTOR10 or MINT200' }
   }
 
   if (coupon.minOrderValue && subtotal < coupon.minOrderValue) {

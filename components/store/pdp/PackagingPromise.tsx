@@ -15,7 +15,7 @@ export function PackagingPromise({ isHotWheels = true, isCard = false }: Packagi
         </div>
         <div>
           <h4 className="font-extrabold text-sm text-midnight-ink">
-            CrateMeet Armored Collector Packaging Promise
+            CollectorEvents Armored Collector Packaging Promise
           </h4>
           <p className="text-xs text-slate">
             Engineered so your blister card and slabs arrive in 100% untouched condition.

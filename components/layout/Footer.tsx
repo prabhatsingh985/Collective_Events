@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Instagram, Twitter, Youtube, Check, Sparkles } from 'lucide-react'
 
 export function Footer() {
@@ -24,11 +25,15 @@ export function Footer() {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-[8px] bg-midnight-ink text-pure-canvas flex items-center justify-center font-bold text-sm shadow-sm">
-                ✨
-              </div>
+              <Image
+                src="/brand/logo-mark.png"
+                alt="CollectorEvents"
+                width={36}
+                height={36}
+                className="object-contain"
+              />
               <span className="font-extrabold text-2xl tracking-tight text-midnight-ink">
-                Crate<span className="text-slate">Meet</span>
+                Collector<span className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] bg-clip-text text-transparent">Events</span>
               </span>
             </Link>
 
@@ -197,13 +202,13 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate font-normal">
-          <p>© 2026 CrateMeet Inc. Built with celebration energy for collector communities.</p>
+          <p>© 2026 CollectorEvents Inc. Built with celebration energy for collector communities.</p>
           <div className="flex items-center gap-6">
             <Link href="/login" className="hover:text-midnight-ink transition-colors">
               Sign In
             </Link>
             <Link href="/signup" className="hover:text-midnight-ink transition-colors">
-              Join CrateMeet
+              Join CollectorEvents
             </Link>
             <Link href="/onboarding" className="hover:text-midnight-ink transition-colors">
               Collector Calibration

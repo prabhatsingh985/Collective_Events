@@ -5,7 +5,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions (FAQ) | CrateMeet Store',
+  title: 'Frequently Asked Questions (FAQ) | CollectorEvents Store',
   description: 'Common questions about Hot Wheels castings, sealed sports cards, shipping, and authenticity.',
 }
 

@@ -16,9 +16,14 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'CrateMeet — Die-Cast & Sports Trading Card Event Discovery',
+  title: 'CollectorEvents — Events for People Who Collect Experiences',
   description:
-    'The premier collector meetup hub for Hot Wheels, scale model customs, Panini & Topps sports cards, and live collector auctions.',
+    'Find the best events, meet like-minded people and collect unforgettable moments. Official discovery hub for die-cast, trading cards, and collector grails.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({

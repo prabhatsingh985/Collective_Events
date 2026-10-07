@@ -349,7 +349,7 @@ export const MOCK_SHOP_PRODUCTS: ShopProduct[] = [
     castingName: '1:64 Blister Case Protector Pack',
     series: 'Accessories',
     scale: '1:64',
-    brand: 'CrateMeet Vault Supplies',
+    brand: 'CollectorEvents Vault Supplies',
     releaseYear: 2025,
     wheelType: 'N/A (Protective Equipment)',
     colorDeco: '0.5mm Crystal Clear PET with UV Sun-Fade Inhibitor',

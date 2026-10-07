@@ -5,7 +5,7 @@ import { StoreNavbar } from '@/components/store/StoreNavbar'
 import { StoreFooter } from '@/components/store/StoreFooter'
 
 export const metadata: Metadata = {
-  title: 'Contact & Collector Concierge | CrateMeet Store',
+  title: 'Contact & Collector Concierge | CollectorEvents Store',
   description: 'Reach our collector support team for order inquiries, drop waitlists, or packaging support.',
 }
 
@@ -32,7 +32,7 @@ export default function ContactPage() {
           <div className="p-6 rounded-3xl bg-pure-canvas border border-silver/60 space-y-3 shadow-sm">
             <Mail className="w-6 h-6 text-orange-600" />
             <h3 className="font-bold text-sm text-midnight-ink font-display">Email Concierge</h3>
-            <p className="text-slate">support@cratemeet.com</p>
+            <p className="text-slate">support@collectorevents.com</p>
             <span className="text-[11px] text-slate font-mono block">Typical reply: Under 2 hours</span>
           </div>
 
